@@ -1,0 +1,8 @@
+{
+  "name": "ashtanga-studio",
+  "version": "1.0.0",
+  "description": "Static website for Ashtanga Studio",
+  "scripts": {
+    "build": "echo 'Static site - no build needed' && exit 0"
+  }
+}
