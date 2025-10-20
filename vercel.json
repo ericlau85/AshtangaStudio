@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "**/*.html": {
+      "runtime": "@vercel/static"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
