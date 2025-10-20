@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瑜伽的本质</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Futura", "-apple-system", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fff;
+        }
+        
+        /* 左侧导航栏样式 */
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            left: 32px;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .nav-trigger {
+            width: 6px;
+            height: 6px;
+            background-color: #666;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1002;
+        }
+        
+        .nav-trigger:hover,
+        .nav-trigger.active {
+            background-color: #1a1a1a;
+            transform: scale(1.2);
+        }
+        
+        .nav-menu {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-8px);
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 0.75rem;
+            min-width: 180px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .chapter-nav:hover .nav-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 0.5rem 0.375rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 9px;
+            line-height: 1.2;
+            transition: all 0.2s ease;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            color: #1a1a1a;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item.active {
+            color: #1a1a1a;
+            font-weight: 500;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* 主内容区域样式 */
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .article-header {
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .chapter {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+        
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .chapter-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-paragraph {
+            margin-bottom: 1.5rem;
+        }
+        
+        .sanskrit {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 0.25rem;
+        }
+        
+        .transliteration {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-left: 0.5rem;
+            font-weight: 400;
+        }
+        
+        .meaning {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+            margin-top: 0.25rem;
+        }
+        
+        .quote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .technique-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #8bc34a;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .concept-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .concept-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 8px 16px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-link:hover {
+            color: #000;
+            background-color: #f0f0f0;
+            transform: translateX(-5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-link:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-nav">
+        <div class="nav-trigger"></div>
+        <div class="nav-menu">
+            <a href="#intro" class="nav-item">瑜伽本质</a>
+            <a href="#citta" class="nav-item">心场 Citta</a>
+            <a href="#guna" class="nav-item">三性 Guṇa</a>
+            <a href="#vritti" class="nav-item">波动 Vṛtti</a>
+            <a href="#antahkarana" class="nav-item">心念结构</a>
+            <a href="#klesha" class="nav-item">痛苦根源</a>
+            <a href="#ashtanga" class="nav-item">八支修行</a>
+            <a href="#atman" class="nav-item">真我 Ātman</a>
+            <a href="#sharira" class="nav-item">三身五鞘</a>
+            <a href="#karma" class="nav-item">业力 Karma</a>
+            <a href="#nadi" class="nav-item">脉轮系统</a>
+        </div>
+    </div>
+
+    <article class="blog-article">
+        <header class="article-header">
+            <h1 class="article-title">瑜伽的本质</h1>
+            <p class="article-subtitle">योगश्चित्तवृत्तिनिरोधः yogaś citta vṛtti nirodhaḥ</p>
+        </header>
+        
+        <section id="intro" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">瑜伽的本质</h2>
+                <p class="chapter-subtitle">योग परमार्थ yoga paramārtha</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p class="sanskrit">योगश्चित्तवृत्तिनिरोधः</p>
+                <p class="transliteration">yogaś citta vṛtti nirodhaḥ</p>
+                <p class="meaning">瑜伽(yoga) 停止(nirodhaḥ) 心场(citta) 波动(vṛtti)</p>
+                <p class="meaning">——《瑜伽经》1.2</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>瑜伽是通过抑制心念波动（vṛtti）实现意识纯净（puruṣa）的实践。</p>
+                <p><strong>过程：</strong>平息杂念 → 意识清晰 → 照见真我</p>
+            </div>
+            
+            <div class="technique-box">
+                <h3>修行三阶</h3>
+                <p><strong>止波（nirodhaḥ）：</strong>通过aṣṭāṅga-yoga八支体系平息vṛtti</p>
+                <p><strong>明辨（viveka-khyāti）：</strong>区分puruṣa（真我）与prakṛti（自然）</p>
+                <p><strong>独照（kaivalya）：</strong>真我如镜独现（《瑜伽经》4.34）</p>
+            </div>
+        </section>
+
+        <section id="citta" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">चित्त citta（心场）</h2>
+                <p class="chapter-subtitle">चित्तवृत्ति citta vṛtti</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>心场是三性交互作用的场域（三性的复合体），指意识的整体场域，包含所有心理活动（वृत्ति, vṛtti）和潜在印迹（संस्कार, saṃskāra）。</p>
+                <p>因其属于प्रकृति, prakṛti范畴，修行中需要净化和超越或完全止息。</p>
+            </div>
+        </section>
+
+        <section id="guna" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">गुण guṇa（三性）</h2>
+                <p class="chapter-subtitle">त्रिगुण tri-guṇa</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>宇宙二元性：意识（puruṣa）与物质（prakṛti）</p>
+                <p>prakṛti的三种基本属性：</p>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">सत्त्व sattva（悦性）</p>
+                    <p class="meaning">纯净、光明、智慧</p>
+                    <p><strong>表现：</strong>平静、清晰、慈悲；良善、和平、无私</p>
+                    <p><strong>失衡：</strong>过度理想化</p>
+                    <p><strong>修行：</strong>作为阶梯，需超越，仍属prakṛti（自然）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">रजस् rajas（激性）</p>
+                    <p class="meaning">激情、活力、欲望</p>
+                    <p><strong>表现：</strong>焦虑、追求、兴奋；进取、自我中心</p>
+                    <p><strong>失衡：</strong>躁动不安</p>
+                    <p><strong>修行：</strong>导致波动，通过调息转化为 सत्त्व sattva</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">तमस् tamas（惰性）</p>
+                    <p class="meaning">愚昧、黑暗、惰性</p>
+                    <p><strong>表现：</strong>昏沉、拖延、无知；消极、抑郁</p>
+                    <p><strong>失衡：</strong>昏沉麻木</p>
+                    <p><strong>修行：</strong>阻碍修行，通过 तपस् tapas 消融</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="vritti" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">वृत्ति vṛtti（波动）</h2>
+                <p class="chapter-subtitle">चित्तवृत्ति citta vṛtti</p>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">क्लिष्ट kliṣṭa（苦）</p>
+                    <p class="meaning">关联五苦因pañca kleśa，需优先止息</p>
+                    <p><strong>例：</strong>rāga（贪）用santoṣa（知足）化解（2.33）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">अक्लिष्ट akliṣṭa（乐）</p>
+                    <p class="meaning">中性或愉悦，如：知识、善念、修行成就感，仍属束缚，需最终超越</p>
+                    <p><strong>例：</strong>通过 वैराग्य vairāgya（离欲）破除执着</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="antahkarana" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">अन्तःकरण antaḥkaraṇa 心念结构</h2>
+                <p class="chapter-subtitle">चतुरन्तःकरण catur antaḥkaraṇa</p>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">मनस् manas（心智/DMN）</p>
+                    <p><strong>功能：</strong>感官处理/杂念生成，处理感官输入，产生思维、怀疑、情绪反应</p>
+                    <p><strong>现象：</strong>心猿意马的散乱状态</p>
+                    <p><strong>修行对策：</strong>止（稳定注意力）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">बुद्धि buddhi（智慧/理性）</p>
+                    <p><strong>功能：</strong>直觉辨别/决策判断，智慧辨别真相与幻象</p>
+                    <p><strong>现象：</strong>觉醒时的清晰判断</p>
+                    <p><strong>修行对策：</strong>辨（智慧观照viveka-khyāti）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">अहंकार ahaṃkāra（小我/自我）</p>
+                    <p><strong>功能：</strong>自我认同/小我错觉，制造"我与他人分离"的错觉</p>
+                    <p><strong>现象：</strong>傲慢、自卑、身份认同</p>
+                    <p><strong>修行对策：</strong>破（消解认同）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">चित्त citta（潜意识/狭义心场）</p>
+                    <p><strong>功能：</strong>记忆存储/习气印迹，储存记忆、习气（संस्कार saṃskāra）和潜在印迹</p>
+                    <p><strong>现象：</strong>无意识行为、惯性反应</p>
+                    <p><strong>修行对策：</strong>净（清除业力）</p>
+                </div>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>互动关系：</h3>
+                <p>感官输入 → manas接收信息 → buddhi分析判断 → ahaṃkāra贴上标签 → citta储存经验 → 新vṛtti生成</p>
+                <p>这些互动持续产生 vṛtti（波动），形成我们感知的世界。</p>
+            </div>
+        </section>
+
+        <section id="klesha" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">क्लेश kleśa 痛苦根源</h2>
+                <p class="chapter-subtitle">पञ्चक्लेश pañca kleśa</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>五因连锁反应</h3>
+                <p>अविद्या (avidyā) → अस्मिता (asmitā) → राग/द्वेष (rāga/dveṣa) → अभिनिवेश (abhiniveśa)</p>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">अविद्या avidyā（痴/无明）</p>
+                    <p class="meaning">误将无常当永恒，以假为真。无明会产生妄念，掩盖对"我"的认识</p>
+                    <p><strong>对治：</strong>学习经典+正知见 jñāna（《瑜伽经》2.26）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">अस्मिता asmitā（我/我执）</p>
+                    <p class="meaning">混淆真我与身心现象。将能观者与所观者混淆，产生"小我"认同</p>
+                    <p><strong>对治：</strong>分辨练习（विवेकख्याति viveka-khyāti），辨别真我与自然属性（puruṣa-prakṛti-viveka）（《瑜伽经》2.17-2.25）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">राग rāga（贪/贪爱）</p>
+                    <p class="meaning">追逐愉悦，产生依赖，混淆欲望和需求</p>
+                    <p><strong>对治：</strong>修知足（संतोष santoṣa）替代（《瑜伽经》2.32）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">द्वेष dveṣa（嗔/嗔恨）</p>
+                    <p class="meaning">抗拒痛苦，制造对立，固执地划分好坏、美丑、得失等二元对立</p>
+                    <p><strong>对治：</strong>修慈悲（ मैत्री maitrī）化解（《瑜伽经》1.33）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">अभिनिवेश abhiniveśa（畏/惧灭）</p>
+                    <p class="meaning">不愿放下小我，抗拒改变，害怕失去身份。对生命的执着成为习惯，依赖于客观来源获得快乐，对死亡抗拒，对生命的顽固坚持</p>
+                    <p><strong>对治：</strong>观无常（अनित्यभावना anitya-bhāvanā）（《瑜伽经》2.9）</p>
+                </div>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>无明是根本，其余苦因由其衍生（《瑜伽经》2:4）轻微苦因可用逆向思维对治，如：贪念起时修知足，（《瑜伽经》2:11）。</p>
+            </div>
+        </section>
+
+        <section id="ashtanga" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">अष्टाङ्ग aṣṭāṅga 修行次第</h2>
+                <p class="chapter-subtitle">योगाष्टाङ्ग yoga aṣṭāṅga</p>
+            </div>
+            
+            <div class="technique-box">
+                <h3>三阶段进阶</h3>
+                
+                <h4>止心（निरोध nirodha）</h4>
+                <p><strong>外修五支：</strong>通过体式、调息稳定心智，逐渐平息心念的波动</p>
+                <p>यम (yama)、नियम (niyama) →道德净化</p>
+                <p>आसन (āsana)、प्राणायाम (prāṇāyāma) →身心稳定</p>
+                <p>प्रत्याहार (pratyāhāra)外修转向内修的枢纽</p>
+                
+                <h4>息妄（विवेक viveka）</h4>
+                <p><strong>内修三支：</strong>用智慧分辨真我（puruṣa）与心念现象（prakṛti）瓦解小我的认同</p>
+                <p>धारणा (dhāraṇā)、ध्यान (dhyāna) →意识聚焦</p>
+                <p>समाधि (samādhi) →能所双泯</p>
+                
+                <h4>究竟解脱（ कैवल्य kaivalya）独存境界</h4>
+                <p>当所有妄念止息，心场如透明玻璃，映照出真我的纯粹觉知。真我独照，彻底自由（《瑜伽经》4:34）</p>
+            </div>
+        </section>
+
+        <section id="atman" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">真我 ātman</h2>
+                <p class="chapter-subtitle">आत्मन् ātman</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>即灵魂(Soul)，是永恒纯粹的意识(cit)，超越三身五鞘，是不变的见证者(sākṣī)，不参与体验，不受业力束缚。</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">देहेन्द्रियमनोभ्यस्तु परं यत् साक्षिणं शुद्धम्</p>
+                <p class="transliteration">dehendriya-manobhyas tu paraṃ yat sākṣiṇaṃ śuddham</p>
+                <p class="meaning">阿特曼超越身体、感官和心意，是纯净的见证者</p>
+                <p class="meaning">——《自我奥义书》ātma upaniṣad 2</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">न जायते म्रियते वा विपश्चिन्नायं कुतश्चिन्न बभूव कश्चित्</p>
+                <p class="transliteration">na jāyate mriyate vā vipaścin nāyaṃ kutaścin na babhūva kaścit</p>
+                <p class="meaning">灵魂（阿特曼）不生不灭，无始无终</p>
+                <p class="meaning">——《薄伽梵歌》bhagavad gītā 2.20</p>
+            </div>
+        </section>
+
+        <section id="sharira" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">三身五鞘</h2>
+                <p class="chapter-subtitle">त्रिशरीर-पञ्चकोश tri-śarīra-pañca-kośa</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>三身 tri-śarīra</h3>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">粗身 sthūla śarīra（肉体）</p>
+                    <p class="meaning">由五大粗元素(mahābhūta) 空ākāśa、气vāyu、火tejas、水jala、土pṛthvī 构成的物质体，受生老病死限制</p>
+                    <p><strong>状态：</strong>清醒状态(jāgrat)的载体，体验物质世界（我是身体）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">精身 sūkṣma śarīra（星体）</p>
+                    <p class="meaning">由气脉nāḍī、脉轮cakra、心智manas、我慢ahaṃkāra、业力印记saṃskāra等构成的能量体</p>
+                    <p><strong>状态：</strong>梦境状态(svapna)的载体，体验潜意识活动（我是角色）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">因果身 kāraṇa śarīra</p>
+                    <p class="meaning">未显化的业力种子(vāsanā)储存层，在沉睡状态(suṣupti) 中暂时遮蔽个体意识(jīva)，但阿特曼始终作为超越的见证者存在</p>
+                </div>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>五鞘 pañca kośa</h3>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">食物鞘 annamaya kośa</p>
+                    <p class="meaning">依赖物质营养，对应肉体生存需求</p>
+                    <p><strong>练习：</strong>体式（āsana）、洁净法（śauca）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">能量鞘 prāṇamaya kośa</p>
+                    <p class="meaning">五种气（prāṇa）维持生命活动</p>
+                    <p><strong>练习：</strong>调息（prāṇāyāma）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">精神鞘 manomaya kośa</p>
+                    <p class="meaning">情绪、记忆、潜意识活动</p>
+                    <p><strong>练习：</strong>持咒（japa）、制感（pratyāhāra）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">智慧鞘 vijñānamaya kośa</p>
+                    <p class="meaning">理性分析、自我认同(ahaṃkāra)</p>
+                    <p><strong>练习：</strong>研读经典（svādhyāya）</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">喜乐鞘 ānandamaya kośa</p>
+                    <p class="meaning">深层喜悦，是沉睡的基底</p>
+                    <p><strong>练习：</strong>禅定（dhyāna）</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="karma" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">业力 karma</h2>
+                <p class="chapter-subtitle">कर्म karma</p>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <p class="sanskrit">累计业力 sañcita karma</p>
+                    <p class="meaning">过去未消耗的业力总和</p>
+                    <p><strong>对治：</strong>可通过智慧瑜伽（jñāna yoga）烧毁</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">现行业力 prārabdha karma</p>
+                    <p class="meaning">正在体验的业果</p>
+                    <p><strong>状态：</strong>觉悟者（jīvanmukta）虽经历但不认同</p>
+                </div>
+                
+                <div class="concept-card">
+                    <p class="sanskrit">未来业力 āgāmi karma</p>
+                    <p class="meaning">新造业力</p>
+                    <p><strong>对治：</strong>通过无执行动（karma yoga）避免累积</p>
+                </div>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">कर्मणो ह्यपि बोद्धव्यं बोद्धव्यं च विकर्मणः । अकर्मणश्च बोद्धव्यं गहना कर्मणो गतिः ॥</p>
+                <p class="transliteration">karmaṇo hy api boddhavyaṃ boddhavyaṃ ca vikarmaṇaḥ । akarmaṇaś ca boddhavyaṃ gahanā karmaṇo gatiḥ ॥</p>
+                <p class="meaning">应知何为正法行为、非法行为与无为，业力的道路深奥难测</p>
+                <p class="meaning">—— BG 4.17</p>
+            </div>
+        </section>
+
+        <section id="nadi" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">脉轮系统</h2>
+                <p class="chapter-subtitle">नाडी-चक्र nāḍī-cakra</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>脉 nāḍī</h3>
+                <p>在精微身中，nāḍī（经络）构成能量传输网络。据古籍记载，人体有nāḍī 72,000条，其分支细如发丝。这些能量通道的源头称为kaṇḍa（卵形能量聚合体），位于会阴区，根轮上方。(haṭha ratnāvalī 1.29)</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>三大主脉</h3>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <p class="sanskrit">suṣumṇā nāḍī 中脉</p>
+                        <p class="meaning">脊柱中央，蓝色，对应中枢神经系统</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">iḍā nāḍī 左脉</p>
+                        <p class="meaning">银白色，ha（月），副交感神经（冷却）</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">piṅgalā nāḍī 右脉</p>
+                        <p class="meaning">金红色，tha（日），交感神经（激活）</p>
+                    </div>
+                </div>
+                <p>左右脉沿脊柱螺旋交错，于各cakra处交汇，形成haṭha（日月结合）的平衡基础。</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>七大脉轮 cakra</h3>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <p class="sanskrit">mūlādhāra 会阴</p>
+                        <p class="meaning">地（ पृथ्वी pṛthvī）｜骨盆神经丛</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">svādhiṣṭhāna 骶骨</p>
+                        <p class="meaning">水（ अप् ap）｜生殖系统</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">maṇipūra 脐部</p>
+                        <p class="meaning">火（ तेजस् tejas）｜腹腔神经丛</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">anāhata 心脏</p>
+                        <p class="meaning">风（ वायु vāyu）｜心脏神经丛</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">viśuddha 喉咙</p>
+                        <p class="meaning">空（ आकाश ākāśa）｜迷走神经</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">ājñā 眉间</p>
+                        <p class="meaning">- ｜松果体-下丘脑轴</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <p class="sanskrit">sahasrāra 头顶</p>
+                        <p class="meaning">- ｜大脑皮层整合</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h3>昆达里尼 kuṇḍalinī 安全警示</h3>
+                <p>昆达里尼觉醒(kuṇḍalinī śakti)：能量从根轮上升至顶轮，达成nirvikalpa samādhi（无分别三摩地）</p>
+                <p><strong>安全警示：</strong>昆达里尼觉醒可能引发癫痫或精神症状（如幻觉），传统文献虽未直接提及，但强调极度谨慎练习。</p>
+                <p><strong>有效方法：</strong>体式āsana稳定身体结构，调息prāṇāyāma调节能量流动。</p>
+            </div>
+        </section>
+        
+        <a href="../index.html" class="back-link">← 返回首页</a>
+    </article>
+    
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 链接点击反馈
+            const links = document.querySelectorAll('.item, .contact-icon');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // 页面过渡效果 - 淡出过渡
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    document.body.style.transition = 'opacity 0.4s ease';
+                    document.body.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 400);
+                });
+                
+                link.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                link.addEventListener('mouseup', function() {
+                    this.style.transform = '';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // 加载动画
+            const items = document.querySelectorAll('.item

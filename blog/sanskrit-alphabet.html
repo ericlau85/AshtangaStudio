@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>梵语字母 Sanskrit Alphabet</title>
+                <style>
+                    /* 基础样式 */
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    
+                    body {
+                        font-family: "Futura", "-apple-system", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+                        line-height: 1.6;
+                        color: #1a1a1a;
+                        background-color: #fff;
+                    }
+                    
+                    /* 左侧导航栏样式 */
+                    .chapter-nav {
+                        position: fixed;
+                        top: 50%;
+                        left: 32px;
+                        transform: translateY(-50%);
+                        z-index: 1000;
+                    }
+                    
+                    .nav-trigger {
+                        width: 6px;
+                        height: 6px;
+                        background-color: #666;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        position: relative;
+                        z-index: 1002;
+                    }
+                    
+                    .nav-trigger:hover,
+                    .nav-trigger.active {
+                        background-color: #1a1a1a;
+                        transform: scale(1.2);
+                    }
+                    
+                    .nav-menu {
+                        position: absolute;
+                        left: 16px;
+                        top: 50%;
+                        transform: translateY(-50%) translateX(-8px);
+                        background: white;
+                        border: 1px solid #e5e5e5;
+                        border-radius: 6px;
+                        padding: 0.75rem;
+                        min-width: 100px;
+                        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.3s ease;
+                        z-index: 1001;
+                    }
+                    
+                    .chapter-nav:hover .nav-menu {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateY(-50%) translateX(0);
+                    }
+                    
+                    .nav-item {
+                        display: block;
+                        padding: 0.5rem 0.375rem;
+                        color: #666;
+                        text-decoration: none;
+                        font-size: 9px;
+                        line-height: 1.2;
+                        transition: all 0.2s ease;
+                        border-radius: 3px;
+                        cursor: pointer;
+                    }
+                    
+                    .nav-item:hover {
+                        color: #1a1a1a;
+                        background-color: #f8f9fa;
+                    }
+                    
+                    .nav-item.active {
+                        color: #1a1a1a;
+                        font-weight: 500;
+                        background-color: #f8f9fa;
+                    }
+                    
+                    .nav-item:not(:last-child) {
+                        border-bottom: 1px solid #f0f0f0;
+                    }
+                    
+                    /* 主内容区域样式 */
+                    .blog-article {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 4rem 2rem;
+                    }
+                    
+                    .article-header {
+                        margin-bottom: 3rem;
+                    }
+                    
+                    .article-title {
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .article-subtitle {
+                        font-size: 1.25rem;
+                        color: #666;
+                        font-style: italic;
+                    }
+                    
+                    .chapter {
+                        margin-bottom: 4rem;
+                        scroll-margin-top: 2rem;
+                    }
+                    
+                    .chapter-header {
+                        margin-bottom: 2rem;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid #e5e5e5;
+                    }
+                    
+                    .chapter-title {
+                        font-size: 1.75rem;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .content-paragraph {
+                        margin-bottom: 1.5rem;
+                    }
+                    
+                    .sanskrit {
+                        font-size: 1.125rem;
+                        font-weight: 500;
+                        color: #000;
+                        margin-bottom: 0.25rem;
+                    }
+                    
+                    .transliteration {
+                        font-size: 0.9rem;
+                        color: #666;
+                        font-style: italic;
+                        margin-left: 0.5rem;
+                        font-weight: 000;
+                    }
+                    
+                    .meaning {
+                        font-size: 0.9rem;
+                        color: #666;
+                        font-weight: 000;
+                        margin-top: 0.25rem;
+                    }
+                    
+
+                    /* 返回链接样式 */
+                    .back-link {
+                        display: inline-block;
+                        font-size: 13px;
+                        color: #666;
+                        text-decoration: none;
+                        margin-top: 30px;
+                        padding: 8px 16px;
+                        border-radius: 15px;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .back-link:hover {
+                        color: #000;
+                        background-color: #f0f0f0;
+                        transform: translateX(-5px);
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    .back-link::before {
+                        content: '';
+                        position: absolute;
+                        left: -100%;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.1), transparent);
+                        transition: left 0.5s ease;
+                    }
+                    
+                    .back-link:hover::before {
+                        left: 100%;
+                    }
+                </style>
+    </head>
+    <body>
+        <div class="chapter-nav">
+            <div class="nav-trigger"></div>
+            <div class="nav-menu">
+                <a href="#intro" class="nav-item">梵语字母</a>
+                <a href="#vowels" class="nav-item">元音</a>
+                <a href="#simple-vowels" class="nav-item">基本元音</a>
+                <a href="#compound-vowels" class="nav-item">复合元音</a>
+                <a href="#support-vowels" class="nav-item">辅助元音</a>
+                <a href="#consonants" class="nav-item">辅音</a>
+                <a href="#plosive" class="nav-item">塞音</a>
+                <a href="#nasal" class="nav-item">鼻音</a>
+                <a href="#semivowel" class="nav-item">近音</a>
+                <a href="#sibilant" class="nav-item">擦音</a>
+                <a href="#conjunct" class="nav-item">复合字母</a>
+                <a href="#consonants-vowels" class="nav-item">元辅音组合</a>
+                <a href="#syllable" class="nav-item">音节</a>
+                <a href="#sandhi" class="nav-item">连音</a>
+            </div>
+        </div>
+
+        <article class="blog-article">
+            <header class="article-header">
+                <h1 class="article-title">梵语字母 Sanskrit Alphabet</h1>
+                <p class="article-subtitle">संस्कृत अक्षर saṃskṛta akṣara</p>
+            </header>
+            
+            <section id="intro" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">梵语字母 Sanskrit Alphabet</h2>
+                    <p class="chapter-subtitle">संस्कृत अक्षर saṃskṛta akṣara</p>
+                </div>
+            
+                <div class="content-paragraph">
+                    <p>梵语字母表被称为 <span class="sanskrit">वर्णमाला varṇamālā</span> 字面意思是字母花环，梵语本质上是语音语言，梵语字母书面形状代表着独特的声音<span class="sanskrit">कार kāra</span>，其发音就是字母的名称。</p>
+                    <p>传统梵语由16个元音和33个辅音组成。</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>由16花瓣喉轮<span class="sanskrit">हं</span>产生：<span class="sanskrit">अ आ इ ई उ ऊ ऋ ऋृ ऌ ॡ ए ऐ ओ औ अं अः</span></p>
+                    <p>由12花瓣心轮<span class="sanskrit">यं</span>产生：<span class="sanskrit">क् ख् ग् घ् ङ् च् छ् ज् झ् ञ् ट् ठ्</span></p>
+                    <p>由10花瓣脐轮<span class="sanskrit">रं</span>产生：<span class="sanskrit">ड् ढ् ण् त् थ् द् ध् न् प् फ्</span></p>
+                    <p>由6花瓣腹轮<span class="sanskrit">वं</span>产生：<span class="sanskrit">ब् भ् म् य् र् ल्</span></p>
+                    <p>由4花瓣根轮<span class="sanskrit">लं</span>产生：<span class="sanskrit">व् श् ष् स्</span></p>
+                    <p>由2花瓣额轮<span class="sanskrit">उँ</span>产生：<span class="sanskrit">ह् क्ष्</span></p>
+                    <p>千花瓣顶轮<span class="sanskrit">ॐ</span></p>
+                </div>
+            </section>
+
+            <section id="vowels" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">元音 Vowels</h2>
+                    <p class="chapter-subtitle">स्वरः svaraḥ</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>元音是在发音过程中气流通过口腔而不受阻碍发出的音，也称为母音。</p>
+                    <p>天城文从左至右书写，以一条横线<span class="sanskrit">षिरोरेखा ṣirorekhā</span>连接每个字母。</p>
+                    <p>元音单独书写时同发音书面形式，如：<span class="sanskrit">अ आ इ ई उ ऊ ऋ ऋृ ऌ ॡ ए ऐ ओ औ</span></p>
+                    <p>短音与长音相似，只是有一些额外标记特征。</p>
+                    <p>梵语中有16个元音：</p>
+                    <p>5个短元音：<span class="sanskrit">अ इ उ ऋ ऌ</span> 及其5个长元音：<span class="sanskrit">आ ई ऊ ऋृ ॡ</span> 其中 <span class="sanskrit">अ a इ i उ u</span> 为主音</p>
+                    <p>4个复合音：<span class="sanskrit">ए ऐ ओ औ</span></p>
+                    <p>2个辅助音：<span class="sanskrit">अं अः</span></p>
+                </div>
+            </section>
+
+            <section id="simple-vowels" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">基本元音 Simple vowels</h2>
+                    <p class="chapter-subtitle">समानाक्षर samānākṣara</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>仅使用一个发音点发出的元音，称为基本元音或单元音。</p>
+                    <p>5个基本发音点：喉、鄂、顶、齿、唇，对应5个基本元音：<span class="sanskrit">अ a  इ i  ऋ ṛ   ऌ ḷ  उ u</span></p>
+                    <p>当一个发音点的音延长一倍时即成为长元音：<span class="sanskrit">आ ā ई ī ऊ ū ॠ ṝ ॡ ḹ</span></p>
+                </div>
+            </section>
+
+            <section id="compound-vowels" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">复合元音 Compound vowels</h2>
+                    <p class="chapter-subtitle">सन्ध्यक्षर sandhyakṣara</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>使用两个发音点发出的元音，称为复合元音或双元音，复合元音都是长音</p>
+                    <p><span class="sanskrit">ए e ऐ ai ओ o औ au</span></p>
+                </div>
+            </section>
+
+            <section id="support-vowels" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">辅助元音 Support vowels</h2>
+                    <p class="chapter-subtitle">उभयक्स्हर ubhayakshara</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>两个在音节中的正常元音上添加的特定音。为方便发音，在前面添加一个音 <span class="sanskrit">अ a</span></p>
+                    <p><span class="sanskrit">अं aṃ</span> 称为随韵 After-sound</p>
+                    <p><span class="sanskrit">अनुस्वारः anusvāraḥ</span></p>
+                    <p>符号：天城体写作 <span class="sanskrit">ं</span> 转写为 <span class="transliteration">ṃ</span> 如：<span class="sanskrit">क + ं = कं</span>  <span class="transliteration">(ka+ṃ=kaṃ)</span></p>
+                    <p>表示前一元音的鼻音化，或根据后续辅音转化为相应的鼻辅音。在同组擦音前与前面的元音发同组鼻音；作尾音则发m</p>
+                </div>
+                <div class="content-paragraph">
+                    <p><span class="sanskrit">अः aḥ</span> 称为止韵 Release</p>
+                    <p><span class="sanskrit">विसर्गः visargaḥ</span></p>
+                    <p>符号：天城体写作 <span class="sanskrit">ः</span> 转写为 <span class="transliteration">ḥ</span> 如：<span class="sanskrit">क + ः = कः</span>  <span class="transliteration">(ka+ḥ=kaḥ)</span></p>
+                    <p>清喉擦音呼气音，通常出现在词尾，发前一个元音的回声，如：<span class="transliteration">aḥ</span>发音<span class="transliteration">aha</span>，<span class="transliteration">ūḥ</span>发音<span class="transliteration">ūhu</span>，<span class="transliteration">aiḥ</span>发音<span class="transliteration">aihi</span></p>
+                </div>
+            </section>
+
+            <section id="consonants" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">辅音 Consonants</h2>
+                    <p class="chapter-subtitle">व्यञ्जनम् vyañjanam</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>辅音是在发音过程中气流通过口腔受阻碍发出的音，也称为子音</p>
+                    <p>辅音独立书写形式：<span class="sanskrit">क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह</span></p>
+                    <p>为方便发音，辅音自带默认元音<span class="sanskrit">अ a</span> 如：<span class="sanskrit">क</span> 音译转写为 <span class="transliteration">ka</span> 而不是 <span class="transliteration">k</span></p>
+                    <p>若消除默认的元音，则使用消音标记halant <span class="sanskrit">्</span> <span class="transliteration">(विराम virāma)</span> 如：<span class="sanskrit">क ka → क् k</span></p>
+                    <p>梵语中有33个辅音，按发音气流可分3种：闭塞音<span class="sanskrit">sparśāḥ</span>，中间音<span class="sanskrit">antaḥstha</span>，擦音<span class="sanskrit">ūṣmāṇaḥ</span></p>
+                </div>
+                <div class="content-paragraph">
+                    <p>梵语辅音可按发音部位<span class="transliteration">(sthāna)</span>和发音方式<span class="transliteration">(prayatna)</span>进行分类或分组<span class="sanskrit">(वर्ग varga)</span></p>
+                    <p>按发音部位可分5类，对应口腔与舌位的不同位置：</p>
+                    <p>喉音 <span class="sanskrit">कण्ठ्य kaṇṭhya</span> 或 <span class="transliteration">ka-varga</span>: <span class="sanskrit">ka kha ga gha ṅa ha</span></p>
+                    <p>鄂音 <span class="sanskrit">तालव्य tālavya</span> 或 <span class="transliteration">ca-varga</span>: <span class="sanskrit">ca cha ja jha ña ya śa</span></p>
+                    <p>卷舌音 <span class="sanskrit">मूर्धन्य mūrdhanya</span> 或 <span class="transliteration">ṭa-varga</span>: <span class="sanskrit">ṭa ṭha ḍa ḍha ṇa ra ṣa</span></p>
+                    <p>齿龈音 <span class="sanskrit">दन्त्य dantya</span> 或 <span class="transliteration">ta-varga</span>: <span class="sanskrit">ta tha da dha na la sa</span></p>
+                    <p>唇音 <span class="sanskrit">ओष्ठ्य oṣṭhya</span> 或 <span class="transliteration">pa-varga</span>: <span class="sanskrit">pa pha ba bha ma va</span></p>
+                </div>
+            </section>
+
+            <section id="plosive" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">塞音 Plosive</h2>
+                    <p class="chapter-subtitle">स्पृष्ट spṛṣṭa</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>特点：气流完全阻塞突然释放</p>
+                    <p>分类：</p>
+                    <p>清音 <span class="sanskrit">अघोषः aghoṣāḥ</span></p>
+                    <p>浊音 <span class="sanskrit">घोषवन्तः ghoṣavantaḥ</span></p>
+                    <p>分别有送气<span class="sanskrit">महाप्राणाः mahāprāṇāḥ</span>与不送气<span class="sanskrit">अल्पप्राणाः alpaprāṇāḥ</span>区别</p>
+                    <p>不送气清音： <span class="sanskrit">ka ca ṭa ta pa</span></p>
+                    <p>送气清音： <span class="sanskrit">kha cha ṭha tha pha</span></p>
+                    <p>不送气浊音： <span class="sanskrit">ga ja ḍa da ba</span></p>
+                    <p>送气浊音： <span class="sanskrit">gha jha ḍha dha bha</span></p>
+                </div>
+            </section>
+
+            <section id="nasal" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">鼻音 Nasal</h2>
+                    <p class="chapter-subtitle">आनुनासिकाः anunāsikāḥ</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>特点：气流通过鼻腔共鸣</p>
+                    <p><span class="sanskrit">ṅa ña ṇa na ma</span></p>
+                    <p>例：<span class="sanskrit">ṇka</span></p>
+                </div>
+            </section>
+
+            <section id="semivowel" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">近音 Semivowel</h2>
+                    <p class="chapter-subtitle">अन्तःस्थ antaḥstha</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>特点：介开元音与辅音之间的滑音</p>
+                    <p><span class="sanskrit">ya ra la va</span></p>
+                    <p>例：<span class="sanskrit">yoga</span></p>
+                </div>
+            </section>
+
+            <section id="sibilant" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">擦音 Sibilant</h2>
+                    <p class="chapter-subtitle">ऊष्माणः ūṣmāṇaḥ</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>特点：气流通过狭窄通道产生摩擦</p>
+                    <p><span class="sanskrit">śa ṣa sa ha</span></p>
+                    <p>例：<span class="sanskrit">śiva</span></p>
+                </div>
+            </section>
+
+            <section id="conjunct" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">复合字母 Conjunct letters</h2>
+                    <p class="chapter-subtitle">संयुक्ताक्षर saṃyuktākṣara</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>复合字母是一组连续没有元音的辅音组合，通常与元音结合以形成完整的发音单位。</p>
+                </div>
+                <div class="content-paragraph">
+                    <h3>发音规则 Rules of pronunciation</h3>
+                    <p>同化 (Assimilation)</p>
+                    <p>辅音在组合中可能改变发音以适应相邻辅音，如：</p>
+                    <p><span class="transliteration">t + s → tsa</span> 音变如英语cats中的ts</p>
+                    <p><span class="transliteration">n + c → ñca</span> 鼻音同化，n变为硬腭鼻音ñ</p>
+                    <p>送气与浊化</p>
+                    <p>送气辅音与不送气辅音结合时，送气可能减弱。</p>
+                    <p>清辅音后接浊辅音可能浊化，如：<span class="transliteration">t + da → dda</span></p>
+                    <p>鼻音化</p>
+                    <p>鼻音与塞音结合时，常伴随鼻腔共鸣，如 <span class="transliteration">mpa</span></p>
+                </div>
+                <div class="content-paragraph">
+                    <h3>书写规则 Rules of writing</h3>
+                    <p>当有消音竖线辅音组合时，竖线消失，如：<span class="sanskrit">स्+त→स्त</span> <span class="transliteration">s+ta→sta</span> / <span class="sanskrit">ष्+ट+ष्ट</span> <span class="transliteration">ṣ+ṭa→ṣṭa</span></p>
+                    <p>当有消音右弧字母组合时，右弧消失一半，如：<span class="sanskrit">क्+न→क्न</span> <span class="transliteration">k+na→kna</span></p>
+                    <p>特殊情况：<span class="sanskrit">र् r</span> 在首位，以符号形式写在上面：<span class="sanskrit">र्+त→र्त</span> <span class="transliteration">r+ta→rta</span> / <span class="sanskrit">र्+न→र्न</span> <span class="transliteration">r+na→rna</span></p>
+                    <p><span class="sanskrit">र ra</span> 在次位，符号写在左下方，但圆形字母消音符保留：<span class="sanskrit">क्+र→क्र</span> <span class="transliteration">k+ra→kra</span> / <span class="sanskrit">प्+र→प्र</span> <span class="transliteration">p+ra→pra</span> / <span class="sanskrit">ट्+र→ट्र</span> <span class="transliteration">ṭ+ra→ṭra</span></p>
+                </div>
+                <div class="content-paragraph">
+                    <p>根据辅音结合的位置和发音方式，可分为：</p>
+                    <p>同部位辅音组合</p>
+                    <p>发音部位相同的辅音结合，如：</p>
+                    <p><span class="sanskrit">त् + त → त्त</span> <span class="transliteration">t + ta → tta</span> 双写辅音，延长塞音</p>
+                    <p><span class="transliteration">mma</span> 双唇鼻音 m 的延长</p>
+                    <p>异部位辅音组合</p>
+                    <p>发音部位不同的辅音结合，</p>
+                    <p>半元音+辅音：<span class="sanskrit">न् + च → न्च</span> <span class="transliteration">n + ca → yca</span></p>
+                    <p>鼻音+辅音：<span class="sanskrit">न् + त → न्त</span> <span class="transliteration">n + ta → nta</span></p>
+                </div>
+                <div class="content-paragraph">
+                    <h3>特殊辅合辅音</h3>
+                    <p><span class="sanskrit">क्ष (kṣa) त्र (tra) ज्ञ (jña) श्र (śra)</span> 是梵语特有的高频复合辅音，需单独记忆。</p>
+                    <p><span class="sanskrit">क्(k) + ष(ṣa) → क्ष (kṣa)</span></p>
+                    <p><span class="sanskrit">त्(t) + र(ra) → त्र (tra)</span></p>
+                    <p><span class="sanskrit">ज्(j) + ञ(ña) → ज्ञ (jña)</span></p>
+                    <p><span class="sanskrit">श्(ś) + र(ra) → श्र (śra)</span></p>
+                </div>
+            </section>
+
+            <section id="consonants-vowels" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">元辅音组合 Consonants with vowels</h2>
+                    <p class="chapter-subtitle">स्वरयुक्तव्यञ्जनानि svarayuktavyañjanāni</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>元辅音组合形式不同于独立书写，书面元音会以符号的形式有规律的附加在辅音的不同位置（在辅音后、前、下、上）</p>
+                </div>
+                <div class="content-paragraph">
+                    <h3>1.4.1 元音符号 Symbols</h3>
+                    <p><span class="sanskrit">मत्र matra</span></p>
+                    <p><span class="sanskrit">अ आ ा इ ि ई ी उ ु ऊ ू ऋ ृ ऋृ ॄ ऌ ॢ ॡ ॣ ए े ऐ ै ओ ो औ ौ</span></p>
+                    <p>如：<span class="sanskrit">क ka</span>；<span class="sanskrit">का kā</span>；<span class="sanskrit">कि ki</span>；<span class="sanskrit">की kī</span>；<span class="sanskrit">कु ku</span>；<span class="sanskrit">कू kū</span>；<span class="sanskrit">के ke</span>；<span class="sanskrit">कै kai</span>；<span class="sanskrit">को ko</span>；<span class="sanskrit">कौ kau</span></p>
+                    <p>特殊情况：与r或ṛ结合的音节，如：<span class="sanskrit">रु ru</span> <span class="sanskrit">रू rū</span> <span class="sanskrit">रृ rṛ</span> <span class="sanskrit">हृ hṛ</span> <span class="sanskrit">हॄ hṝ</span></p>
+                </div>
+                <div class="content-paragraph">
+                    <h3>特殊标记 Special marks</h3>
+                    <p>鼻音化 <span class="sanskrit">आनुनासिक्यम् ānunāsikyam</span></p>
+                    <p>月牙点<span class="transliteration">（चन्द्रबिन्दु candra-bindu）</span>，标记为 <span class="sanskrit">ँ</span> 转写作 <span class="transliteration">m̐</span> 如：<span class="sanskrit">क + ँ = कँ</span> <span class="transliteration">(ka+m̐=kam̐)</span></p>
+                    <p>半月形<span class="transliteration">（अर्धचन्द्र ardha-candra）</span>，标记为 <span class="sanskrit">ॅ</span> 转写作 <span class="transliteration">ṁ</span> 如：<span class="sanskrit">क + ॅ = कॅ</span> <span class="transliteration">(ka+ṁ=kaṁ)</span></p>
+                </div>
+                <div class="content-paragraph">
+                    <h3>标点符号 Punctuation</h3>
+                    <p><span class="sanskrit">।</span> 竖杠<span class="transliteration">(दण्ड daṇḍa)</span> 转写为：<span class="sanskrit">।</span>和<span class="sanskrit">॥</span> 表示句子的结尾或诗句的中点；双竖杠表示段落或诗句的结束。</p>
+                    <p><span class="sanskrit">ऽ</span> 略音符<span class="transliteration">(अवग्रह avagraha)</span> 转写为：<span class="transliteration">'</span> 用于分割复合词中的各个元素，表示元音因连读而被删除，长元音被删除，可以重复略音符。</p>
+                </div>
+                <div class="content-paragraph">
+                    <p>如：</p>
+                    <p><span class="sanskrit">अथ योगानुशासनम्</span></p>
+                    <p><span class="transliteration">atha yogā'nuśāsanaṃ</span></p>
+                    <p><span class="sanskrit">तदा ट्रष्टुः स्वरूपेऽवसथानम्</span></p>
+                    <p><span class="transliteration">tadā draṣṭuḥ svarūpe'vasthānam</span></p>
+                    <p><span class="sanskrit">प्रत्यक्षानुमानागमाः प्रमाणानि</span></p>
+                    <p><span class="transliteration">pratyakṣā'numānā''gamāḥ pramāṇāni</span></p>
+                </div>
+            </section>
+            
+            <section id="syllable" class="chapter">
+                            <div class="chapter-header">
+                                <h2 class="chapter-title">音节 Syllable</h2>
+                                <p class="chapter-subtitle">अक्षराणि akṣarāṇi</p>
+                            </div>
+                            <div class="content-paragraph">
+                                <p>音节是梵语发音的基本单位，以元音分音节，每个音节只有一个元音。</p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>音节的类型</h3>
+                                <p>开音节：尾音为元音，如：<span class="sanskrit">क ka</span></p>
+                                <p>闭音节：尾音为辅音，如：<span class="sanskrit">म् m</span></p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>音节的核心是元音</h3>
+                                <p>每个音节必须包含一个元音，元音可以是独立的字母<span class="sanskrit">(वर्ण varṇa)</span>，也可以与辅音结合。</p>
+                                <p>如：<span class="sanskrit">अ a</span> 是一个独立的元音音节。<span class="sanskrit">क ka</span> 是由辅音<span class="sanskrit">क् k</span>和元音<span class="sanskrit">अ a</span>组成的音节。</p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>辅音与元音结合形成音节</h3>
+                                <p><span class="sanskrit">क् k + अ a = क ka</span>; <span class="sanskrit">क् k + इ i = कि ki</span>; <span class="sanskrit">क् k + उ u = कु ku</span></p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>复合辅音音节</h3>
+                                <p>两个或多个辅音结合在一起时，会形成一个复合辅音，并与一个元音组成音节</p>
+                                <p>如：<span class="sanskrit">क् k + ष ṣ + अ a = क्ष kṣa</span></p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>音节划分规则</h3>
+                                <p>末尾有其他音将归于最后一个音节中</p>
+                                <p>如：<span class="sanskrit">सुखम् → सु खम्</span> <span class="transliteration">sukham → su kham</span></p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>辅助元音音节</h3>
+                                <p>辅助元音与元音在同一个音节中</p>
+                                <p>如：<span class="sanskrit">संस्कृत → सं स्कृ त</span> <span class="transliteration">saṃskṛta → saṃ skṛ ta</span></p>
+                            </div>
+                            <div class="content-paragraph">
+                                <h3>音节重量</h3>
+                                <p>带有长元音、辅助音、辅音组合的音节为重音节 <span class="sanskrit">गुरु guru</span>；其他为轻音节 <span class="sanskrit">लघु laghu</span></p>
+                                <p>通常重音节发音时长为轻音节的两倍。</p>
+                                <p>符号：重- 轻⏑ 可轻可重⏓</p>
+                            </div>
+                        </section>
+
+                        <section id="sandhi" class="chapter">
+                            <div class="chapter-header">
+                                <h2 class="chapter-title">连音 Junction</h2>
+                                <p class="chapter-subtitle">सन्धि sandhi</p>
+                            </div>
+                            <div class="content-paragraph">
+                                <p>是指词与词之间或词内部音节之间的音变规则。这些规则是为了使发音更加流畅和自然。</p>
+                                <p>梵语的连声规则非常复杂，涵盖了元音、辅音以及复合音的变化。</p>
+                            </div>
+                            
+                            <div class="content-paragraph">
+                                <h3>元音连音 vowel sandhi</h3>
+                                <p>当两个元音相连时，根据元音类型发生合并、替换或插入辅音，以实现发音流畅。</p>
+                                
+                                <h4>核心原则：</h4>
+                                <p>优先合并：短元音常被长元音或复合元音取代</p>
+                                <p>简化发音：避免元音重复，通过音变减少发音断裂</p>
+                                
+                                <h4>连音规则：</h4>
+                                <p>同元音合并</p>
+                                <p>两个相同元音相遇时合并为长元音</p>
+                                <p><span class="sanskrit">अ + अ → आ</span> <span class="transliteration">a + a → ā</span></p>
+                                <p><span class="sanskrit">इ + इ → ई</span> <span class="transliteration">i + i → ī</span></p>
+                                <p><span class="sanskrit">उ + उ → ऊ</span> <span class="transliteration">u + u → ū</span></p>
+                                <p><span class="sanskrit">ऋ + ऋ → ॠ</span> <span class="transliteration">ṛ + ṛ → ṝ</span></p>
+                                <p><span class="sanskrit">ऌ + ऌ → ॡ</span> <span class="transliteration">ḷ + ḷ → ḹ</span></p>
+                                
+                                <p>异元音合并</p>
+                                <p>不同元音相遇时，产生音变</p>
+                                <p><span class="sanskrit">(अ, आ) + (इ, ई) → ए</span> <span class="transliteration">(a, ā) + (i, ī) → e</span></p>
+                                <p><span class="sanskrit">(अ, आ) + ए → ऐ</span> <span class="transliteration">(a, ā) + e → ai</span></p>
+                                <p><span class="sanskrit">(अ, आ) + (उ, ऊ) → ओ</span> <span class="transliteration">(a, ā) + (u, ū) → o</span></p>
+                                <p><span class="sanskrit">(अ, आ) + ओ → औ</span> <span class="transliteration">(a, ā) + o → au</span></p>
+                                <p><span class="sanskrit">(अ, आ) + (ऋ, ॠ) → अर्</span> <span class="transliteration">(a, ā) + (ṛ, ṝ) → ar</span></p>
+                                <p><span class="sanskrit">(अ, आ) + अर् → आर्</span> <span class="transliteration">(a, ā) + ar → ār</span></p>
+                                <p><span class="sanskrit">(अ, आ) + ऌ → अल्</span> <span class="transliteration">(a, ā) + ḷ → al</span></p>
+                                <p><span class="sanskrit">(अ, आ) + अल् → आल्</span> <span class="transliteration">(a, ā) + al → āl</span></p>
+                                <p><span class="sanskrit">इ, ई + अ, आ → य, आय् अ</span> <span class="transliteration">i, ī + a, ā → ya, āy a</span></p>
+                                <p><span class="sanskrit">उ, ऊ + अ, आ → व</span> <span class="transliteration">u, ū + a, ā → va</span></p>
+                                <p><span class="sanskrit">ए, ऐ + अ, आ → अय, आय् अ</span> <span class="transliteration">e, ai + a, ā → aya, āy a</span></p>
+                                <p><span class="sanskrit">ओ, औ + अ, आ → अव, आव् अ</span> <span class="transliteration">o, au + a, ā → ava, āv a</span></p>
+                                <p><span class="sanskrit">ए + अ → अ + इ + अ → अय् अ</span> <span class="transliteration">e + a → a + i + a → ay a</span></p>
+                                <p><span class="sanskrit">ओ + अ → अ + उ + अ → अव् अ</span> <span class="transliteration">o + a → a + u + a → av a</span></p>
+                                
+                                <h4>例句：</h4>
+                                <p><span class="sanskrit">देव + आत्म → देवात्म</span></p>
+                                <p><span class="transliteration">deva + ātma → devātma</span> （神与灵魂 → 神灵）</p>
+                                
+                                <p><span class="sanskrit">अथ योग अनुशासनम् → अथ योगानुशासनम्</span></p>
+                                <p><span class="transliteration">atha yoga anuśāsanaṃ → atha yogā'nuśāsanaṃ</span></p>
+                                
+                                <p><span class="sanskrit">पाद + उत्तानासन → पादोत्तानासन</span></p>
+                                <p><span class="transliteration">pāda + uttāna → pādottānā</span></p>
+                                
+                                <p><span class="sanskrit">मरीचि + आसन → मरीच्यासन</span></p>
+                                <p><span class="transliteration">marīci + āsana → marīcyāsana</span></p>
+                            </div>
+                            
+                            <div class="content-paragraph">
+                                <h3>辅音连音 consonant sandhi</h3>
+                                <p>当辅音与辅音或元音相遇时，为消除发音断裂，根据发音部位、发音方式的协调性，发生同化、浊化、鼻化等音变。</p>
+                                
+                                <h4>核心原则：</h4>
+                                <p>同化优先：前辅音被后辅音同化发音部位或清浊属性。</p>
+                                <p>简化发音：复杂辅音组合可能合并为复合辅音，如：<span class="sanskrit">क्(k) + ष(ṣa) → क्ष (kṣa)</span></p>
+                                
+                                <h4>连音规则：</h4>
+                                <p>同部位辅音同化</p>
+                                <p>若前后辅音发音部位相同，前辅音被后辅音同化</p>
+                                <p><span class="sanskrit">त् + न = न्न</span> <span class="transliteration">t + na = nna</span></p>
+                                <p><span class="sanskrit">तत् + नाम → तन्नाम</span> <span class="transliteration">tat + nāma → tannāma</span></p>
+                                <p><span class="sanskrit">द् + न = न्न</span> <span class="transliteration">d + na = nna</span></p>
+                                <p><span class="sanskrit">तद् + नाम → तन्नम</span> <span class="transliteration">tad + nāma → tannāma</span></p>
+                                <p><span class="sanskrit">तत् + अपि → तद् अपि</span> <span class="transliteration">tat + api → tad api</span> （那也 → 即便如此）辅音连音 t → d 受后续元音影响浊化</p>
+                                
+                                <p>清浊辅音同化</p>
+                                <p>前辅音清浊属性与后辅音保持一致</p>
+                                <p><span class="transliteration">tat + gacchati → tadgacchati</span></p>
+                                <p><span class="transliteration">ud + tiṣṭhati → uttiṣṭhati</span></p>
+                                
+                                <p>送气音弱化</p>
+                                <p>送气辅音与其他辅音组合时，送气减弱或消失</p>
+                                <p><span class="transliteration">path + ta → patta</span></p>
+                                
+                                <p>鼻音化</p>
+                                <p>辅音后接鼻音时，变为对应鼻音</p>
+                                <p>鼻音后接塞辅音时，鼻音转化为对应发音部位的鼻辅音</p>
+                                <p><span class="transliteration">sam + prayoga → samprayoga</span></p>
+                                <p><span class="transliteration">ahaṃ + karomi → ahaṅkaromi</span></p>
+                                
+                                <p>特殊复合辅音</p>
+                                <p>高频复合辅音，需单独记忆其固定形式</p>
+                                <p><span class="sanskrit">क्(k) + ष(ṣa) → क्ष (kṣa)</span></p>
+                                <p><span class="sanskrit">त्(t) + र(ra) → त्र (tra)</span></p>
+                                <p><span class="sanskrit">ज्(j) + ञ(ña) → ज्ञ (jña)</span></p>
+                                <p><span class="sanskrit">श्(ś) + र(ra) → श्र (śra)</span></p>
+                            </div>
+                            
+                            <div class="content-paragraph">
+                                <h3>止韵连音 visarga sandhi</h3>
+                                <p>当词尾的ḥ后接其他词时，根据后续音素发生音变，以实现发音流畅。</p>
+                                
+                                <h4>连音规则：</h4>
+                                <p>后接元音的音变</p>
+                                <p>ḥ+短音a,i,u… → ḥ 变为对应元音的同部位擦音(o,e)</p>
+                                <p>如：<span class="sanskrit">शिवः + अहम् → शिवो'हम्</span> <span class="transliteration">śivaḥ + aham → śivo'ham</span></p>
+                                <p>ḥ+长音ā,ī,ū… → ḥ 变为对应元音</p>
+                                <p>如：<span class="sanskrit">तेजः + ईशः → तेज ईशः</span> <span class="transliteration">tejaḥ + īśaḥ → teja īśaḥ</span></p>
+                                
+                                <p>后接辅音的音变</p>
+                                <p>ḥ+清辅音k,c,t,p… → ḥ 变为 ś, ṣ, s</p>
+                                <p>如：<span class="sanskrit">योगः चित्त → योगश् चित्त</span> <span class="transliteration">yogaḥ citta → yogaś citta</span></p>
+                                <p><span class="sanskrit">मनः + तापः → मनस्तापः</span> <span class="transliteration">manaḥ + tāpaḥ → manastāpaḥ</span></p>
+                                <p>ḥ+浊辅音g,j,d,b… → ḥ 变为 r</p>
+                                <p>如：<span class="sanskrit">प्राणः + गच्छति → प्राणर् गच्छति</span> <span class="transliteration">prāṇaḥ + gacchati → prāṇar gacchati</span></p>
+                                <p>ḥ+鼻音ṅ,ñ,ṇ,n,m… → ḥ 脱落，鼻音延长</p>
+                                <p>如：<span class="sanskrit">शान्तिः + न → शान्तिं न</span> <span class="transliteration">śāntiḥ + na → śāntiṃ na</span></p>
+                                
+                                <p>句尾或停顿时的保留</p>
+                                <p>ḥ后无词或需停顿，保持原音</p>
+                                <p>如：<span class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः</span> <span class="transliteration">oṃ śāntiḥ śāntiḥ śāntiḥ</span></p>
+                            </div>
+                        </section>
+                        
+                        <a href="../index.html" class="back-link">← 返回首页</a>
+                    </div>
+                </article>
+                <script src="../js/articles.js"></script>
+            </body>
+        </html>

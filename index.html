@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashtanga Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body class="home-page-body">
+    <div class="home-container">
+        <div class="home-layout">
+            <div class="home-left-column">
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="zh">
+                        🇨🇳
+                    </button>
+                    <button class="lang-btn" data-lang="en">
+                        🇬🇧
+                    </button>
+                </div>
+                
+                <div class="home-logo">AS</div>
+                <div class="home-name">Ashtanga Studio</div>
+                <div class="home-location">Eric</div>
+                <div class="home-contact-icons">
+                    <a href="mailto:info@ashtangastudio.com" class="home-contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="home-contact-icon" onclick="showWechatQR()">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/xbyoga" class="home-contact-icon" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="home-right-column">
+                <!-- 中文内容 -->
+                <section class="home-section zh-content">
+                    <h2 class="home-section-title">课程</h2>
+                    <div class="home-items-list">
+                        <a href="courses/mysore.html" class="home-item">Mysore</a>
+                        <a href="courses/private.html" class="home-item">私教</a>
+                        <a href="courses/workshops.html" class="home-item">工作坊</a>
+                    </div>
+                </section>
+
+                <section class="home-section zh-content">
+                    <h2 class="home-section-title">文章</h2>
+                    <div class="home-items-list">
+                        <a href="blog/sanskrit-alphabet.html" class="home-item">梵语字母</a>
+                        <a href="blog/yoga-philosophy.html" class="home-item">瑜伽哲学</a>
+                        <a href="blog/yoga-sutra.html" class="home-item">瑜伽经</a>
+                        <a href="blog/sanskrit-mantra.html" class="home-item">梵语唱诵</a>
+                        <a href="blog/asanas.html" class="home-item">体式详解</a>
+                        <a href="blog/breathing-techniques.html" class="home-item">调息法</a>
+                    </div>
+                </section>
+
+                <!-- 英文内容 (默认隐藏) -->
+                <section class="home-section en-content" style="display: none;">
+                    <h2 class="home-section-title">Courses</h2>
+                    <div class="home-items-list">
+                        <a href="en-pages/courses/mysore-en.html" class="home-item">Mysore</a>
+                        <a href="en-pages/courses/private-en.html" class="home-item">Private Class</a>
+                        <a href="en-pages/courses/workshops-en.html" class="home-item">Workshops</a>
+                    </div>
+                </section>
+
+                <section class="home-section en-content" style="display: none;">
+                    <h2 class="home-section-title">Articles</h2>
+                    <div class="home-items-list">
+                        <a href="en-pages/blog/sanskrit-alphabet-en.html" class="home-item">Sanskrit Alphabet</a>
+                        <a href="en-pages/blog/yoga-philosophy-en.html" class="home-item">Yoga Philosophy</a>
+                        <a href="en-pages/blog/yoga-sutra-en.html" class="home-item">Yoga Sutra</a>
+                        <a href="en-pages/blog/sanskrit-mantra-en.html" class="home-item">Sanskrit Mantra</a>
+                        <a href="en-pages/blog/asanas-en.html" class="home-item">Asanas Guide</a>
+                        <a href="en-pages/blog/breathing-techniques-en.html" class="home-item">Breathing Techniques</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wechatQRModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <span class="qr-close">&times;</span>
+            <h3>添加微信</h3>
+            <img src="images/wechat-qr.jpg" alt="微信二维码" class="qr-image">
+            <p>扫描二维码联系我</p>
+            <p class="qr-username">微信号: xbyogi</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 语言切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const zhContents = document.querySelectorAll('.zh-content');
+            const enContents = document.querySelectorAll('.en-content');
+            
+            langButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // 更新按钮状态
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 切换内容显示
+                    if (lang === 'zh') {
+                        zhContents.forEach(content => content.style.display = 'block');
+                        enContents.forEach(content => content.style.display = 'none');
+                        document.documentElement.lang = 'zh-CN';
+                    } else {
+                        zhContents.forEach(content => content.style.display = 'none');
+                        enContents.forEach(content => content.style.display = 'block');
+                        document.documentElement.lang = 'en';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

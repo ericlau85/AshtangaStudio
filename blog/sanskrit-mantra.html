@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>习惯念诵的咒语 - Ashtanga Studio</title>
+                <style>
+                    /* 基础样式 */
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    
+                    body {
+                        font-family: "Futura", "-apple-system", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+                        line-height: 1.6;
+                        color: #1a1a1a;
+                        background-color: #fff;
+                    }
+                    
+                    /* 左侧导航栏样式 */
+                    .chapter-nav {
+                        position: fixed;
+                        top: 50%;
+                        left: 32px;
+                        transform: translateY(-50%);
+                        z-index: 1000;
+                    }
+                    
+                    .nav-trigger {
+                        width: 6px;
+                        height: 6px;
+                        background-color: #666;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        position: relative;
+                        z-index: 1002;
+                    }
+                    
+                    .nav-trigger:hover,
+                    .nav-trigger.active {
+                        background-color: #1a1a1a;
+                        transform: scale(1.2);
+                    }
+                    
+                    .nav-menu {
+                        position: absolute;
+                        left: 16px;
+                        top: 50%;
+                        transform: translateY(-50%) translateX(-8px);
+                        background: white;
+                        border: 1px solid #e5e5e5;
+                        border-radius: 6px;
+                        padding: 0.75rem;
+                        min-width: 100px;
+                        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.3s ease;
+                        z-index: 1001;
+                    }
+                    
+                    .chapter-nav:hover .nav-menu {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateY(-50%) translateX(0);
+                    }
+                    
+                    .nav-item {
+                        display: block;
+                        padding: 0.5rem 0.375rem;
+                        color: #666;
+                        text-decoration: none;
+                        font-size: 9px;
+                        line-height: 1.2;
+                        transition: all 0.2s ease;
+                        border-radius: 3px;
+                        cursor: pointer;
+                    }
+                    
+                    .nav-item:hover {
+                        color: #1a1a1a;
+                        background-color: #f8f9fa;
+                    }
+                    
+                    .nav-item.active {
+                        color: #1a1a1a;
+                        font-weight: 500;
+                        background-color: #f8f9fa;
+                    }
+                    
+                    .nav-item:not(:last-child) {
+                        border-bottom: 1px solid #f0f0f0;
+                    }
+                    
+                    /* 主内容区域样式 */
+                    .blog-article {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 4rem 2rem;
+                    }
+                    
+                    .article-header {
+                        margin-bottom: 3rem;
+                    }
+                    
+                    .article-title {
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .article-subtitle {
+                        font-size: 1.25rem;
+                        color: #666;
+                        font-style: italic;
+                    }
+                    
+                    .chapter {
+                        margin-bottom: 4rem;
+                        scroll-margin-top: 2rem;
+                    }
+                    
+                    .chapter-header {
+                        margin-bottom: 2rem;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid #e5e5e5;
+                    }
+                    
+                    .chapter-title {
+                        font-size: 1.75rem;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .content-paragraph {
+                        margin-bottom: 1.5rem;
+                    }
+                    
+                    .sanskrit {
+                        font-size: 1.125rem;
+                        font-weight: 500;
+                        color: #000;
+                        margin-bottom: 0.25rem;
+                    }
+                    
+                    .transliteration {
+                        font-size: 0.9rem;
+                        color: #666;
+                        font-style: italic;
+                        margin-left: 0.5rem;
+                        font-weight: 000;
+                    }
+                    
+                    .meaning {
+                        font-size: 0.9rem;
+                        color: #666;
+                        font-weight: 000;
+                        margin-top: 0.25rem;
+                    }
+                    
+
+                    /* 返回链接样式 */
+                    .back-link {
+                        display: inline-block;
+                        font-size: 13px;
+                        color: #666;
+                        text-decoration: none;
+                        margin-top: 30px;
+                        padding: 8px 16px;
+                        border-radius: 15px;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .back-link:hover {
+                        color: #000;
+                        background-color: #f0f0f0;
+                        transform: translateX(-5px);
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    .back-link::before {
+                        content: '';
+                        position: absolute;
+                        left: -100%;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.1), transparent);
+                        transition: left 0.5s ease;
+                    }
+                    
+                    .back-link:hover::before {
+                        left: 100%;
+                    }
+                </style>
+    </head>
+    <body>
+        <div class="chapter-nav">
+            <div class="nav-trigger"></div>
+            <!-- 导航链接 -->
+            <div class="nav-menu">
+                <a href="#intro" class="nav-item">习惯念诵的咒语</a>
+                <a href="#ashtanga-mantras" class="nav-item">阿斯汤加瑜伽咒语</a>
+                <a href="#opening-invocation" class="nav-item">开场诵</a>
+                <a href="#closing-invocation" class="nav-item">结束诵</a>
+                <a href="#short-incantation" class="nav-item">简短咒语</a>
+                <a href="#hymn-praise" class="nav-item">赞美诗</a>
+                <a href="#peace-mantras" class="nav-item">和平咒</a>
+            </div>
+        </div>
+        
+        <article class="blog-article">
+            <header class="article-header">
+                <h1 class="article-title">习惯念诵的咒语 Mantras Customarily Chanted</h1>
+                <p class="article-subtitle">नित्यजपमन्त्राः nityajapamantrāḥ</p>
+            </header>
+            
+            <section id="intro" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">习惯念诵的咒语 Mantras Customarily Chanted</h2>
+                    <p class="chapter-subtitle">नित्यजपमन्त्राः nityajapamantrāḥ</p>
+                </div>
+            
+            <div class="article-content">
+                <section id="intro" class="chapter">
+                    <div class="content-paragraph">
+                        <p>咒语是瑜伽修行中重要的组成部分，通过声音的振动连接个体意识与宇宙意识。以下是在阿斯汤加瑜伽传统中常用的咒语。</p>
+                    </div>
+                </section>
+                
+                <section id="ashtanga-mantras" class="chapter">
+                    <div class="chapter-header">
+                        <h2 class="chapter-title">阿斯汤加瑜伽咒语 Ashtanga Yoga Mantras</h2>
+                        <p class="chapter-subtitle">अष्टाङ्गयोगमन्त्राः aṣṭāṅgayogamantrāḥ</p>
+                    </div>
+                    
+                    <section id="opening-invocation" class="chapter">
+                        <div class="chapter-header">
+                            <h3 class="chapter-title">开场诵 Opening Invocation</h3>
+                            <p class="chapter-subtitle">वन्दे गुरूणां मन्त्र vande gurūṇāṃ mantra</p>
+                        </div>
+                        <div class="content-paragraph">
+                            <p class="sanskrit">ॐ</p>
+                            <p class="sanskrit">वन्दे गुरूणां चरणारविन्दे संदर्शितस्वात्मसुखावबोधे ।</p>
+                            <p class="sanskrit">निःश्रेयसे जाङ्गलिकायमाने संसारहालाहलमोहशान्त्यै ॥</p>
+                            <p class="sanskrit">आबाहुपुरुषाकारं शङ्खचक्रासिधारिणम् ।</p>
+                            <p class="sanskrit">सहस्रशिरसं श्वेतं प्रणमामि पतञ्जलिम् ॥</p>
+                            <p class="sanskrit">ॐ</p>
+                        </div>
+                        <div class="content-paragraph">
+                            <p class="transliteration">oṃ</p>
+                            <p class="transliteration">vande gurūṇāṃ caraṇāravinde saṃdarśitasvātmasukhāvabodhe ।</p>
+                            <p class="transliteration">niḥśreyase jāṅgalikāyamāne saṃsārahālāhalamohaśāntyai ॥</p>
+                            <p class="transliteration">ābāhupuruṣākāraṃ śaṅkhacakrāsidhāriṇam ।</p>
+                            <p class="transliteration">sahasraśirasaṃ śvetaṃ praṇamāmi patañjalim ॥</p>
+                            <p class="transliteration">oṃ</p>
+                        </div>
+                    </section>
+                    
+                    <section id="closing-invocation" class="chapter">
+                        <div class="chapter-header">
+                            <h3 class="chapter-title">结束诵 Closing Invocation</h3>
+                            <p class="chapter-subtitle">मङ्गल मन्त्र maṅgala mantra</p>
+                        </div>
+                        <div class="content-paragraph">
+                            <p class="sanskrit">ॐ</p>
+                            <p class="sanskrit">स्वस्तिप्रजाभ्यः परिपालयन्तां न्यायेन मार्गेण महीं महीशाः ।</p>
+                            <p class="sanskrit">गोब्राह्मणेभ्यः शुभमस्तु नित्यं लोकाः समस्ताः सुखिनो भवन्तु ॥</p>
+                            <p class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः ॥</p>
+                        </div>
+                        <div class="content-paragraph">
+                            <p class="transliteration">oṃ</p>
+                            <p class="transliteration">svasti prajābhyaḥ paripālayantāṃ nyāyena mārgeṇa mahīṃ mahīśāḥ ।</p>
+                            <p class="transliteration">go brāhmaṇebhyaḥ śubhamastu nityaṃ lokāḥ samastāḥ sukhino bhavantu ॥</p>
+                            <p class="transliteration">oṃ śāntiḥ śāntiḥ śāntiḥ ॥</p>
+                        </div>
+                    </section>
+                </section>
+                
+                <section id="short-incantation" class="chapter">
+                    <div class="chapter-header">
+                        <h2 class="chapter-title">简短咒语 Short incantation</h2>
+                        <p class="chapter-subtitle">लघुमन्त्राः laghumantrāḥ</p>
+                    </div>
+                    <div class="content-paragraph">
+                        <p class="sanskrit">ॐ <span class="transliteration">om̐ / aum</span></p>
+                        <p class="sanskrit">सो हम् <span class="transliteration">so ham</span></p>
+                        <p class="sanskrit">ॐ नमः शिवाय <span class="transliteration">om̐ namaḥ śivāya</span></p>
+                        <p class="sanskrit">ॐ नम ब्रह्म मने <span class="transliteration">om̐ nama brahma mane</span></p>
+                        <p class="sanskrit">श्री गुरुभ्यो नमः । हरिः ॐ <span class="transliteration">śrī gurubhyo namaḥ । hariḥ oṃ</span></p>
+                        <p class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः <span class="transliteration">om̐ śāntiḥ śāntiḥ śāntiḥ</span></p>
+                        <p class="sanskrit">लोकाः समस्ताः सुखिनो भवन्तु <span class="transliteration">lokāḥ samastāḥ sukhino bhavantu</span></p>
+                        <p class="sanskrit">ॐ तत् सत् <span class="transliteration">om̐ tat sat</span></p>
+                    </div>
+                </section>
+                
+                <section id="hymn-praise" class="chapter">
+                    <div class="chapter-header">
+                        <h2 class="chapter-title">赞美诗 Hymn of Praise</h2>
+                        <p class="chapter-subtitle">श्लोक śloka</p>
+                    </div>
+                    <div class="content-paragraph">
+                        <p class="sanskrit">गणानां त्वा गणपतिंहवामहे कविं कवीनामुपमश्रवस्तमम् ।</p>
+                        <p class="sanskrit">ज्येष्ठराजं ब्रह्मणां ब्रह्मणस्पत आनःशृण्वन्नूतिभिःसीदसादनम् ॥</p>
+                        <p class="sanskrit">ॐ श्री महागणपतये नमः ॥</p>
+                        <p class="transliteration">gaṇānāṃ tvā gaṇapatiṃ havāmahe kaviṃ kavīnāmupamaśravastamam ।</p>
+                        <p class="transliteration">jyeṣṭharājaṃ brahmaṇāṃ brahmaṇaspata ānaḥśṛṇvanūtibhiḥsīdasādanam ॥</p>
+                        <p class="transliteration">oṃ śrī mahāgaṇapatayē namaḥ ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">वक्रतुण्ड महकाय सूर्य कोटि समप्रभ ।</p>
+                        <p class="sanskrit">निर्विघ्नं कुरु मे देव सर्व कार्येषु सर्वदा ॥</p>
+                        <p class="transliteration">vakratuṇḍa mahakāya sūrya kōṭi samaprabha ।</p>
+                        <p class="transliteration">nirvighnaṃ kuru mē dēva sarva kāryēṣu sarvadā ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">स्वस्ति प्रजाभ्यः परिपालयन्तां । न्यायेन मार्गेण महीं महीशाः ।</p>
+                        <p class="sanskrit">गोब्राह्मणेभ्यश्शुभमस्तु नित्यं । लोकास्समस्तास्सुखिनो भवन्तु ॥</p>
+                        <p class="transliteration">svasti prajābhyaḥ paripālayantāṃ । nyāyēna mārgēṇa mahīṃ mahīśāḥ ।</p>
+                        <p class="transliteration">gōbrāhmaṇēbhyaśśubhamastu nityaṃ । lōkāssamastāssukhinō bhavantu ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">काले वर्षतु पर्जन्यः । पृथिवी सस्यशालिनी ॥</p>
+                        <p class="sanskrit">देशोऽयं क्षोभरहितः । ब्राह्मणास्सन्तु निर्भयाः ॥</p>
+                        <p class="transliteration">kāle varṣatu parjanyaḥ । pṛthivī sasyaśālinī ॥</p>
+                        <p class="transliteration">deśo'yaṃ kṣobharahitaḥ । brāhmaṇāssantu nirbhayāḥ ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">सर्वे भवन्तु सुखिनः । सर्वे सन्तु निरामयाः ॥</p>
+                        <p class="sanskrit">सर्वे भद्राणि पश्यन्तु । मा कश्चिद्दुःखभाग्भवेत् ॥</p>
+                        <p class="transliteration">sarve bhavantu sukhinaḥ । sarve santu nirāmayāḥ ॥</p>
+                        <p class="transliteration">sarve bhadrāṇi paśyantu । mā kaścit duḥkhabhāg bhavet ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
+                        <p class="transliteration">asato mā sadgamaya । tamaso mā jyotirgamaya । mṛtyormā amṛtaṃ gamaya ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः ॥</p>
+                        <p class="transliteration">om̐ śāntiḥ śāntiḥ śāntiḥ ॥</p>
+                    </div>
+                </section>
+                
+                <section id="peace-mantras" class="chapter">
+                    <div class="chapter-header">
+                        <h2 class="chapter-title">和平咒 Peace mantras</h2>
+                        <p class="chapter-subtitle">शान्तिमन्त्राः śāntimantrāḥ</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">ॐ शं नो मित्रः शं वरुणः । शं नो भवत्वर्यमा ।</p>
+                        <p class="sanskrit">शं नो इन्द्रो बृहस्पतिः । शं नो विष्णुरुरुक्रमः ।</p>
+                        <p class="sanskrit">नमो ब्रह्मणे । नमस्ते वायो । त्वमेव प्रत्यक्षं ब्रह्मासि ।</p>
+                        <p class="sanskrit">त्वामेव प्रत्यक्षं ब्रह्म वदिष्यामि । ॠतं वदिष्यामि ।</p>
+                        <p class="sanskrit">सत्यं वदिष्यामि । तन्मामवतु । तद्वक्तारमवतु ।</p>
+                        <p class="sanskrit">अवतु माम् । अवतु वक्तारम् ॥</p>
+                        <p class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः ॥</p>
+                        <p class="transliteration">oṃ śaṃ no mitraḥ śaṃ varuṇaḥ । śaṃ no bhavatvaryamā ।</p>
+                        <p class="transliteration">śaṃ no indro bṛhaspatiḥ ।  śaṃ no viṣṇururukramaḥ ।</p>
+                        <p class="transliteration">namo brahmaṇe । namaste vāyo । tvameva pratyakṣaṃ brahmāsi ।</p>
+                        <p class="transliteration">tvāmeva pratyakṣaṃ brahma vadiṣyāmi । ṝtaṃ vadiṣyāmi ।</p>
+                        <p class="transliteration">satyaṃ vadiṣyāmi । tanmāmavatu । tadvaktāramavatu ।</p>
+                        <p class="transliteration">avatu mām । avatu vaktāram ॥</p>
+                        <p class="transliteration">oṃ śāntiḥ śāntiḥ śāntiḥ ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">ॐ सह नाववतु सह नौ भुनक्तु सह वीर्यं करवावहै ।</p>
+                        <p class="sanskrit">तेजस्वि नावधीतमस्तु मा विद्विषावहै ।</p>
+                        <p class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः ॥</p>
+                        <p class="transliteration">oṃ saha nāvavatu saha nau bhunaktu saha vīryaṃ karavāvahai ।</p>
+                        <p class="transliteration">tejasvi nāvadhītamastu mā vidviṣāvahai ।</p>
+                        <p class="transliteration">oṃ śāntiḥ śāntiḥ śāntiḥ ॥</p>
+                    </div>
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">ॐ यश्छन्दसामृषभो विश्वरूपः ।</p>
+                        <p class="sanskrit">छन्दोभ्योऽध्यमृताथ्संबभूव ।</p>
+                        <p class="sanskrit">स मेन्द्रो मेधया स्पृणोतु ।</p>
+                        <p class="sanskrit">अमृतस्य देवधारणो भूयासम् ।</p>
+                        <p class="sanskrit">शरीरं मे विचर्षणम् ।</p>
+                        <p class="sanskrit">जिह्वा मे मधुमत्तमा ।</p>
+                        <p class="sanskrit">कर्णाभ्यां भूरिविश्रुवम् ।</p>
+                        <p class="sanskrit">ब्रह्मणः कोशोऽसि मेधया पिहितः ।</p>
+                        <p class="sanskrit">श्रुतं मे गोपाय ।</p>
+                        <p class="transliteration">oṃ yaśchandasāmṛṣabho viśvarūpaḥ ।</p>
+                        <p class="transliteration">chandobhyo'dhyamṛtāthsaṃbabhūva ।</p>
+                        <p class="transliteration">sa mendro medhayā spṛṇotu ।</p>
+                        <p class="transliteration">amṛtasya devadhāraṇo bhūyāsam ।</p>
+                        <p class="transliteration">śarīraṃ me vicarṣaṇam ।</p>
+                        <p class="transliteration">jihvā me madhumattamā ।</p>
+                        <p class="transliteration">karṇābhyāṃ bhūriviśruvam ।</p>
+                        <p class="transliteration">brahmaṇaḥ kośo'si medhayā pihitaḥ ।</p>
+                        <p class="transliteration">śrutaṃ me gopāya ।</p>
+                    </div>
+                    
+                    <!-- 更多和平咒内容... -->
+                    
+                    <div class="content-paragraph">
+                        <p class="sanskrit">पूर्णमदः पूर्णमिदं पूर्णात्पूर्णमुदच्यते ।</p>
+                        <p class="sanskrit">पूर्णस्य पूर्णमादाय पूर्णमेवावशिष्यते ॥</p>
+                        <p class="sanskrit">ॐ शान्तिः शान्तिः शान्तिः ॥</p>
+                        <p class="transliteration">pūrṇamadaḥ pūrṇamidaṃ pūrṇāt pūrṇamudacyate ।</p>
+                        <p class="transliteration">pūrṇasya pūrṇamādāya pūrṇamevāvaśiṣyate ॥</p>
+                        <p class="transliteration">oṃ śāntiḥ śāntiḥ śāntiḥ ॥</p>
+                    </div>
+                </section>
+
+                <a href="../index.html" class="back-link">← 返回首页</a>
+            </div>
+        </article>
+        <script src="../js/articles.js"></script>
+    </body>
+    </html>

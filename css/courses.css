@@ -1,0 +1,295 @@
+/* 课程专用样式 */
+
+.courses-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.course-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    padding: 30px;
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-features {
+    list-style: none;
+    padding: 0;
+}
+
+.course-features li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.course-features li:before {
+    content: "✓ ";
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.pricing-table th,
+.pricing-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.pricing-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* ===== Mysore 页面专用样式 ===== */
+
+.classes-section {
+    padding: 0 0 80px;
+}
+
+.classes-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.classes-header h1 {
+    font-size: 32px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.classes-header p {
+    color: #666;
+    font-size: 14px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 练习方式对比 */
+.practice-method {
+    background: #f8f8f8;
+    padding: 60px 0;
+    margin: 40px 0;
+}
+
+.method-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.method-card {
+    background: white;
+    padding: 30px;
+    border: 1px solid #e5e5e5;
+    transition: all 0.3s ease;
+}
+
+.method-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.method-icon {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/* 课程特色 */
+.benefits-section {
+    padding: 60px 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.benefit-icon {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+/* 课表样式 */
+.schedule-section {
+    padding: 60px 0;
+    background-color: #f8f8f8;
+}
+
+.schedule-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.schedule-header h2 {
+    font-size: 28px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.schedule-header p {
+    color: #666;
+    font-size: 14px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.schedule-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.schedule-day {
+    margin-bottom: 40px;
+}
+
+.day-title {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.class-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 20px;
+}
+
+.class-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.class-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.class-type {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.class-time {
+    text-align: center;
+    min-width: 120px;
+    margin: 0 20px;
+}
+
+.time-slot {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.class-duration {
+    color: #666;
+    font-size: 12px;
+}
+
+.class-action {
+    min-width: 80px;
+    text-align: right;
+}
+
+.book-btn, .class-btn {
+    padding: 8px 20px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.book-btn:hover, .class-btn:hover {
+    background: transparent;
+    color: #000;
+}
+
+.rest-day {
+    text-align: center;
+    padding: 40px 0;
+    color: #666;
+    font-style: italic;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .course-card {
+        padding: 20px;
+        margin: 15px 0;
+    }
+    
+    .pricing-table {
+        font-size: 14px;
+    }
+    
+    .method-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .class-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .class-time {
+        text-align: left;
+        margin: 0;
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}

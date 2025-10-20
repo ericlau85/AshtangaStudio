@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私教课程 | ASHTANGA STUDIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.5;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-menu li {
+            position: relative;
+        }
+        
+        .nav-menu a {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-menu a.active {
+            font-weight: 500;
+        }
+        
+        /* 导航栏下划线动画 */
+        .nav-menu a {
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #000;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+        
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .login-btn, .signup-btn {
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signup-btn {
+            background: #000;
+            color: #fff;
+        }
+        
+        .login-btn:hover, .signup-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .login-btn:active, .signup-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        
+        /* 课程页面内容 */
+        .classes-section {
+            padding: 100px 0 80px;
+        }
+        
+        .classes-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .classes-header h1 {
+            font-size: 32px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .classes-header p {
+            color: #666;
+            font-size: 14px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 课程网格 */
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 80px;
+        }
+        
+        .class-card {
+            border: 1px solid #e5e5e5;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .class-card:hover {
+            border-color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .class-icon {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        
+        .class-card h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .class-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .class-features {
+            margin: 20px 0;
+        }
+        
+        .class-features li {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        
+        .class-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #000;
+            color: #fff;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .class-btn:hover {
+            background: transparent;
+            color: #000;
+        }
+        
+        .class-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 课表内容 */
+        .schedule-section {
+            padding: 60px 0;
+            background-color: #f8f8f8;
+        }
+        
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .schedule-header h2 {
+            font-size: 28px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-header p {
+            color: #666;
+            font-size: 14px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 课表 */
+        .schedule-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .schedule-day {
+            margin-bottom: 40px;
+        }
+        
+        .day-title {
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .class-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+            gap: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .class-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .class-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .class-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .class-type {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .class-time {
+            text-align: center;
+            min-width: 120px;
+            margin: 0 20px;
+        }
+
+        .time-slot {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .class-duration {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .class-action {
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .book-btn {
+            padding: 8px 20px;
+            background: #000;
+            color: #fff;
+            border: 1px solid #000;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-btn:hover {
+            background: transparent;
+            color: #000;
+        }
+        
+        .book-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .rest-day {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+        
+        .footer-column a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 页面加载动画 */
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu, .nav-auth {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .class-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .class-time {
+                text-align: left;
+                margin: 0;
+                display: flex;
+                gap: 20px;
+                align-items: center;
+            }
+            
+            .class-action {
+                text-align: left;
+                width: 100%;
+            }
+            
+            .book-btn {
+                width: 100%;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .class-time {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* 私教特色样式 */
+        .private-features {
+            padding: 60px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: #000;
+            transform: translateY(-5px);
+        }
+        
+        .process-section {
+            background: #f8f8f8;
+            padding: 60px 0;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .process-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 500;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">ASHTANGA STUDIO</a>
+            <ul class="nav-menu">
+                <li><a href="mysore.html">Mysore</a></li>
+                <li><a href="private.html" class="active">私教</a></li>
+                <li><a href="workshops.html">工作坊</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div class="language-switcher">
+                    <a href="index.html" class="language-btn active" title="中文">🇨🇳</a>
+                    <a href="../en/index.html" class="language-btn" title="English">🇬🇧</a>
+                </div>
+                <a href="sign/login.html" class="login-btn">登录</a>
+                <a href="sign/register.html" class="signup-btn">注册</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面内容 -->
+    <section class="classes-section">
+        <div class="container">
+            <div class="classes-header">
+                <h1>私教课程</h1>
+                <p>一对一专业指导 · 个性化定制 · 深度精进</p>
+            </div>
+
+            <!-- 课程介绍 -->
+            <div class="about-text" style="max-width: 800px; margin: 0 auto 50px;">
+                <h2>个性化瑜伽之旅</h2>
+                <p>私教课程为您提供完全个性化的阿斯汤加瑜伽指导。无论是初学者想要建立坚实基础，还是资深练习者希望突破瓶颈，我们都能为您量身定制最适合的练习方案。</p>
+            </div>
+
+            <!-- 私教特色 -->
+            <div class="private-features">
+                <div class="container">
+                    <div class="section-title">
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="method-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3>目标导向</h3>
+                            <p style="color: #666;">根据您的具体目标定制练习计划，无论是体式精进、伤痛恢复还是压力管理</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="method-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>快速进步</h3>
+                            <p style="color: #666;">一对一专注指导，及时纠正错误，确保练习的安全性和有效性</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="method-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>时间灵活</h3>
+                            <p style="color: #666;">根据您的日程安排课程时间，真正实现工作与练习的平衡</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 适合人群 -->
+            <div class="schedule-section">
+                <div class="container">
+                    <div class="schedule-header">
+                        <h2>适合人群</h2>
+                    </div>
+                    <div class="classes-grid">
+                        <div class="class-card">
+                            <div class="class-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h3>初学者</h3>
+                            <p>建立正确的练习基础，避免受伤，快速掌握核心要领</p>
+                        </div>
+                        <div class="class-card">
+                            <div class="class-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <h3>精进者</h3>
+                            <p>突破练习瓶颈，深入体式细节，提升练习质量</p>
+                        </div>
+                        <div class="class-card">
+                            <div class="class-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h3>特殊需求</h3>
+                            <p>伤痛恢复、孕期瑜伽、年龄相关调整等特殊情况</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 预约流程 -->
+            <div class="process-section">
+                <div class="container">
+                    <div class="section-title">
+                    </div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <h4>需求评估</h4>
+                            <p style="color: #666;">沟通您的目标和身体状况</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <h4>方案定制</h4>
+                            <p style="color: #666;">制定个性化练习计划</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <h4>时间安排</h4>
+                            <p style="color: #666;">确定课程时间和频率</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <h4>开始练习</h4>
+                            <p style="color: #666;">线上实时指导课程</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 在预约流程部分后添加 -->
+        <section class="pricing-cta" style="padding: 60px 0; text-align: center;">
+            <div class="container">
+                <h3 style="font-size: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">私教费用</h3>
+                <p style="color: #666; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    私教课程提供多种套餐选择，满足不同深度和频率的学习需求。
+                </p>
+                <div style="display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                    <div style="text-align: center; padding: 0 25px;">
+                        <div style="font-size: 18px; font-weight: 500; margin-bottom: 5px;">单节私教</div>
+                        <div style="color: #666; font-size: 13px;">¥380/节</div>
+                    </div>
+                    <div style="text-align: center; padding: 0 25px;">
+                        <div style="font-size: 18px; font-weight: 500; margin-bottom: 5px;">5节套餐</div>
+                        <div style="color: #666; font-size: 13px;">¥1,760</div>
+                    </div>
+                    <div style="text-align: center; padding: 0 25px;">
+                        <div style="font-size: 18px; font-weight: 500; margin-bottom: 5px;">10节套餐</div>
+                        <div style="color: #666; font-size: 13px;">¥3,200</div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <a href="rates.html" class="class-btn" style="display: inline-block;">查看完整价格表</a>
+                </div>
+            </div>
+        </section>
+        
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ASHTANGA STUDIO</h3>
+                    <p style="color: #ccc; font-size: 13px; margin-top: 10px; line-height: 1.6;">自主练习 · 个性化指导 · 线上便捷学习</p>
+                </div>
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于</a></li>
+                        <li><a href="classes.html">课程</a></li>
+                        <li><a href="rates.html">价格</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系信息</h3>
+                    <ul>
+                        <li><a href="mailto:info@ashtangastudio.com">info@ashtangastudio.com</a></li>
+                        <li><a href="tel:+8613121212007">+86 131 2121 2007</a></li>
+                        <li>视频会议授课</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <ul>
+                        <li><a href="#">微信: xbyogi</a></li>
+                        <li><a href="#">小红书: 608394030</a></li>
+                        <li><a href="#">Instagram: xbyoga</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ASHTANGA STUDIO. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainContent = document.querySelector('.classes-section');
+            if (mainContent) {
+                mainContent.classList.add('fade-in');
+            }
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+        
+        // 汉堡菜单功能
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            const navAuth = document.querySelector('.nav-auth');
+            
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            navAuth.style.display = navAuth.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '60px';
+                navMenu.style.left = '0';
+                navMenu.style.width = '100%';
+                navMenu.style.background = '#fff';
+                navMenu.style.padding = '20px';
+                navMenu.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                
+                navAuth.style.flexDirection = 'column';
+                navAuth.style.position = 'absolute';
+                navAuth.style.top = '260px';
+                navAuth.style.left = '0';
+                navAuth.style.width = '100%';
+                navAuth.style.background = '#fff';
+                navAuth.style.padding = '20px';
+                navAuth.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // 课程按钮功能
+        document.querySelectorAll('.class-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const className = this.closest('.class-card').querySelector('h3').textContent;
+                alert(`了解更多关于 ${className} 的信息`);
+            });
+        });
+
+        // 预约按钮功能
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const className = this.closest('.class-item').querySelector('.class-name').textContent;
+                const timeSlot = this.closest('.class-item').querySelector('.time-slot').textContent;
+                alert(`预约 ${className}\n时间: ${timeSlot}\n即将跳转到预约页面...`);
+            });
+        });
+    </script>
+</body>
+</html>

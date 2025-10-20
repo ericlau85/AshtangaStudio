@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体式 Asanas - Ashtanga Studio</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Futura", "-apple-system", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fff;
+        }
+        
+        /* 左侧导航栏样式 */
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            left: 32px;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .nav-trigger {
+            width: 6px;
+            height: 6px;
+            background-color: #666;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1002;
+        }
+        
+        .nav-trigger:hover,
+        .nav-trigger.active {
+            background-color: #1a1a1a;
+            transform: scale(1.2);
+        }
+        
+        .nav-menu {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-8px);
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 0.75rem;
+            min-width: 100px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .chapter-nav:hover .nav-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 0.5rem 0.375rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 9px;
+            line-height: 1.2;
+            transition: all 0.2s ease;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            color: #1a1a1a;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item.active {
+            color: #1a1a1a;
+            font-weight: 500;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* 主内容区域样式 */
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .article-header {
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .chapter {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+        
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .chapter-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-paragraph {
+            margin-bottom: 1.5rem;
+        }
+        
+        .sanskrit {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 0.25rem;
+        }
+        
+        .transliteration {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-left: 0.5rem;
+            font-weight: 000;
+        }
+        
+        .meaning {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 000;
+            margin-top: 0.25rem;
+        }
+        
+
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 8px 16px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-link:hover {
+            color: #000;
+            background-color: #f0f0f0;
+            transform: translateX(-5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-link:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-nav">
+            <div class="nav-trigger"></div>
+            <div class="nav-menu">
+                <a href="#intro" class="nav-item">体式</a>
+                <a href="#asanas-list" class="nav-item">体式列表</a>
+                <a href="#meanings" class="nav-item">体式释义</a>
+            </div>
+        </div>
+        
+        <article class="blog-article">
+                <header class="article-header">
+                    <h1 class="article-title">体式 Asanas</h1>
+                    <p class="article-subtitle">आसन āsana</p>
+                </header>
+                
+                <section id="intro" class="chapter">
+                    <div class="chapter-header">
+                        <h2 class="chapter-title">体式</h2>
+                        <p class="chapter-subtitle">आसन āsana</p>
+                    </div>
+            
+            <div class="content-paragraph">
+                        <p>体式是瑜伽练习中的重要组成部分，通过特定的身体姿势来培养力量、柔韧性和专注力。</p>
+                    </div>
+            
+            <section id="asanas-list" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">体式列表</h2>
+                    <p class="chapter-subtitle">आसनानि āsanāni</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">समस्थितिः <span class="transliteration">samasthitiḥ</span></p>
+                    <p class="sanskrit">सूर्य नमस्कार <span class="transliteration">sūrya namaskāra</span></p>
+                    <p class="sanskrit">पादाङ्गुष्ठासन <span class="transliteration">pādāṅguṣṭhāsana</span></p>
+                    <p class="sanskrit">पादहस्तासन <span class="transliteration">pāda hastāsana</span></p>
+                    <p class="sanskrit">उत्थित त्रिकोणासन <span class="transliteration">utthita trikoṇāsana</span></p>
+                    <p class="sanskrit">उत्थित पार्श्वकोणासन <span class="transliteration">utthita pārśvakoṇāsana</span></p>
+                    <p class="sanskrit">प्रसारित पादोत्तानासन <span class="transliteration">prasārita pādottānāsana</span></p>
+                    <p class="sanskrit">पार्श्वोत्तानासन <span class="transliteration">pārśvottānāsana</span></p>
+                    <p class="sanskrit">उत्थितहस्त पादाङ्गुष्ठासन <span class="transliteration">utthita hasta pādāṅguṣṭhāsana</span></p>
+                    <p class="sanskrit">अर्धबद्ध पद्मोत्तानासन <span class="transliteration">ardha baddha padmottānāsana</span></p>
+                    <p class="sanskrit">उत्कटासन <span class="transliteration">utkaṭāsana</span></p>
+                    <p class="sanskrit">वीरभद्रासन <span class="transliteration">vīrabhadrāsana</span></p>
+                    <p class="sanskrit">दण्डासन - पश्चिमोत्तानासन <span class="transliteration">daṇḍāsana - paścimottānāsana</span></p>
+                    <p class="sanskrit">पूर्वोत्तानासन <span class="transliteration">pūrvottānāsana</span></p>
+                    <p class="sanskrit">अर्धबद्धपद्म पश्चिमोत्तानासन <span class="transliteration">ardha baddha padma paścimottānāsana</span></p>
+                    <p class="sanskrit">त्रियङ्गमुखैकपाद पश्चिमोत्तानासन <span class="transliteration">triyaṅga mukhaikapāda paścimottānāsana</span></p>
+                    <p class="sanskrit">जानुशीर्षासन <span class="transliteration">jānu śīrṣāsana</span></p>
+                    <p class="sanskrit">मरीच्यासन <span class="transliteration">marīcyāsana</span></p>
+                    <p class="sanskrit">नावासन <span class="transliteration">nāvāsana</span></p>
+                    <p class="sanskrit">भुजपीडासन <span class="transliteration">bhuja pīḍāsana</span></p>
+                    <p class="sanskrit">कूर्मासन <span class="transliteration">kūrmāsana</span></p>
+                    <p class="sanskrit">सुप्त कूर्मासन <span class="transliteration">supta kūrmāsana</span></p>
+                    <p class="sanskrit">गर्भ पिण्डासन <span class="transliteration">garbha piṇḍāsana</span></p>
+                    <p class="sanskrit">कुक्कुटासन <span class="transliteration">kukkuṭāsana</span></p>
+                    <p class="sanskrit">बद्ध कोणासन <span class="transliteration">baddha koṇāsana</span></p>
+                    <p class="sanskrit">उपविष्ट कोणासन <span class="transliteration">upaviṣṭa koṇāsana</span></p>
+                    <p class="sanskrit">सुप्त कोणासन <span class="transliteration">supta koṇāsana</span></p>
+                    <p class="sanskrit">सुप्त पादाङ्गुष्ठासन <span class="transliteration">supta pādāṅguṣṭhāsana</span></p>
+                    <p class="sanskrit">उभय पादाङ्गुष्ठासन <span class="transliteration">ubhaya pādāṅguṣṭhāsana</span></p>
+                    <p class="sanskrit">ऊर्ध्वमुख पश्चिमोत्तानासन <span class="transliteration">ūrdhva mukha paścimottānāsana</span></p>
+                    <p class="sanskrit">सेतुबन्धासन <span class="transliteration">setu bandhāsana</span></p>
+                    <p class="sanskrit">पाशासन <span class="transliteration">pāśāsana</span></p>
+                    <p class="sanskrit">क्रौञ्चासन <span class="transliteration">krauñcāsana</span></p>
+                    <p class="sanskrit">शलभासन <span class="transliteration">śalabhāsana</span></p>
+                    <p class="sanskrit">भेकासन <span class="transliteration">bhekāsana</span></p>
+                    <p class="sanskrit">धनुरासन <span class="transliteration">dhanurāsana</span></p>
+                    <p class="sanskrit">पार्श्व धनुरासन <span class="transliteration">pārśva dhanurāsana</span></p>
+                    <p class="sanskrit">उष्ट्रासन <span class="transliteration">uṣṭrāsana</span></p>
+                    <p class="sanskrit">लघु वज्रासन <span class="transliteration">laghu vajrāsana</span></p>
+                    <p class="sanskrit">कपोतासन <span class="transliteration">kapotāsana</span></p>
+                    <p class="sanskrit">सुप्त वज्रासन <span class="transliteration">supta vajrāsana</span></p>
+                    <p class="sanskrit">बकासन <span class="transliteration">bakāsana</span></p>
+                    <p class="sanskrit">भरद्वाजासन <span class="transliteration">bharadvājāsana</span></p>
+                    <p class="sanskrit">अर्ध मत्स्येन्द्रासन <span class="transliteration">ardha matsyendrāsana</span></p>
+                    <p class="sanskrit">एक पाद शीर्षासन <span class="transliteration">eka pāda śīrṣāsana</span></p>
+                    <p class="sanskrit">द्वि पाद शीर्षासन <span class="transliteration">dvi pāda śīrṣāsana</span></p>
+                    <p class="sanskrit">योग निद्रासन <span class="transliteration">yoga nidrāsana</span></p>
+                    <p class="sanskrit">टिट्टिभासन <span class="transliteration">ṭiṭṭibhāsana</span></p>
+                    <p class="sanskrit">पिञ्छ मयूरासन <span class="transliteration">piñcha mayūrāsana</span></p>
+                    <p class="sanskrit">कारण्डवासन <span class="transliteration">kāraṇḍavāsana</span></p>
+                    <p class="sanskrit">मयूरासन <span class="transliteration">mayūrāsana</span></p>
+                    <p class="sanskrit">नक्रासन <span class="transliteration">nakrāsana</span></p>
+                    <p class="sanskrit">वातायनासन <span class="transliteration">vātāyanāsana</span></p>
+                    <p class="sanskrit">परिघासन <span class="transliteration">parighāsana</span></p>
+                    <p class="sanskrit">गोमुखासन <span class="transliteration">gomukhāsana</span></p>
+                    <p class="sanskrit">सुप्त ऊर्ध्व पाद वज्रासन <span class="transliteration">supta ūrdhva pāda vajrāsana</span></p>
+                    <p class="sanskrit">मुक्त हस्त शीर्षासन <span class="transliteration">mukta hasta śīrṣāsana</span></p>
+                    <p class="sanskrit">बद्ध हस्त शीर्षासन <span class="transliteration">baddha hasta śīrṣāsana</span></p>
+                    <p class="sanskrit">ऊर्ध्व धनुरासन <span class="transliteration">ūrdhva dhanurāsana</span></p>
+                    <p class="sanskrit">विपरीत चक्रासन <span class="transliteration">viparīta cakrāsana</span></p>
+                    <p class="sanskrit">त्रियङ्गमुख उत्तानासन <span class="transliteration">triyaṅgamukha uttānāsana</span></p>
+                    <p class="sanskrit">सालम्ब सर्वाङ्गासन <span class="transliteration">sālamba sarvāṅgāsana</span></p>
+                    <p class="sanskrit">हलासन <span class="transliteration">halāsana</span></p>
+                    <p class="sanskrit">कर्ण पीडासन <span class="transliteration">karṇa pīḍāsana</span></p>
+                    <p class="sanskrit">ऊर्ध्व पद्मासन <span class="transliteration">ūrdhva padmāsana</span></p>
+                    <p class="sanskrit">पिण्डासन <span class="transliteration">piṇḍāsana</span></p>
+                    <p class="sanskrit">मत्स्यासन <span class="transliteration">matsyāsana</span></p>
+                    <p class="sanskrit">उत्तान पादासन <span class="transliteration">uttāna pādāsana</span></p>
+                    <p class="sanskrit">शीर्षासन <span class="transliteration">śīrṣāsana</span></p>
+                    <p class="sanskrit">बद्ध पद्मासन <span class="transliteration">baddha padmāsana</span></p>
+                    <p class="sanskrit">योग-मुद्रा <span class="transliteration">yoga-mudrā</span></p>
+                    <p class="sanskrit">पद्मासन <span class="transliteration">padmāsana</span></p>
+                    <p class="sanskrit">उत्प्लुतिः <span class="transliteration">utplutiḥ</span></p>
+                    <p class="sanskrit">सुखासन <span class="transliteration">sukhāsana</span></p>
+                </div>
+            </section>
+            
+            <section id="meanings" class="chapter">
+                <div class="chapter-header">
+                    <h2 class="chapter-title">体式释义</h2>
+                    <p class="chapter-subtitle">आसनविवरणम् āsanavivaraṇam</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">आसन <span class="transliteration">āsana</span></p>
+                    <p>体式</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">समस्थितिः <span class="transliteration">samasthitiḥ</span></p>
+                    <p>sama(相等的) + sthitiḥ(稳定)</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सूर्य नमस्कार <span class="transliteration">sūrya namaskāra</span></p>
+                    <p>sūrya(太阳) + namaskāra(礼拜)</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पादाङ्गुष्ठासन <span class="transliteration">pādāṅguṣṭhāsana</span></p>
+                    <p>pāda(脚) + aṅguṣṭha(脚趾) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पादहस्तासन <span class="transliteration">pāda hastāsana</span></p>
+                    <p>pāda(脚) + hasta(手) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उत्थित त्रिकोणासन <span class="transliteration">utthita trikoṇāsana</span></p>
+                    <p>utthita(伸展的) + tri(三) + koṇa(角) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उत्थित पार्श्वकोणासन <span class="transliteration">utthita pārśvakoṇāsana</span></p>
+                    <p>utthita(伸展的) + pārśva(侧面) + koṇa(角) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">प्रसारित पादोत्तानासन <span class="transliteration">prasārita pādottānāsana</span></p>
+                    <p>prasārita(展开的) + pāda(脚) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पार्श्वोत्तानासन <span class="transliteration">pārśvottānāsana</span></p>
+                    <p>pārśva(侧面) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उत्थितहस्त पादाङ्गुष्ठासन <span class="transliteration">utthita hasta pādāṅguṣṭhāsana</span></p>
+                    <p>utthita(伸展的) + hasta(手) + pāda(脚) + aṅguṣṭha(脚趾) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">अर्धबद्ध पद्मोत्तानासन <span class="transliteration">ardha baddha padmottānāsana</span></p>
+                    <p>ardha(一半) + baddha(束缚的) + padma(莲花) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उत्कटासन <span class="transliteration">utkaṭāsana</span></p>
+                    <p>utkaṭa(强大的) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">वीरभद्रासन <span class="transliteration">vīrabhadrāsana</span></p>
+                    <p>vīrabhadra(维拉巴德拉「战士」) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">दण्डासन <span class="transliteration">daṇḍāsana</span></p>
+                    <p>daṇḍa(杖) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पश्चिमोत्तानासन <span class="transliteration">paścimottānāsana</span></p>
+                    <p>paścima(西方) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पूर्वोत्तानासन <span class="transliteration">pūrvottānāsana</span></p>
+                    <p>pūrva(东方) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">अर्धबद्धपद्म पश्चिमोत्तानासन <span class="transliteration">ardha baddha padma paścimottānāsana</span></p>
+                    <p>ardha(一半) + baddha(束缚的) + padma(莲花) + paścima(西方) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">त्रियङ्गमुखैकपाद पश्चिमोत्तानासन <span class="transliteration">triyaṅga mukhaikapāda paścimottānāsana</span></p>
+                    <p>tri(三) + aṅga(肢体) + mukha(脸) + eka(一) + pāda(脚) + paścima(西方) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">जानुशीर्षासन <span class="transliteration">jānu śīrṣāsana</span></p>
+                    <p>jānu(膝) + śīrṣa(头) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">मरीच्यासन <span class="transliteration">marīcyāsana</span></p>
+                    <p>marīci(马里奇「摩利支」) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">नावासन <span class="transliteration">nāvāsana</span></p>
+                    <p>nāva(船) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">भुजपीडासन <span class="transliteration">bhuja pīḍāsana</span></p>
+                    <p>bhuja(手臂) + pīḍa(压力) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">कूर्मासन <span class="transliteration">kūrmāsana</span></p>
+                    <p>kūrma(乌龟) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सुप्त कूर्मासन <span class="transliteration">supta kūrmāsana</span></p>
+                    <p>supta(卧) + kūrma(乌龟) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">गर्भ पिण्डासन <span class="transliteration">garbha piṇḍāsana</span></p>
+                    <p>garbha(子宫) + piṇḍa(胎儿) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">कुक्कुटासन <span class="transliteration">kukkuṭāsana</span></p>
+                    <p>kukkuṭa(公鸡) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">बद्ध कोणासन <span class="transliteration">baddha koṇāsana</span></p>
+                    <p>baddha(束缚的) + koṇa(角) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उपविष्ट कोणासन <span class="transliteration">upaviṣṭa koṇāsana</span></p>
+                    <p>upaviṣṭa(坐着的) + koṇa(角) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सुप्त कोणासन <span class="transliteration">supta koṇāsana</span></p>
+                    <p>supta(卧) + koṇa(角) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सुप्त पादाङ्गुष्ठासन <span class="transliteration">supta pādāṅguṣṭhāsana</span></p>
+                    <p>supta(卧) + pāda(脚) + aṅguṣṭha(脚趾) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उभय पादाङ्गुष्ठासन <span class="transliteration">ubhaya pādāṅguṣṭhāsana</span></p>
+                    <p>ubhaya(两者) + pāda(脚) + aṅguṣṭha(脚趾) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">ऊर्ध्वमुख पश्चिमोत्तानासन <span class="transliteration">ūrdhva mukha paścimottānāsana</span></p>
+                    <p>ūrdhva(向上) + mukha(脸) + paścima(西方) + uttāna(强烈伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सेतुबन्धासन <span class="transliteration">setu bandhāsana</span></p>
+                    <p>setu(桥) + bandha(捆绑) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पाशासन <span class="transliteration">pāśāsana</span></p>
+                    <p>pāśa(套索) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">क्रौञ्चासन <span class="transliteration">krauñcāsana</span></p>
+                    <p>krauñca(鹳) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">शलभासन <span class="transliteration">śalabhāsana</span></p>
+                    <p>śalabha(蝗虫) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">भेकासन <span class="transliteration">bhekāsana</span></p>
+                    <p>bheka(青蛙) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">धनुरासन <span class="transliteration">dhanurāsana</span></p>
+                    <p>dhanur(弓) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पार्श्व धनुरासन <span class="transliteration">pārśva dhanurāsana</span></p>
+                    <p>pārśva(侧面) + dhanur(弓) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उष्ट्रासन <span class="transliteration">uṣṭrāsana</span></p>
+                    <p>uṣṭra(骆驼) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">लघु वज्रासन <span class="transliteration">laghu vajrāsana</span></p>
+                    <p>laghu(轻的) + vajra(雷电) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">कपोतासन <span class="transliteration">kapotāsana</span></p>
+                    <p>kapota(鸽子) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सुप्त वज्रासन <span class="transliteration">supta vajrāsana</span></p>
+                    <p>supta(卧) + vajra(雷电) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">बकासन <span class="transliteration">bakāsana</span></p>
+                    <p>baka(鹤) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">भरद्वाजासन <span class="transliteration">bharadvājāsana</span></p>
+                    <p>bharadvāja(巴拉德瓦贾「婆罗堕缚」) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">अर्ध मत्स्येन्द्रासन <span class="transliteration">ardha matsyendrāsana</span></p>
+                    <p>ardha(一半) + matsyendra(玛茨因德拉「鱼王」) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">एक पाद शीर्षासन <span class="transliteration">eka pāda śīrṣāsana</span></p>
+                    <p>eka(一) + pāda(脚) + śīrṣa(头) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">द्वि पाद शीर्षासन <span class="transliteration">dvi pāda śīrṣāsana</span></p>
+                    <p>dvi(二) + pāda(脚) + śīrṣa(头) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">योग निद्रासन <span class="transliteration">yoga nidrāsana</span></p>
+                    <p>yoga(瑜伽) + nidrā(睡眠) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">टिट्टिभासन <span class="transliteration">ṭiṭṭibhāsana</span></p>
+                    <p>ṭiṭṭibha(滨鹬) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पिञ्छ मयूरासन <span class="transliteration">piñcha mayūrāsana</span></p>
+                    <p>piñcha(羽毛) + mayūra(孔雀) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">कारण्डवासन <span class="transliteration">kāraṇḍavāsana</span></p>
+                    <p>kāraṇḍava(鹅) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">मयूरासन <span class="transliteration">mayūrāsana</span></p>
+                    <p>mayūra(孔雀) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">नक्रासन <span class="transliteration">nakrāsana</span></p>
+                    <p>nakra(鳄鱼) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">वातायनासन <span class="transliteration">vātāyanāsana</span></p>
+                    <p>vātāyana(窗) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">परिघासन <span class="transliteration">parighāsana</span></p>
+                    <p>parigha(门闩) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">गोमुखासन <span class="transliteration">gomukhāsana</span></p>
+                    <p>go(牛) + mukha(脸) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सुप्त ऊर्ध्व पाद वज्रासन <span class="transliteration">supta ūrdhva pāda vajrāsana</span></p>
+                    <p>supta(卧) + ūrdhva(向上) + pāda(脚) + vajra(雷电) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">मुक्त हस्त शीर्षासन <span class="transliteration">mukta hasta śīrṣāsana</span></p>
+                    <p>mukta(解脱的) + hasta(手) + śīrṣa(头) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">बद्ध हस्त शीर्षासन <span class="transliteration">baddha hasta śīrṣāsana</span></p>
+                    <p>baddha(束缚的) + hasta(手) + śīrṣa(头) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">ऊर्ध्व धनुरासन <span class="transliteration">ūrdhva dhanurāsana</span></p>
+                    <p>ūrdhva(向上) + dhanur(弓) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">विपरीत चक्रासन <span class="transliteration">viparīta cakrāsana</span></p>
+                    <p>viparīta(反转的) + cakra(轮) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">त्रियङ्गमुख उत्तानासन <span class="transliteration">triyaṅgamukha uttānāsana</span></p>
+                    <p>triyaṅga(三肢) + mukha(脸) + uttāna(伸展) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सालम्ब सर्वाङ्गासन <span class="transliteration">sālamba sarvāṅgāsana</span></p>
+                    <p>sa(有) + ālamba(支撑) + sarva(所有) + aṅga(肢体) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">हलासन <span class="transliteration">halāsana</span></p>
+                    <p>hala(犁) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">कर्ण पीडासन <span class="transliteration">karṇa pīḍāsana</span></p>
+                    <p>karṇa(耳) + pīḍa(压力) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">ऊर्ध्व पद्मासन <span class="transliteration">ūrdhva padmāsana</span></p>
+                    <p>ūrdhva(向上) + padma(莲花) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पिण्डासन <span class="transliteration">piṇḍāsana</span></p>
+                    <p>piṇḍa(胎儿) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">मत्स्यासन <span class="transliteration">matsyāsana</span></p>
+                    <p>matsya(鱼) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उत्तान पादासन <span class="transliteration">uttāna pādāsana</span></p>
+                    <p>uttāna(伸展) + pāda(脚) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">शीर्षासन <span class="transliteration">śīrṣāsana</span></p>
+                    <p>śīrṣa(头) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">बद्ध पद्मासन <span class="transliteration">baddha padmāsana</span></p>
+                    <p>baddha(束缚的) + padma(莲花) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">योग-मुद्रा <span class="transliteration">yoga-mudrā</span></p>
+                    <p>yoga(瑜伽) + mudrā(印契)</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">पद्मासन <span class="transliteration">padmāsana</span></p>
+                    <p>padma(莲花) + āsana</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">उत्प्लुतिः <span class="transliteration">utplutiḥ</span></p>
+                    <p>utpluti(跳起)</p>
+                </div>
+                
+                <div class="content-paragraph">
+                    <p class="sanskrit">सुखासन <span class="transliteration">sukhāsana</span></p>
+                    <p>sukha(舒适的) + āsana</p>
+            </section>
+
+                    <a href="../index.html" class="back-link">← 返回首页</a>
+                </article>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // 平滑滚动到锚点
+                        const navItems = document.querySelectorAll('.nav-item');
+                        navItems.forEach(item => {
+                            item.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                const targetId = this.getAttribute('href');
+                                const targetElement = document.querySelector(targetId);
+                                if (targetElement) {
+                                    targetElement.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'start'
+                                    });
+                                }
+                            });
+                        });
+                    });
+                </script>
+            </body>
+            </html>

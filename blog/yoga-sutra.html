@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帕坦伽利瑜伽经</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Futura", "-apple-system", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fff;
+        }
+        
+        /* 左侧导航栏样式 */
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            left: 32px;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .nav-trigger {
+            width: 6px;
+            height: 6px;
+            background-color: #666;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1002;
+        }
+        
+        .nav-trigger:hover,
+        .nav-trigger.active {
+            background-color: #1a1a1a;
+            transform: scale(1.2);
+        }
+        
+        .nav-menu {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-8px);
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 0.75rem;
+            min-width: 200px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .chapter-nav:hover .nav-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 0.5rem 0.375rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 9px;
+            line-height: 1.2;
+            transition: all 0.2s ease;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            color: #1a1a1a;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item.active {
+            color: #1a1a1a;
+            font-weight: 500;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* 主内容区域样式 */
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .article-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .invocation {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            border-left: 4px solid #8bc34a;
+        }
+        
+        .chapter {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+        
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .chapter-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .content-paragraph {
+            margin-bottom: 1.5rem;
+        }
+        
+        .sanskrit {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 0.25rem;
+            line-height: 1.8;
+        }
+        
+        .transliteration {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .meaning {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            line-height: 1.6;
+        }
+        
+        .sutra {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 3px solid #e5e5e5;
+            background-color: #fafafa;
+            border-radius: 4px;
+        }
+        
+        .sutra-number {
+            font-size: 0.8rem;
+            color: #999;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 8px 16px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-link:hover {
+            color: #000;
+            background-color: #f0f0f0;
+            transform: translateX(-5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-link:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-nav">
+        <div class="nav-trigger"></div>
+        <div class="nav-menu">
+            <a href="#invocation" class="nav-item">开篇赞颂</a>
+            <a href="#samadhi" class="nav-item">三摩地篇</a>
+            <a href="#sadhana" class="nav-item">修行篇</a>
+            <a href="#vibhuti" class="nav-item">神通篇</a>
+            <a href="#kaivalya" class="nav-item">独存篇</a>
+        </div>
+    </div>
+
+    <article class="blog-article">
+        <header class="article-header">
+            <h1 class="article-title">पतञ्जलि योग सूत्राणि</h1>
+            <p class="article-subtitle">patañjali yōga sūtrāṇi</p>
+            <p class="article-subtitle">帕坦伽利瑜伽经</p>
+        </header>
+
+        <section id="invocation" class="chapter">
+            <div class="invocation">
+                <div class="sanskrit">
+                    योगेन चित्तस्य पदेन वाचां ।<br>
+                    मलं शरीरस्य च वैद्यकेन ॥<br>
+                    योऽपाकरोत्तमं प्रवरं मुनीनां ।<br>
+                    पतञ्जलिं प्राञ्जलिरानतोऽस्मि ॥
+                </div>
+                <div class="transliteration">
+                    yogena cittasya padena vācāṁ ।<br>
+                    malaṁ śarīrasya ca vaidyakena ॥<br>
+                    yo'pākarottamaṁ pravaraṁ munīnāṁ ।<br>
+                    patañjaliṁ prāñjalirānato'smi ॥
+                </div>
+                <div class="meaning">
+                    我合十顶礼最尊贵的圣者帕坦伽利，<br>
+                    他赐予我们瑜伽净化心意，文法净化语言，<br>
+                    阿育吠陀净化身体。
+                </div>
+
+                <div class="sanskrit" style="margin-top: 2rem;">
+                    आबाहुपुरुषाकारं शङ्खचक्रासिधारिणम् ।<br>
+                    सहस्रशिरसं श्वेतं प्रणमामि पतञ्जलिम् ॥
+                </div>
+                <div class="transliteration">
+                    ābāhupuruṣākāraṃ śaṅkhacakrāsidhāriṇam ।<br>
+                    sahasraśirasaṃ śvetaṃ praṇamāmi patañjalim ॥
+                </div>
+                <div class="meaning">
+                    我顶礼帕坦伽利，<br>
+                    他拥有千首白蛇形象，<br>
+                    手持海螺、法轮和宝剑。
+                </div>
+            </div>
+        </section>
+
+        <section id="samadhi" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">प्रथमोऽध्यायः । समाधिपादः</h2>
+                <p class="chapter-subtitle">prathamo'dhyāyaḥ । samādhi pādaḥ</p>
+                <p class="chapter-subtitle">第一篇 · 三摩地篇</p>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१॥</div>
+                <div class="sanskrit">अथ योगानुशासनम्</div>
+                <div class="transliteration">atha yōgānuśāsanam</div>
+                <div class="meaning">现在开始瑜伽的教导。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२॥</div>
+                <div class="sanskrit">योगश्चित्तवृत्तिनिरोधः</div>
+                <div class="transliteration">yōgaś citta vṛtti nirōdhaḥ</div>
+                <div class="meaning">瑜伽是心念波动的止息。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३॥</div>
+                <div class="sanskrit">तदा द्रष्टुः स्वरूपेऽवस्थानम्</div>
+                <div class="transliteration">tadā draṣṭuḥ svarūpē'vasthānam</div>
+                <div class="meaning">那时，见者安住于自性中。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४॥</div>
+                <div class="sanskrit">वृत्तिसारूप्यमितरत्र</div>
+                <div class="transliteration">vṛtti sārūpyam itaratra</div>
+                <div class="meaning">在其他时候，心认同于波动。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.५॥</div>
+                <div class="sanskrit">वृत्तयः पञ्चतय्यः क्लिष्टाऽक्लिष्टाः</div>
+                <div class="transliteration">vṛttayaḥ pañcatayyaḥ kliṣṭā'kliṣṭāḥ</div>
+                <div class="meaning">波动有五种，有些是痛苦的，有些是不痛苦的。</div>
+            </div>
+            
+            <div class="sutra">
+                <div class="sutra-number">॥१.६॥</div>
+                <div class="sanskrit">प्रमाणविपर्ययविकल्पनिद्रास्मृतयः</div>
+                <div class="transliteration">pramāṇa viparyaya vikalpa nidrā smṛtayaḥ</div>
+                <div class="meaning">正知、谬误、分别知、睡眠、记忆。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.७॥</div>
+                <div class="sanskrit">प्रत्यक्षानुमानागमाः प्रमाणानि</div>
+                <div class="transliteration">pratyakṣānumānāgamāḥ pramāṇāni</div>
+                <div class="meaning">直接知觉、推论、圣典是正知的来源。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.८॥</div>
+                <div class="sanskrit">विपर्ययो मिथ्याज्ञानमतद्रूपप्रतिष्ठम्</div>
+                <div class="transliteration">viparyayō mithyājñānam atadrūpa pratiṣṭham</div>
+                <div class="meaning">谬误是错误的知识，建立在并非其真实本性的基础上。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.९॥</div>
+                <div class="sanskrit">शब्दज्ञानानुपाती वस्तुशून्यो विकल्पः</div>
+                <div class="transliteration">śabdajñānānupātī vastu śūnyō vikalpaḥ</div>
+                <div class="meaning">分别知来自于言语知识，没有实际对象。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१०॥</div>
+                <div class="sanskrit">अभावप्रत्ययालम्बना वृत्तिर्निद्रा</div>
+                <div class="transliteration">abhāva pratyayālambanā vṛttirnidrā</div>
+                <div class="meaning">睡眠是依赖于不存在（感知）的心念波动。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.११॥</div>
+                <div class="sanskrit">अनुभूतविषयासम्प्रमोषः स्मृतिः</div>
+                <div class="transliteration">anubhūta viṣayāsampramōṣaḥ smṛtiḥ</div>
+                <div class="meaning">记忆是对已经验对象的未失去（印象）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१२॥</div>
+                <div class="sanskrit">अभ्यासवैराग्याभ्यां तन्निरोधः</div>
+                <div class="transliteration">abhyāsa vairāgyābhyāṃ tannirōdhaḥ</div>
+                <div class="meaning">通过修习和离欲可以控制这些波动。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१३॥</div>
+                <div class="sanskrit">तत्र स्थितौ यत्नोऽभ्यासः</div>
+                <div class="transliteration">tatra sthitau yatnō'bhyāsaḥ</div>
+                <div class="meaning">修习是努力稳定心念。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१४॥</div>
+                <div class="sanskrit">स तु दीर्घकालनैरन्तर्यसत्कारासेवितो दृढभूमिः</div>
+                <div class="transliteration">sa tu dīrgha kāla nairantarya satkārāsēvitō dṛḍhabhūmiḥ</div>
+                <div class="meaning">当长期不间断、以真诚态度修习时，修习就稳固建立。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१५॥</div>
+                <div class="sanskrit">दृष्टानुश्रविकविषयवितृष्णस्य वशीकारसञ्ज्ञा वैराग्यम्</div>
+                <div class="transliteration">dṛṣṭānuśravika viṣaya vitṛṣṇasya vaśīkārasañjñā vairāgyam</div>
+                <div class="meaning">离欲是对所见和所闻对象无渴望的意识控制。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१६॥</div>
+                <div class="sanskrit">तत्परं पुरुषख्यातेर्गुणवैतृष्ण्यम्</div>
+                <div class="transliteration">tatparaṃ puruṣa khyātēr guṇavaitṛṣṇyam</div>
+                <div class="meaning">至高的离欲是对三德无欲，源于对真我的认识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१७॥</div>
+                <div class="sanskrit">वितर्क विचारानन्दास्मितारूपानुगमात् संप्रज्ञातः</div>
+                <div class="transliteration">vitarka vicārānandāsmitārūpānugamāt saṃprajñātaḥ</div>
+                <div class="meaning">有想三摩地伴随着粗重、细微、喜悦和我慢的思维。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१८॥</div>
+                <div class="sanskrit">विरामप्रत्ययाभ्यासपूर्वः संस्कारशेषोऽन्यः</div>
+                <div class="transliteration">virāma pratyayābhyāsa pūrvaḥ saṃskāraśēṣō'nyaḥ</div>
+                <div class="meaning">另一种（无想三摩地）通过修习停止心念而来，只有潜印象留存。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.१९॥</div>
+                <div class="sanskrit">भवप्रत्ययो विदेहप्रकृतिलयानाम्</div>
+                <div class="transliteration">bhavapratyayō vidēha prakṛtilayānām</div>
+                <div class="meaning">对于无身者和已融入原质者，它（三摩地）源于存在（的倾向）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२०॥</div>
+                <div class="sanskrit">श्रद्धावीर्यस्मृतिसमाधिप्रज्ञापूर्वक इतरेषाम्</div>
+                <div class="transliteration">śraddhā vīrya smṛti samādhiprajñā pūrvaka itarēṣām</div>
+                <div class="meaning">对于其他人，它（三摩地）通过信心、精力、专注、三摩地和智慧而来。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२१॥</div>
+                <div class="sanskrit">तीव्रसंवेगानामासन्नः</div>
+                <div class="transliteration">tīvrasaṃvēgānāmāsannaḥ</div>
+                <div class="meaning">对于有强烈渴望者，（成就）是临近的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२२॥</div>
+                <div class="sanskrit">मृदुमध्याधिमात्रत्वात्ततोऽपि विशेषः</div>
+                <div class="transliteration">mṛdu madhyādhimātratvāttatō'pi viśēṣaḥ</div>
+                <div class="meaning">根据修习的温和、中等或强烈程度，也有区别。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२३॥</div>
+                <div class="sanskrit">ईश्वरप्रणिधानाद्वा</div>
+                <div class="transliteration">īśvarapraṇidhānādvā</div>
+                <div class="meaning">或者通过敬奉自在天。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२४॥</div>
+                <div class="sanskrit">क्लेशकर्मविपाकाशयैरपरामृष्टः पुरुषविशेष ईश्वरः</div>
+                <div class="transliteration">klēśa karma vipākāśayairaparāmṛṣṭaḥ puruṣaviśēṣa īśvaraḥ</div>
+                <div class="meaning">自在天是特殊的原人，不受烦恼、业、业果和潜在印象的影响。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२५॥</div>
+                <div class="sanskrit">तत्र निरतिशयं सर्वज्ञबीजम्</div>
+                <div class="transliteration">tatra niratiśayaṃ sarvajñabījam</div>
+                <div class="meaning">在祂之中，全知的种子是至高无上的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२६॥</div>
+                <div class="sanskrit">स पूर्वेषामपि गुरुः कालेनानवच्छेदात्</div>
+                <div class="transliteration">sa pūrvēṣām api guruḥ kālēnānavacchēdāt</div>
+                <div class="meaning">祂也是古鲁们的古鲁，不受时间限制。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२७॥</div>
+                <div class="sanskrit">तस्य वाचकः प्रणवः</div>
+                <div class="transliteration">tasya vācakaḥ praṇavaḥ</div>
+                <div class="meaning">祂的象征是唵（OM）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२८॥</div>
+                <div class="sanskrit">तज्जपस्तदर्थभावनम्</div>
+                <div class="transliteration">tajjapas tadartha bhāvanam</div>
+                <div class="meaning">重复诵念它（OM），冥想它的意义。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.२९॥</div>
+                <div class="sanskrit">ततः प्रत्यक्चेतनाधिगमोऽप्यन्तरायाभावश्च</div>
+                <div class="transliteration">tataḥ pratyak cētanādhigamō'pyantarāyābhāvaśca</div>
+                <div class="meaning">由此获得内在意识，障碍也消失。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३०॥</div>
+                <div class="sanskrit">व्याधि स्त्यान संशय प्रमादालस्याविरति भ्रान्ति दर्शनालब्धभूमिकत्वानवस्थितत्वानि चित्तविक्षेपास्तेंऽतरायाः</div>
+                <div class="transliteration">vyādhi styāna saṃśaya pramādālasyāvirati bhrānti darśanālabdhabhūmikatvānavasthitatvāni cittavikṣēpāstēṃ'tarāyāḥ</div>
+                <div class="meaning">疾病、懒惰、怀疑、疏忽、懈怠、贪欲、谬见、无法获得基础、不稳定 - 这些是分心的障碍。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३१॥</div>
+                <div class="sanskrit">दुःख दौर्मनस्याङ्गमेजयत्व श्वासप्रश्वासा विक्षेपसहभुवः</div>
+                <div class="transliteration">duḥkha daurmanasyāṅgamējayatva śvāsapraśvāsā vikṣēpa sahabhuvaḥ</div>
+                <div class="meaning">痛苦、沮丧、身体颤抖、呼吸不匀是分心的伴随症状。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३२॥</div>
+                <div class="sanskrit">तत्प्रतिषेधार्थमेकतत्त्वाभ्यासः</div>
+                <div class="transliteration">tat pratiṣēdhārthamēkatattvābhyāsaḥ</div>
+                <div class="meaning">为防止这些，应修习一个真理。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३३॥</div>
+                <div class="sanskrit">मैत्रीकरुणामुदितोपेक्षाणां सुखदुःखपुण्यापुण्य विषयाणाम् भावनातश्चित्तप्रसादनम्</div>
+                <div class="transliteration">maitrī karuṇā muditōpēkṣāṇāṃ sukha duḥkha puṇyāpuṇya viṣayāṇām bhāvanātaś citta prasādanam</div>
+                <div class="meaning">通过培养对快乐者友善、对痛苦者慈悲、对美德者喜悦、对罪恶者中立，心念变得平静。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३४॥</div>
+                <div class="sanskrit">प्रच्छर्दनविधारणाभ्यां वा प्राणस्य</div>
+                <div class="transliteration">pracchardana vidhāraṇābhyāṃ vā prāṇasya</div>
+                <div class="meaning">或者通过呼气和屏息来调节呼吸。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३५॥</div>
+                <div class="sanskrit">विषयवती वा प्रवृत्तिरुत्पन्ना मनसः स्थिति निबन्धिनी</div>
+                <div class="transliteration">viṣayavatī vā pravṛttirutpannā manasaḥ sthiti nibandhinī</div>
+                <div class="meaning">或者，感官体验的产生能够稳定心念。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३६॥</div>
+                <div class="sanskrit">विशोका वा ज्योतिष्मती</div>
+                <div class="transliteration">viśōkā vā jyōtiṣmatī</div>
+                <div class="meaning">或者，无悲伤的、发光的状态（可以稳定心念）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३७॥</div>
+                <div class="sanskrit">वीतरागविषयं वा चित्तम्</div>
+                <div class="transliteration">vītarāga viṣayaṃ vā cittam</div>
+                <div class="meaning">或者，心念专注于无欲的对象。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३८॥</div>
+                <div class="sanskrit">स्वप्ननिद्राज्ञानालम्बनं वा</div>
+                <div class="transliteration">svapna nidrā jñānālambanaṃ vā</div>
+                <div class="meaning">或者，以梦境和睡眠的知识为基础。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.३९॥</div>
+                <div class="sanskrit">यथाभिमतध्यानाद्वा</div>
+                <div class="transliteration">yathābhimata dhyānād vā</div>
+                <div class="meaning">或者通过如意的冥想。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४०॥</div>
+                <div class="sanskrit">परमाणुपरममहत्त्वान्तोऽस्य वशीकारः</div>
+                <div class="transliteration">paramāṇu parama mahattvāntō'sya vaśīkāraḥ</div>
+                <div class="meaning">他的掌控从最细微的原子延伸到最大的无限。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४१॥</div>
+                <div class="sanskrit">क्षीणवृत्तेरभिजातस्येव मणेर्ग्रहीतृग्रहणग्राह्येषु तत्स्थतदञ्जनता समापत्तिः</div>
+                <div class="transliteration">kṣīṇa vṛttēr abhijātasyēva maṇēr grahītṛ grahaṇa grāhyēṣu tatstha tadañjanatā samāpattiḥ</div>
+                <div class="meaning">当波动减弱时，心就像纯净的宝石，在认知者、认知过程和认知对象中呈现出它们的颜色，这称为三昧。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४२॥</div>
+                <div class="sanskrit">तत्र शब्दार्थज्ञानविकल्पैः सङ्कीर्णा सवितर्का समापत्तिः</div>
+                <div class="transliteration">tatra śabdārtha jñāna vikalpaiḥ saṅkīrṇā savitarkā samāpattiḥ</div>
+                <div class="meaning">在那里，与言语、意义和知识混合的有想三昧。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४३॥</div>
+                <div class="sanskrit">स्मृतिपरिशुद्धौ स्वरूपशून्येवार्थमात्रनिर्भासा निर्वितर्का</div>
+                <div class="transliteration">smṛti pariśuddhau svarūpa śūnyēvārtha mātranirbhāsā nirvitarkā</div>
+                <div class="meaning">当记忆纯净时，心似乎失去了自己的本性，只有对象显现，这是无想三昧。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४४॥</div>
+                <div class="sanskrit">एतयैव सविचारा निर्विचारा च सूक्ष्मविषया व्याख्याता</div>
+                <div class="transliteration">ētayaiva savicārā nirvicārā ca sūkṣmaviṣayā vyākhyātā</div>
+                <div class="meaning">通过这种方式，有伺和无伺三昧，涉及细微对象，得以解释。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४५॥</div>
+                <div class="sanskrit">सूक्ष्मविषयत्वं चालिङ्गपर्यवसानम्</div>
+                <div class="transliteration">sūkṣma viṣayatvaṃ cāliṅga paryavasānam</div>
+                <div class="meaning">细微对象的领域延伸到无标志的原质。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४६॥</div>
+                <div class="sanskrit">ता एव सबीजः समाधिः</div>
+                <div class="transliteration">tā ēva sabījaḥ samādhiḥ</div>
+                <div class="meaning">这些构成了有种三摩地。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४७॥</div>
+                <div class="sanskrit">निर्विचारवैशाराद्येऽध्यात्मप्रसादः</div>
+                <div class="transliteration">nirvicāra vaiśārādyē’dhyātma prasādaḥ</div>
+                <div class="meaning">在无伺三昧的纯净中，出现了内在的明澈。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४८॥</div>
+                <div class="sanskrit">ऋतम्भरा तत्र प्रज्ञा</div>
+                <div class="transliteration">ṛtambharā tatra prajñā</div>
+                <div class="meaning">在那里，智慧充满真理。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.४९॥</div>
+                <div class="sanskrit">श्रुतानुमान प्रज्ञाभ्यामन्यविषया विशेषार्थत्वात्</div>
+                <div class="transliteration">śrutānumāna prajñābhyām anya viṣayā viśēṣārthatvāt</div>
+                <div class="meaning">它的对象与经典知识和推论知识不同，因为它涉及特殊对象。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.५०॥</div>
+                <div class="sanskrit">तज्जः संस्कारोऽन्यसंस्कार प्रतिबन्धी</div>
+                <div class="transliteration">tajjaḥ saṃskārō’nya saṃskāra pratibandhī</div>
+                <div class="meaning">由它产生的印象阻止其他印象。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥१.५१॥</div>
+                <div class="sanskrit">तस्यापि निरोधे सर्वनिरोधान्निर्बीजः समाधिः</div>
+                <div class="transliteration">tasyāpi nirōdhē sarva nirōdhān nirbījaḥ samādhiḥ</div>
+                <div class="meaning">当那个也被抑制时，由于所有都被抑制，就达到无种三摩地。</div>
+            </div>
+
+        </section>
+
+        <section id="sadhana" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">द्वितीयोऽध्यायः । साधनपादः</h2>
+                <p class="chapter-subtitle">dvitīyo'dhyāyaḥ । sādhana pādaḥ</p>
+                <p class="chapter-subtitle">第二篇 · 修行篇</p>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१॥</div>
+                <div class="sanskrit">तपः स्वाध्यायेश्वरप्रणिधानानि क्रियायोगः</div>
+                <div class="transliteration">tapaḥ svādhyāyēśvarapraṇidhānāni kriyā yōgaḥ</div>
+                <div class="meaning">苦行、研读经典、敬奉神，构成行动瑜伽。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२॥</div>
+                <div class="sanskrit">समाधिभावनार्थः क्लेशतनूकरणार्थश्च</div>
+                <div class="transliteration">samādhi bhāvanārthaḥ klēśa tanūkaraṇārthaś ca</div>
+                <div class="meaning">为了培养三摩地和减弱烦恼。</div>
+            </div>
+            
+            <div class="sutra">
+                <div class="sutra-number">॥२.३॥</div>
+                <div class="sanskrit">अविद्यास्मितारागद्वेषाभिनिवेशाः क्लेशाः</div>
+                <div class="transliteration">avidyāsmitā rāga dvēṣābhinivēśāḥ klēśāḥ</div>
+                <div class="meaning">无明、我执、贪欲、嗔恨、执着是五种烦恼。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४॥</div>
+                <div class="sanskrit">अविद्या क्षेत्रमुत्तरेषां प्रसुप्ततनुविच्छिन्नोदाराणाम्</div>
+                <div class="transliteration">avidyā kṣētram uttarēṣāṃ prasupta tanu vicchinnōdārāṇām</div>
+                <div class="meaning">无明是其他（烦恼）的温床，无论它们是潜伏、微弱、中断还是活跃。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५॥</div>
+                <div class="sanskrit">अनित्याशुचिदुःखानात्मसु नित्यशुचिसुखात्मख्यातिरविद्या</div>
+                <div class="transliteration">anityāśuci duḥkhānātmasu nitya śuci sukhātmakhyātir avidyā</div>
+                <div class="meaning">无明是把无常、不净、痛苦、非我当作永恒、纯净、快乐、自我。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.६॥</div>
+                <div class="sanskrit">दृग्दर्शनशक्त्योरेकात्मतेवास्मिता</div>
+                <div class="transliteration">dṛg darśana śaktyōr ēkātmatēvāsmitā</div>
+                <div class="meaning">我执是视见者（纯意识）与见工具（心）为同一。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.७॥</div>
+                <div class="sanskrit">सुखानुशयी रागः</div>
+                <div class="transliteration">sukhānuśayī rāgaḥ</div>
+                <div class="meaning">贪欲是追随快乐。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.८॥</div>
+                <div class="sanskrit">दुःखानुशयी द्वेषः</div>
+                <div class="transliteration">duḥkhānuśayī dvēṣaḥ</div>
+                <div class="meaning">嗔恨是追随痛苦。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.९॥</div>
+                <div class="sanskrit">स्वरसवाही विदुषोऽपि तथारूढोऽभिनिवेशः</div>
+                <div class="transliteration">svarasavāhī viduṣō'pi tathā rūḍhō'bhinivēśaḥ</div>
+                <div class="meaning">执着是自发的流动，甚至在智者中也牢固确立，源于对自我的执着。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१०॥</div>
+                <div class="sanskrit">ते प्रतिप्रसवहेयाः सूक्ष्माः</div>
+                <div class="transliteration">tē pratiprasavahēyāḥ sūkṣmāḥ</div>
+                <div class="meaning">这些细微的（烦恼）通过回归其源头而消除。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.११॥</div>
+                <div class="sanskrit">ध्यानहेयास्तद्वृत्तयः</div>
+                <div class="transliteration">dhyānahēyāstadvṛttayaḥ</div>
+                <div class="meaning">它们的波动通过冥想消除。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१२॥</div>
+                <div class="sanskrit">क्लेशमूलः कर्माशयो दृष्टादृष्टजन्मवेदनीयः</div>
+                <div class="transliteration">klēśa mūlaḥ karmāśayō dṛṣṭādṛṣṭa janma vēdanīyaḥ</div>
+                <div class="meaning">业力储存以烦恼为根，在今世和来世体验。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१३॥</div>
+                <div class="sanskrit">सति मूले तद् विपाकोजात्यायुर्भोगाः</div>
+                <div class="transliteration">sati mūlē tad vipākōjātyāyur bhōgāḥ</div>
+                <div class="meaning">根存在时，就有其果报：出生、寿命和经历。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१४॥</div>
+                <div class="sanskrit">ते ह्लादपरितापफलाः पुण्यापुण्यहेतुत्वात्</div>
+                <div class="transliteration">tē hlāda paritāpa phalāḥ puṇyāpuṇya hētutvāt</div>
+                <div class="meaning">这些（果报）带来快乐或痛苦，源于善行和恶行。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१५॥</div>
+                <div class="sanskrit">परिणामतापसंस्कारदुःखैर्गुणवृत्ति विरोधाच्च दुःखमेव सर्वं विवेकिनः</div>
+                <div class="transliteration">pariṇāma tāpa saṃskāra duḥkhair guṇa vṛttivirōdhāc ca duḥkham ēva sarvaṃ vivēkinaḥ</div>
+                <div class="meaning">对于有辨别力者，一切皆是痛苦，因为变化、焦虑、习气和三德活动的冲突而痛苦。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१६॥</div>
+                <div class="sanskrit">हेयं दुःखमनागतम्</div>
+                <div class="transliteration">hēyaṃ duḥkham anāgatam</div>
+                <div class="meaning">未来的痛苦应被避免。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१७॥</div>
+                <div class="sanskrit">द्रष्टृदृ श्ययोः संयोगो हेयहेतुः</div>
+                <div class="transliteration">draṣṭṛ dṛśyayōḥ saṃyōgō hēya hētuḥ</div>
+                <div class="meaning">见者与所见结合是应避免的原因。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१८॥</div>
+                <div class="sanskrit">प्रकाश क्रिया स्थितिशीलं भूतेन्द्रियात्मकं भोगापवर्गार्थं दृश्यम्</div>
+                <div class="transliteration">prakāśa kriyā sthitiśīlaṃ bhūtēndriyātmakaṃ bhōgāpavargārthaṃ dṛśyam</div>
+               div class="meaning">所见具有光明、活动和惰性的性质，由元素和感官组成，目的是为了经验和解脱。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.१९॥</div>
+                <div class="sanskrit">विशेषाविशेषलिङ्गमात्रालिङ्गानि गुणपर्वाणि</div>
+                <div class="transliteration">viśēṣāviśēṣa liṅgamātrāliṅgāni guṇa parvāṇi</div>
+                <div class="meaning">三德的阶段是：特定、非特定、有标志、无标志。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२०॥</div>
+                <div class="sanskrit">द्रष्टा दृशिमात्रः शुद्धोऽपि प्रत्ययानुपश्यः</div>
+                <div class="transliteration">draṣṭā dṛśimātraḥ śuddhō'pi pratyayānupaśyaḥ</div>
+                <div class="meaning">见者只是纯粹的见，虽然纯净，但通过心念来看。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२१॥</div>
+                <div class="sanskrit">तदर्थ एव दृश्यस्यात्मा</div>
+                <div class="transliteration">tadartha ēva dṛśyasyātmā</div>
+                <div class="meaning">所见的本质只是为了他（见者）的目的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२२॥</div>
+                <div class="sanskrit">कृतार्थं प्रति नष्टमप्यनष्टं तदन्यसाधारणत्वात्</div>
+                <div class="transliteration">kṛtārthaṃ prati naṣṭam apyanaṣṭaṃ tad anya sādhāraṇatvāt</div>
+                <div class="meaning">虽然对已达到目的者来说已消失，但对其他人来说并未消失，因为它是共同的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२३॥</div>
+                <div class="sanskrit">स्व स्वामि शक्त्योः स्वरूपोपलब्धिहेतुः संयोगः</div>
+                <div class="transliteration">sva svāmi śaktyōḥ svarūpōpalabdhihētuḥ saṃyōgaḥ</div>
+                <div class="meaning">结合是为了认识拥有者（真我）和所有物（原质）各自本性的目的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२४॥</div>
+                <div class="sanskrit">तस्य हेतुरविद्या</div>
+                <div class="transliteration">tasya hēturavidyā</div>
+                <div class="meaning">其原因是无明。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२५॥</div>
+                <div class="sanskrit">तदभावात् संयोगाभावो हानं तद् दृशेः कैवल्यम्</div>
+                <div class="transliteration">tad abhāvāt saṃyōgābhāvō hānaṃ tad dṛśēḥ kaivalyam</div>
+                <div class="meaning">无明消失时，结合也消失，这就是解脱，见者的独存。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२६॥</div>
+                <div class="sanskrit">विवेकख्यातिरविप्लवा हानोपायः</div>
+                <div class="transliteration">vivēkakhyātiraviplavā hānōpāyaḥ</div>
+                <div class="meaning">不间断的辨别知识是消除（无明）的方法。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२७॥</div>
+                <div class="sanskrit">तस्य सप्तधा प्रान्तभूमिः प्रज्ञा</div>
+                <div class="transliteration">tasya saptadhā prāntabhūmiḥ prajñā</div>
+                <div class="meaning">他的智慧有七个最终阶段。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२८॥</div>
+                <div class="sanskrit">योगाङ्गानुष्ठानादशुद्धिक्षये ज्ञानदीप्तिराविवेकख्यातेः</div>
+                <div class="transliteration">yōgāṅgānuṣṭhānād aśuddhi kṣayē jñānadīptir āvivēkakhyātēḥ</div>
+                <div class="meaning">通过修习瑜伽八支，不净消除，智慧之光通向辨别知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.२९॥</div>
+                <div class="sanskrit">यमनियमासनप्राणायामप्रत्याहारधारणाध्यानसमाधयोऽष्टावङ्गानि</div>
+                <div class="transliteration">yama niyamāsana prāṇāyāma pratyāhāra dhāraṇā dhyāna samādhayō'ṣṭāvaṅgāni</div>
+                <div class="meaning">禁制、劝制、坐法、调息、制感、专注、冥想、三摩地是瑜伽的八支。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३०॥</div>
+                <div class="sanskrit">अहिंसासत्यास्तेयब्रह्मचर्यापरिग्रहा यमाः</div>
+                <div class="transliteration">ahiṃsā satyāstēya brahmacaryāparigrahā yamāḥ</div>
+                <div class="meaning">不害、诚实、不偷盗、贞洁、不贪婪是禁制。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३१॥</div>
+                <div class="sanskrit">जातिदेशकालसमयानवच्छिन्नाः सार्वभौमा महाव्रतम्</div>
+                <div class="transliteration">jāti dēśa kāla samayānavacchinnāḥ sārvabhaumā mahāvratam</div>
+                <div class="meaning">这些（禁制）是伟大的誓言，普遍适用，不受种姓、地点、时间或情况的限制。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३२॥</div>
+                <div class="sanskrit">शौचसन्तोषतपः स्वाध्यायेश्वरप्रणिधानानि नियमाः</div>
+                <div class="transliteration">śauca santōṣa tapaḥ svādhyāyēśvarapraṇidhānāni niyamāḥ</div>
+                <div class="meaning">洁净、知足、苦行、研读经典、敬奉神是劝制。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३३॥</div>
+                <div class="sanskrit">वितर्कबाधने प्रतिपक्षभावनम्</div>
+                <div class="transliteration">vitarka bādhanē pratipakṣa bhāvanam</div>
+                <div class="meaning">当负面念头困扰时，应培养相反的念头。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३४॥</div>
+                <div class="sanskrit">वितर्का हिंसादयः कृतकारितानुमोदिता लोभक्रोधमोहपूर्वका मृदुमध्याधिमात्रा दुःखाज्ञानानन्तफला इति प्रतिपक्षभावनम्</div>
+                <div class="transliteration">vitarkā hiṃsādayaḥ kṛta kāritānumōditā lōbha krōdha mōha pūrvakā mṛdu madhyādhimātrā duḥkhājñānānanta phalā iti pratipakṣa bhāvanam</div>
+                <div class="meaning">负面念头如伤害等，无论是自己实施、促使他人实施或认可，源于贪婪、愤怒或迷惑，无论是轻微、中等还是强烈，都会带来无尽的痛苦和无知，这就是培养相反念头的方法。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३५॥</div>
+                <div class="sanskrit">अहिंसाप्रतिष्ठायां तत्सन्निधौ वैरत्यागः</div>
+                <div class="transliteration">ahiṃsā pratiṣṭhāyāṃ tat sannidhau vaira tyāgaḥ</div>
+                <div class="meaning">当不害稳固建立时，在瑜伽士面前所有敌意都停止。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३६॥</div>
+                <div class="sanskrit">सत्यप्रतिष्ठायां क्रियाफलाश्रयत्वम्</div>
+                <div class="transliteration">satya pratiṣṭhāyāṃ kriyāphalāśrayatvam</div>
+                <div class="meaning">当诚实稳固建立时，行动和结果依赖于他。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३७॥</div>
+                <div class="sanskrit">अस्तेयप्रतिष्ठायां सर्वरत्नोपस्थानम्</div>
+                <div class="transliteration">astēyapratiṣṭhāyāṃ sarvaratnōpasthānam</div>
+                <div class="meaning">当不偷盗稳固建立时，一切珍宝呈现。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३८॥</div>
+                <div class="sanskrit">ब्रह्मचर्यप्रतिष्ठायां वीर्यलाभः</div>
+                <div class="transliteration">brahmacarya pratiṣṭhāyāṃ vīryalābhaḥ</div>
+                <div class="meaning">当贞洁稳固建立时，获得活力。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.३९॥</div>
+                <div class="sanskrit">अपरिग्रहस्थैर्ये जन्मकथन्तासम्बोधः</div>
+                <div class="transliteration">aparigraha sthairyē janmakathantā sambōdhaḥ</div>
+                <div class="meaning">当不贪婪稳固时，了知生命如何而来的知识产生。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४०॥</div>
+                <div class="sanskrit">शौचात् स्वाङ्गजुगुप्सा परैरसंसर्गः</div>
+                <div class="transliteration">śaucāt svāṅgajugupsā parairasaṃsargaḥ</div>
+                <div class="meaning">通过洁净，产生对身体厌恶和不愿接触他人。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४१॥</div>
+                <div class="sanskrit">सत्त्वशुद्धिसौमनस्यैकाग्य्रेन्द्रियजयात्मदर्शनयोग्यत्वानि च</div>
+                <div class="transliteration">sattvaśuddhi saumanasyaikāgyrēndriyajayātmadarśana yōgyatvāni ca</div>
+                <div class="meaning">还有悦性纯净、心念愉悦、专注、感官掌控和见自性的能力。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४२॥</div>
+                <div class="sanskrit">सन्तोषादनुत्तमःसुखलाभः</div>
+                <div class="transliteration">santōṣādanuttamaḥ sukhalābhaḥ</div>
+                <div class="meaning">从知足中，获得无上的快乐。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४३॥</div>
+                <div class="sanskrit">कायेन्द्रियसिद्धिरशुद्धिक्षयात् तपसः</div>
+                <div class="transliteration">kāyēndriya siddhiraśuddhikṣayāt tapasaḥ</div>
+                <div class="meaning">通过苦行，不净消除，身体和感官完美。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४४॥</div>
+                <div class="sanskrit">स्वाध्यायादिष्टदेवतासम्प्रयोगः</div>
+                <div class="transliteration">svādhyāyādiṣṭadēvatāsamprayōgaḥ</div>
+                <div class="meaning">通过研读经典，与所选择的神祇连接。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४५॥</div>
+                <div class="sanskrit">समाधिसिद्धिरीश्वरप्रणिधानात्</div>
+                <div class="transliteration">samādhisiddhir īśvarapraṇidhānāt</div>
+                <div class="meaning">通过敬奉神，获得三摩地完美。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४६॥</div>
+                <div class="sanskrit">स्थिरसुखमासनम्</div>
+                <div class="transliteration">sthira sukhamāsanam</div>
+                <div class="meaning">坐姿应稳定舒适。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४७॥</div>
+                <div class="sanskrit">प्रयत्नशैथिल्यानन्तसमापत्तिभ्याम्</div>
+                <div class="transliteration">prayatna śaithilyānanta samāpattibhyām</div>
+                <div class="meaning">通过放松努力和冥想无限。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४८॥</div>
+                <div class="sanskrit">ततो द्वन्द्वानभिघातः</div>
+                <div class="transliteration">tatō dvandvānabhighātaḥ</div>
+                <div class="meaning">然后，不受对立物（如冷热、苦乐）的影响。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.४९॥</div>
+                <div class="sanskrit">तस्मिन् सति श्वासप्रश्वासयोर्गतिविच्छेदः प्राणायामः</div>
+                <div class="transliteration">tasmin sati śvāsapraśvāsayōrgativicchēdaḥ prāṇāyāmaḥ</div>
+                <div class="meaning">坐姿稳定后，控制吸气和呼气的运动就是调息。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५०॥</div>
+                <div class="sanskrit">बाह्याभ्यन्तरस्तम्भवृत्तिर्देशकालसंख्याभिः परिदृष्टो दीर्घसूक्ष्मः</div>
+                <div class="transliteration">bāhyābhyantara stambhavṛttirdēśakāla saṃkhyābhiḥ paridṛṣṭō dīrghasūkṣmaḥ</div>
+                <div class="meaning">调息有外在、内在和静止的调节，通过地点、时间和计数来观察，变得延长和精微。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५१॥</div>
+                <div class="sanskrit">बाह्याभ्यन्तरविषयाक्षेपी चतुर्थः</div>
+                <div class="transliteration">bāhyābhyantara viṣayākṣēpī caturthaḥ</div>
+                <div class="meaning">第四种超越外在和内在的领域。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५२॥</div>
+                <div class="sanskrit">ततः क्षीयते प्रकाशावरणम्</div>
+                <div class="transliteration">tataḥ kṣīyatē prakāśāvaraṇam</div>
+                <div class="meaning">然后，覆盖光明的面纱被移除。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५३॥</div>
+                <div class="sanskrit">धारणासु च योग्यता मनसः</div>
+                <div class="transliteration">dhāraṇāsu ca yōgyatā manasaḥ</div>
+                <div class="meaning">心念变得适合专注。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५४॥</div>
+                <div class="sanskrit">स्वविषयासम्प्रयोगे चित्तस्वरूपानुकार इवेन्द्रियाणां प्रत्याहारः</div>
+                <div class="transliteration">svaviṣayāsamprayōgē cittasvarūpānukāra ivēndriyāṇāṃ pratyāhāraḥ</div>
+                <div class="meaning">当感官不与它们的对象接触时，而是模仿心念的本性，这就是制感。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥२.५५॥</div>
+                <div class="sanskrit">ततः परमा वश्यतेन्द्रियाणाम्</div>
+                <div class="transliteration">tataḥ paramā vaśyatēndriyāṇām</div>
+                <div class="meaning">由此，获得对感官的最高掌控。</div>
+            </div>
+
+        </section>
+
+        <section id="vibhuti" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">तृतीयोऽध्यायः । विभूतिपादः</h2>
+                <p class="chapter-subtitle">tṛitīyo'dhyāyaḥ । vibhūdi pādaḥ</p>
+                <p class="chapter-subtitle">第三篇 · 神通篇</p>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१॥</div>
+                <div class="sanskrit">देशबन्धश्चित्तस्य धारणा</div>
+                <div class="transliteration">dēśabandhaścittasya dhāraṇā</div>
+                <div class="meaning">将心念专注于一处即是专注。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२॥</div>
+                <div class="sanskrit">तत्र प्रत्ययैकतानता ध्यानम्</div>
+                <div class="transliteration">tatra pratyayaikatānatā dhyānam</div>
+                <div class="meaning">在那里（专注之处），心念持续的流淌即是冥想。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३॥</div>
+                <div class="sanskrit">तदेवार्थमात्रनिर्भासं स्वरूपशून्यमिव समाधिः</div>
+                <div class="transliteration">tadēvārthamātranirbhāsaṃ svarūpaśūnyamiva samādhiḥ</div>
+                <div class="meaning">当仅有对象发出光辉，而自身形式如同空无，这就是三摩地。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४॥</div>
+                <div class="sanskrit">त्रयमेकत्र संयमः</div>
+                <div class="transliteration">trayamēkatra saṃyamaḥ</div>
+                <div class="meaning">这三者（专注、冥想、三摩地）合一于一个对象，即是总制。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५॥</div>
+                <div class="sanskrit">तज्जयात् प्रज्ञालोकः</div>
+                <div class="transliteration">tajjayāt prajñālōkaḥ</div>
+                <div class="meaning">通过掌控总制，智慧之光得以生起。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.६॥</div>
+                <div class="sanskrit">तस्य भूमिषु विनियोगः</div>
+                <div class="transliteration">tasya bhūmiṣu viniyōgaḥ</div>
+                <div class="meaning">它的应用是分阶段的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.७॥</div>
+                <div class="sanskrit">त्रयमन्तरङ्गं पूर्वेभ्यः</div>
+                <div class="transliteration">trayamantaraṅgaṃ pūrvēbhyaḥ</div>
+                <div class="meaning">这三者（专注、冥想、三摩地）相对于前支是内在的修炼。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.८॥</div>
+                <div class="sanskrit">तदपि बहिरङ्गं निर्बीजस्य</div>
+                <div class="transliteration">tadapi bahiraṅgaṃ nirbījasya</div>
+                <div class="meaning">但即使是这三者，相对于无种三摩地，也是外在的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.९॥</div>
+                <div class="sanskrit">व्युत्थाननिरोधसंस्कारयोरभिभवप्रादुर्भावौ निरोधक्षणचित्तान्वयो निरोधपरिणामः</div>
+                <div class="transliteration">vyutthānanirōdhasaṃskārayōrabhibhavaprādurbhāvau nirōdhakṣaṇacittānvayō nirōdhapariṇāmaḥ</div>
+                <div class="meaning">心念的抑制转化发生在这样的时刻：当抑制的瞬间与心念相连接，旧的习气（散乱）被压制，新的习气（抑制）显现。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१०॥</div>
+                <div class="sanskrit">तस्य प्रशान्तवाहिता संस्कारात्</div>
+                <div class="transliteration">tasya praśāntavāhitā saṃskārāt</div>
+                <div class="meaning">由这（抑制）习气产生平静的流淌。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.११॥</div>
+                <div class="sanskrit">सर्वार्थतैकाग्रातयोः क्षयोदयौ चित्तस्य समाधिपरिणामः</div>
+                <div class="transliteration">sarvārthataikāgrātayōḥ kṣayōdayau cittasya samādhipariṇāmaḥ</div>
+                <div class="meaning">三摩地转化是心念的一种状态，其中散乱（万念）消退，专注（一念）升起。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१२॥</div>
+                <div class="sanskrit">ततः पुनः शान्तोदितौ तुल्यप्रत्ययौ चित्तस्यैकाग्रता परिणामः</div>
+                <div class="transliteration">tataḥ punaḥ śāntōditau tulyapratyayau cittasyaikāgratā pariṇāmaḥ</div>
+                <div class="meaning">随后，当平息的和升起的（心念）具有相同的印象时，发生心念的专一转化。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१३॥</div>
+                <div class="sanskrit">एतेन भूतेन्द्रियेषु धर्मलक्षणावस्थापरिणामा व्याख्याताः</div>
+                <div class="transliteration">ētēna bhūtēndriyēṣu dharmalakṣaṇāvasthāpariṇāmā vyākhyātāḥ</div>
+                <div class="meaning">由此，解释了元素和感官在特性、特征和状态上的转化。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१४॥</div>
+                <div class="sanskrit">शान्तोदिताव्यपदेश्यधर्मानुपाती धर्मी</div>
+                <div class="transliteration">śāntōditāvyapadēśyadharmānupātī dharmī</div>
+                <div class="meaning">基体（实体）是贯穿其过去、现在和未显现的特性的那个。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१५॥</div>
+                <div class="sanskrit">क्रमान्यत्वं परिणामान्यत्वे हेतुः</div>
+                <div class="transliteration">kramānyatvaṃ pariṇāmānyatvē hētuḥ</div>
+                <div class="meaning">序列的差异是转化差异的原因。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१६॥</div>
+                <div class="sanskrit">परिणामत्रयसंयमादतीतानागतज्ञानम्</div>
+                <div class="transliteration">pariṇāmatrayasaṃyamādatītānāgatajñānam</div>
+                <div class="meaning">通过对三种转化（特性、特征、状态）应用总制，获得关于过去和未来的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१७॥</div>
+                <div class="sanskrit">शब्दार्थप्रत्ययानामितरेतराध्यासात् सङ्करस्तत्प्रविभागसंयमात् सर्वभूतरुतज्ञानम्</div>
+                <div class="transliteration">śabdārthapratyayānāmitarētarādhyāsāt saṅkarastatpravibhāgasaṃyamāt sarvabhūtarutajñānam</div>
+                <div class="meaning">由于词语、对象和概念相互叠加导致混淆。通过对它们进行区分应用总制，可以理解所有生命发出的声音的含义。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१८॥</div>
+                <div class="sanskrit">संस्कारसाक्षात्करणात् पूर्वजातिज्ञानम्</div>
+                <div class="transliteration">saṃskārasākṣātkaraṇāt pūrvajātijñānam</div>
+                <div class="meaning">通过直接感知（自己的）潜在印象，获得关于前世的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.१९॥</div>
+                <div class="sanskrit">प्रत्ययस्य परचित्तज्ञानम्</div>
+                <div class="transliteration">pratyayasya paracittajñānam</div>
+                <div class="meaning">（通过将总制应用于）他人的心念内容，获得他心通。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२०॥</div>
+                <div class="sanskrit">न च तत् सालम्बनं तस्याविषयीभूतत्वात्</div>
+                <div class="transliteration">na ca tat sālambanaṃ tasyāviṣayībhūtatvāt</div>
+                <div class="meaning">但这（知识）不包括（他人的心念）所依托的对象，因为那（对象）并非（此总制的）直接对象。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२१॥</div>
+                <div class="sanskrit">कायरूपसंयमात् तद्ग्राह्यशक्तिस्तम्भे चक्षुः प्रकाशासम्प्रयोगेऽन्तर्धानम्</div>
+                <div class="transliteration">kāyarūpasaṃyamāt tadgrāhyaśaktistambhē cakṣuḥ prakāśāsamprayōgē'ntardhānam</div>
+                <div class="meaning">通过对身体形态应用总制，并阻止其被感知的特性（与光接触），身体变得对他人不可见。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२२॥</div>
+                <div class="sanskrit">सोपक्रमं निरुपक्रमं च कर्म तत्संयमादपरान्तज्ञानमरिष्टेभ्यो वा</div>
+                <div class="transliteration">sōpakramaṃ nirupakramaṃ ca karma tatsaṃyamādaparāntajñānamariṣṭēbhyō vā</div>
+                <div class="meaning">业有两种：快速显现的和缓慢显现的。通过对这些业应用总制，或者通过观察不祥之兆，可以预知死亡时间。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२३॥</div>
+                <div class="sanskrit">मैत्र्यादिषु बलानि</div>
+                <div class="transliteration">maitryādiṣu balāni</div>
+                <div class="meaning">（通过对）友善等（态度应用总制，获得）力量。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२४॥</div>
+                <div class="sanskrit">बलेषु हस्तिबलादीनी</div>
+                <div class="transliteration">balēṣu hastibalādīnī</div>
+                <div class="meaning">在力量中，有象之力等。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२५॥</div>
+                <div class="sanskrit">प्रवृत्त्यालोकन्यासात् सूक्ष्मव्यवहितविप्रकृष्टज्ञानम्</div>
+                <div class="transliteration">pravṛttyālōkanyāsāt sūkṣmavyavahitaviprakṛṣṭajñānam</div>
+                <div class="meaning">通过将内在之光导向更高的感知活动，获得关于精微、隐蔽和遥远事物的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२६॥</div>
+                <div class="sanskrit">भुवनज्ञानं सूर्ये संयमात्</div>
+                <div class="transliteration">bhuvanajñānaṃ sūryē saṃyamāt</div>
+                <div class="meaning">通过对太阳应用总制，获得关于宇宙体系的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२७॥</div>
+                <div class="sanskrit">चन्द्रे ताराव्यूहज्ञानम्</div>
+                <div class="transliteration">candrē tārāvyūhajñānam</div>
+                <div class="meaning">通过对月亮应用总制，获得关于星辰排列的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२८॥</div>
+                <div class="sanskrit">ध्रुवे तद्गतिज्ञानम्</div>
+                <div class="transliteration">dhruvē tadgatijñānam</div>
+                <div class="meaning">通过对北极星应用总制，获得关于它们运动的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.२९॥</div>
+                <div class="sanskrit">नाभिचक्रे कायव्यूहज्ञानम्</div>
+                <div class="transliteration">nābhicakrē kāyavyūhajñānam</div>
+                <div class="meaning">通过对肚脐轮应用总制，获得关于身体系统的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३०॥</div>
+                <div class="sanskrit">कण्ठकूपे क्षुत्पिपासानिवृत्तिः</div>
+                <div class="transliteration">kaṇṭhakūpē kṣutpipāsānivṛttiḥ</div>
+                <div class="meaning">通过对喉咙凹陷处应用总制，饥饿和口渴得以平息。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३१॥</div>
+                <div class="sanskrit">कूर्मनाड्यां स्थैर्यम्</div>
+                <div class="transliteration">kūrmanāḍyāṃ sthairyam</div>
+                <div class="meaning">通过对龟脉（一种能量通道）应用总制，身体获得稳定。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३२॥</div>
+                <div class="sanskrit">मूर्धज्योतिषि सिद्धदर्शनम्</div>
+                <div class="transliteration">mūrdhajyōtiṣi siddhadarśanam</div>
+                <div class="meaning">通过对头顶的光应用总制，得见成就者。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३३॥</div>
+                <div class="sanskrit">प्रातिभाद्वा सर्वम्</div>
+                <div class="transliteration">prātibhādvā sarvam</div>
+                <div class="meaning">或者，通过直觉智慧（普拉提巴），（知晓）一切。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३४॥</div>
+                <div class="sanskrit">हृदये चित्तसंवित्</div>
+                <div class="transliteration">hṛdayē cittasaṃvit</div>
+                <div class="meaning">通过对心（心脏区域）应用总制，获得对心念本质的觉知。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३५॥</div>
+                <div class="sanskrit">सत्त्वपुरुषयोरत्यन्तासङ्कीर्णयोः प्रत्ययाविशेषो भोगः परार्थत्वात् स्वार्थसंयमात् पुरुषज्ञानम्</div>
+                <div class="transliteration">sattvapuruṣayōratyantāsaṅkīrṇayōḥ pratyayāviśēṣō bhōgaḥ parārthatvāt svārthasaṃyamāt puruṣajñānam</div>
+                <div class="meaning">经验（体验）源于无法区分纯意识（普鲁沙）和纯净心质（萨埵），尽管它们本质上是完全不同的。通过对纯意识本身（为目的）应用总制，获得关于纯意识的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३६॥</div>
+                <div class="sanskrit">ततः प्रातिभश्रावणवेदनादर्शास्वादवार्ता जायन्ते</div>
+                <div class="transliteration">tataḥ prātibhaśrāvaṇavēdanādarśāsvādavārtā jāyantē</div>
+                <div class="meaning">由此，（产生）直觉智慧、超常听觉、触觉、视觉、味觉和嗅觉。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३७॥</div>
+                <div class="sanskrit">ते समाधावुपसर्गाव्युत्थाने सिद्धयः</div>
+                <div class="transliteration">tē samādhāvupasargāvyutthānē siddhayaḥ</div>
+                <div class="meaning">这些（超自然能力）在三摩地状态中是成就，但在（平常的）散乱心念中则是障碍。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३८॥</div>
+                <div class="sanskrit">बन्धकारणशैथिल्यात् प्रचारसंवेदनाच्च चित्तस्य परशरीरावेशः</div>
+                <div class="transliteration">bandhakāraṇaśaithilyāt pracārasaṃvēdanāc ca cittasya paraśarīrāvēśaḥ</div>
+                <div class="meaning">通过放松束缚的原因以及对（心念）流动的觉知，心念可以进入他人的身体。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.३९॥</div>
+                <div class="sanskrit">उदानजयाज्जलपङ्ककण्टकादिष्वसङ्ग उत्क्रान्तिश्च</div>
+                <div class="transliteration">udānajayājjalapaṅkakaṇṭakādiṣvasaṅga utkrāntiśca</div>
+                <div class="meaning">通过掌控上行气，可以做到不沾水、泥、荆棘等，以及（临终时有意识地）出离（身体）。</div>
+            </div>
+            
+            <div class="sutra">
+                <div class="sutra-number">॥३.४०॥</div>
+                <div class="sanskrit">समानजयाज्ज्वलनम्</div>
+                <div class="transliteration">samānajayājjvalanam</div>
+                <div class="meaning">通过掌控平行气，（身体产生）光辉。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४१॥</div>
+                <div class="sanskrit">श्रोत्राकाशयोः सम्बन्धसंयमात् दिव्यं श्रोत्रम्</div>
+                <div class="transliteration">śrōtrākāśayōḥ sambandhasaṃyamāt divyaṃ śrōtram</div>
+                <div class="meaning">通过对耳朵与空间（以太）之间的联系应用总制，获得神圣的听觉。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४२॥</div>
+                <div class="sanskrit">कायाकाशयोः सम्बन्धसंयमात् लघुतूलसमापत्तेश्च आकाशगमनम्</div>
+                <div class="transliteration">kāyākāśayōḥ sambandhasaṃyamāt laghutūlasamāpattēśca ākāśagamanam</div>
+                <div class="meaning">通过对身体与空间（以太）之间的联系应用总制，以及与轻如棉絮的物体合一，可以在太空中穿行。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४३॥</div>
+                <div class="sanskrit">बहिरकल्पिता वृत्तिर्महाविदेहा ततः प्रकाशावरणक्षयः</div>
+                <div class="transliteration">bahirakalpitā vṛttirmahāvidēhā tataḥ prakāśāvaraṇakṣayaḥ</div>
+                <div class="meaning">当心念活动脱离身体（想象），即是大无身三摩地，由此，遮盖光明（的面纱）被摧毁。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४४॥</div>
+                <div class="sanskrit">स्थूलस्वरूपसूक्ष्मान्वयार्थवत्त्वसंयमात् भूतजयः</div>
+                <div class="transliteration">sthūlasvarūpasūkṣmānvayārthavattvasaṃyamāt bhūtajayaḥ</div>
+                <div class="meaning">通过对元素的粗重形态、精微形态、相互关联及其目的应用总制，获得对元素的掌控。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४५॥</div>
+                <div class="sanskrit">ततोऽणिमादिप्रादुर्भावः कायसम्पत् तद्धर्मानभिघातश्च</div>
+                <div class="transliteration">tatō'ṇimādiprādurbhāvaḥ kāyasampat taddharmānabhighātaśca</div>
+                <div class="meaning">由此，显现如原子般微小等（八种神通），身体完美，以及身体不再受元素特性（如热、冷等）的阻碍。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४६॥</div>
+                <div class="sanskrit">रूपलावण्यबलवज्रसंहननत्वानि कायसम्पत्</div>
+                <div class="transliteration">rūpalāvaṇyabalavajrasaṃhananatvāni kāyasampat</div>
+                <div class="meaning">身体完美包括美貌、优雅、力量以及钻石般的坚硬。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४७॥</div>
+                <div class="sanskrit">ग्रहणस्वरूपास्मितान्वयार्थवत्त्वसंयमादिन्द्रियजयः</div>
+                <div class="transliteration">grahaṇasvarūpāsmitānvayārthavattvasaṃyamādindriyajayaḥ</div>
+                <div class="meaning">通过对感官的感知功能、其本性、我执、相互关联及其目的应用总制，获得对感官的掌控。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४८॥</div>
+                <div class="sanskrit">ततो मनोजवित्वं विकरणभावः प्रधानजयश्च</div>
+                <div class="transliteration">tatō manōjavitvaṃ vikaraṇabhāvaḥ pradhānajayaśca</div>
+                <div class="meaning">由此，心念迅捷，无需感官工具即可感知，并完全掌控原初物质（普鲁克里提）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.४९॥</div>
+                <div class="sanskrit">सत्त्वपुरुषान्यताख्यातिमात्रस्य सर्वभावाधिष्ठातृत्वं सर्वज्ञातृत्वञ्च</div>
+                <div class="transliteration">sattvapuruṣānyatākhyātimātrasya sarvabhāvādhiṣṭhātṛtvaṃ sarvajñātṛtvañca</div>
+                <div class="meaning">仅仅通过辨别纯净心质（萨埵）与纯意识（普鲁沙）的纯粹知识，一个人获得对所有存在状态的统治权以及全知。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५०॥</div>
+                <div class="sanskrit">तद्वैराग्यादपि दोषबीजक्षये कैवल्यम्</div>
+                <div class="transliteration">tadvairāgyādapi dōṣabījakṣayē kaivalyam</div>
+                <div class="meaning">甚至从这（全知等成就）中出离，通过摧毁过失的种子，达到独存（解脱）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५१॥</div>
+                <div class="sanskrit">स्थान्युपनिमन्त्रणे सङगस्मयाकरणं पुनरनिष्टप्रसङ्गात्</div>
+                <div class="transliteration">sthānyupanimantraṇē saṅgasmayākaraṇaṃ punaraniṣṭaprasaṅgāt</div>
+                <div class="meaning">当受到高位存在（如天神）邀请时，不应产生执着或骄傲，因为这会再次导致不想要的后果。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५२॥</div>
+                <div class="sanskrit">क्षणतत्क्रमयोः संयमाद्विवेकजं ज्ञानम्</div>
+                <div class="transliteration">kṣaṇatatkramayōḥ saṃyamādvivēkajaṃ jñānam</div>
+                <div class="meaning">通过对瞬间及其序列应用总制，产生源于辨别的知识。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५३॥</div>
+                <div class="sanskrit">जातिलक्षणदेशैरन्यतानवच्छेदात् तुल्ययोस्ततः प्रतिपत्तिः</div>
+                <div class="transliteration">jātilakṣaṇadēśairanyatānavacchēdāt tulyayōstataḥ pratipattiḥ</div>
+                <div class="meaning">由此，能够区分两个极其相似的事物，即使它们在种类、特征和空间位置上没有区别。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५४॥</div>
+                <div class="sanskrit">तारकं सर्वविषयं सर्वथाविषयमक्रमं चेति विवेकजं ज्ञानम्</div>
+                <div class="transliteration">tārakaṃ sarvaviṣayaṃ sarvathāviṣayamakramaṃ cēti vivēkajaṃ jñānam</div>
+                <div class="meaning">这源于辨别的知识是解脱性的，涵盖所有对象，无所不包，并且是直接的（非序列性的）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥३.५५॥</div>
+                <div class="sanskrit">सत्त्वपुरुषयोः शुद्धिसाम्ये कैवल्यम्</div>
+                <div class="transliteration">sattvapuruṣayōḥ śuddhisāmyē kaivalyam</div>
+                <div class="meaning">当纯净心质（萨埵）的纯净与纯意识（普鲁沙）的纯净相等时，即达成独存（解脱）。</div>
+            </div>
+
+        </section>
+
+        <section id="kaivalya" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">चतुर्थोऽध्यायः । कैवल्यपादः</h2>
+                <p class="chapter-subtitle">caturtho'dhyāyaḥ । kaivalya pādaḥ</p>
+                <p class="chapter-subtitle">第四篇 · 独存篇</p>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१॥</div>
+                <div class="sanskrit">जन्मौषधिमन्त्रतपस्समाधिजाः सिद्धयः</div>
+                <div class="transliteration">janmauṣadhimantratapassamādhijāḥ siddhayaḥ</div>
+                <div class="meaning">神通来自出生、药草、咒语、苦行和三摩地。</div>
+            </div>
+            
+            <div class="sutra">
+                <div class="sutra-number">॥४.२॥</div>
+                <div class="sanskrit">जात्यन्तरपरिणामः प्रकृत्यापूरात्</div>
+                <div class="transliteration">jātyantarapariṇāmaḥ prakṛtyāpūrāt</div>
+                <div class="meaning">转生为另一种生命形态是由于自然（原质）的流入。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.३॥</div>
+                <div class="sanskrit">निमित्तमप्रयोजकं प्रकृतीनांवरणभेदस्तु ततः क्षेत्रिकवत्</div>
+                <div class="transliteration">nimittamaprayōjakaṃ prakṛtīnāṃvaraṇabhēdastu tataḥ kṣētrikavat</div>
+                <div class="meaning">直接原因（业等）并非原质转化的驱动者，但它通过移除障碍来引发转化，就像农夫（通过移除水坝）引水灌溉田地一样。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.४॥</div>
+                <div class="sanskrit">निर्माणचित्तान्यस्मितामात्रात्</div>
+                <div class="transliteration">nirmāṇacittānyasmitāmātrāt</div>
+                <div class="meaning">人造心念仅源于我执。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.५॥</div>
+                <div class="sanskrit">प्रवृत्तिभेदे प्रयोजकं चित्तमेकमनेकेषाम्</div>
+                <div class="transliteration">pravṛttibhēdē prayōjakaṃ cittamēkamanēkēṣām</div>
+                <div class="meaning">在多样的活动中，一个心念是许多心念的引导者。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.६॥</div>
+                <div class="sanskrit">तत्र ध्यानजमनाशयम्</div>
+                <div class="transliteration">tatra dhyānajamanāśayam</div>
+                <div class="meaning">其中，由冥想所生的（心念）没有潜印象。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.७॥</div>
+                <div class="sanskrit">कर्माशुक्लाकृष्णं योगिनः त्रिविधमितरेषाम्</div>
+                <div class="transliteration">karmāśuklākṛṣṇaṃ yōginaḥ trividhamitarēṣām</div>
+                <div class="meaning">瑜伽士的业既非白（善）也非黑（恶）；对于其他人，业有三种（白、黑、黑白混合）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.८॥</div>
+                <div class="sanskrit">ततस्तद्विपाकानुगुणानामेवाभिव्यक्तिर्वासनानाम्</div>
+                <div class="transliteration">tatastadvipākānuguṇānāmēvābhivyaktirvāsanānām</div>
+                <div class="meaning">由此，只有那些与业果相应的潜在印象得以显现。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.९॥</div>
+                <div class="sanskrit">जाति देश काल व्यवहितानामप्यानन्तर्यं स्मृतिसंस्कारयोः एकरूपत्वात्</div>
+                <div class="transliteration">jāti dēśa kāla vyavahitānāmapyānantaryaṃ smṛtisaṃskārayōḥ ēkarūpatvāt</div>
+                <div class="meaning">即使被种类、空间和时间所分隔，记忆和潜在印象具有连续性，因为它们（在本质上）是同一的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१०॥</div>
+                <div class="sanskrit">तासामनादित्वं चाशिषो नित्यत्वात्</div>
+                <div class="transliteration">tāsāmanāditvaṃ cāśiṣō nityatvāt</div>
+                <div class="meaning">这些（潜在印象）是无始的，因为生存的欲望是永恒的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.११॥</div>
+                <div class="sanskrit">हेतुफलाश्रयालम्बनैः सङ्गृहीतत्वातेषामभावेतदभावः</div>
+                <div class="transliteration">hētuphalāśrayālambanaiḥ saṅgṛhītatvātēṣāmabhāvētadabhāvaḥ</div>
+                <div class="meaning">由于（潜在印象）由原因、结果、基础（心念）和对象所维系，当这些消失时，潜在印象也消失。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१२॥</div>
+                <div class="sanskrit">अतीतानागतं स्वरूपतोऽस्त्यध्वभेदाद्धर्माणाम्</div>
+                <div class="transliteration">atītānāgataṃ svarūpatō'styadhvabhēdāddharmāṇām</div>
+                <div class="meaning">过去和未来以其真实形态存在，因为（事物）的特性在不同的时间阶段（过去、现在、未来）有所不同。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१३॥</div>
+                <div class="sanskrit">ते व्यक्तसूक्ष्माः गुणात्मानः</div>
+                <div class="transliteration">tē vyaktasūkṣmāḥ guṇātmānaḥ</div>
+                <div class="meaning">这些（特性）是显化或精微的，并且由三德构成。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१४॥</div>
+                <div class="sanskrit">परिणामैकत्वात् वस्तुतत्त्वम्</div>
+                <div class="transliteration">pariṇāmaikatvāt vastutattvam</div>
+                <div class="meaning">事物的真实性在于其转化的统一性。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१५॥</div>
+                <div class="sanskrit">वस्तुसाम्ये चित्तभेदात्तयोर्विभक्तः पन्थाः</div>
+                <div class="transliteration">vastusāmyē cittabhēdāttayōrvibhaktaḥ panthāḥ</div>
+                <div class="meaning">由于心念的差异，即使面对同一对象，不同的人会有不同的认知路径。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१६॥</div>
+                <div class="sanskrit">न चैकचित्ततन्त्रं वस्तु तत्प्रमाणकं तदा किं स्यात्</div>
+                <div class="transliteration">na caikacittatantraṃ vastu tatpramāṇakaṃ tadā kiṃ syāt</div>
+                <div class="meaning">而且，对象并不依赖于单一心念而被认知；如果那样，当不被任何心念感知时，对象会变成什么？</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१७॥</div>
+                <div class="sanskrit">तदुपरागापेक्षित्वात् चित्तस्य वस्तुज्ञाताज्ञातम्</div>
+                <div class="transliteration">taduparāgāpēkṣitvāt cittasya vastujñātājñātam</div>
+                <div class="meaning">对象是被认知还是未被认知，取决于心念是否被其着色（即关注它）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१८॥</div>
+                <div class="sanskrit">सदाज्ञाताः चित्तवृत्तयः तत्प्रभोः पुरुषस्यापरिणामित्वात्</div>
+                <div class="transliteration">sadājñātāḥ cittavṛttayaḥ tatprabhōḥ puruṣasyāpariṇāmitvāt</div>
+                <div class="meaning">心念的活动总是被纯意识（普鲁沙）所知晓，因为纯意识是不变的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.१९॥</div>
+                <div class="sanskrit">न तत्स्वाभासं दृश्यत्वात्</div>
+                <div class="transliteration">na tatsvābhāsaṃ dṛśyatvāt</div>
+                <div class="meaning">心念不能同时照亮自身和对象，因为它是被感知的（客体）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२०॥</div>
+                <div class="sanskrit">एक समये चोभयानवधारणम्</div>
+                <div class="transliteration">ēka samayē cōbhayānavadhāraṇam</div>
+                <div class="meaning">而且，在同一时间，无法同时觉知两个（不同的）心念。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२१॥</div>
+                <div class="sanskrit">चित्तान्तर दृश्ये बुद्धिबुद्धेः अतिप्रसङ्गः स्मृतिसङ्करश्च</div>
+                <div class="transliteration">cittāntara dṛśyē buddhibuddhēḥ atiprasaṅgaḥ smṛtisaṅkaraśca</div>
+                <div class="meaning">如果认为一个心念能被另一个心念感知，那就需要无穷尽的心念序列，并且会导致记忆的混乱。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२२॥</div>
+                <div class="sanskrit">चितेरप्रतिसङ्क्रमायाः तदाकारापत्तौ स्वबुद्धि संवेदनम्</div>
+                <div class="transliteration">citērapratisaṅkramāyāḥ tadākārāpattau svabuddhi saṃvēdanam</div>
+                <div class="meaning">当不变的纯意识（普鲁沙）映照在心质上时，心质就获得了自我意识的能力。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२३॥</div>
+                <div class="sanskrit">द्रष्टृदृश्योपरक्तं चित्तं सर्वार्थम्</div>
+                <div class="transliteration">draṣṭṛdṛśyōparaktaṃ cittaṃ sarvārtham</div>
+                <div class="meaning">被观者（纯意识）和所见（现象世界）两者所染着的心念，知晓一切。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२४॥</div>
+                <div class="sanskrit">तदसङ्ख्येय वासनाभिः चित्रमपि परार्थं संहत्यकारित्वात्</div>
+                <div class="transliteration">tadasaṅkhyēya vāsanābhiḥ citramapi parārthaṃ saṃhatyakāritvāt</div>
+                <div class="meaning">尽管心念因无数潜在印象而复杂多样，但它（最终）是为另一个（即纯意识）而存在，因为它（心念及其内容）是聚合性的。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२५॥</div>
+                <div class="sanskrit">विशेषदर्शिनः आत्मभावभावनानिवृत्तिः</div>
+                <div class="transliteration">viśēṣadarśinaḥ ātmabhāvabhāvanānivṛttiḥ</div>
+                <div class="meaning">对于能看见（纯意识与心质）区别的瑜伽士，对自我（即个体灵魂）的认同感便停止了。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२६॥</div>
+                <div class="sanskrit">तदा विवेकनिम्नं कैवल्यप्राग्भारं चित्तम्</div>
+                <div class="transliteration">tadā vivēkanimnaṃ kaivalyaprāgbhāraṃ cittam</div>
+                <div class="meaning">那时，心念倾向于辨别，并流向独存（解脱）。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२७॥</div>
+                <div class="sanskrit">तच्छिद्रेषु प्रत्ययान्तराणि संस्कारेभ्यः</div>
+                <div class="transliteration">tacchidrēṣu pratyayāntarāṇi saṃskārēbhyaḥ</div>
+                <div class="meaning">在（趋向辨别的）间隙中，由于过去的习气，其他（散乱的）念头会升起。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२८॥</div>
+                <div class="sanskrit">हानमेषां क्लेशवदुक्तम्</div>
+                <div class="transliteration">hānamēṣāṃ klēśavaduktam</div>
+                <div class="meaning">这些（散乱的念头）的弃绝方式，如同之前描述的对烦恼的弃绝一样。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.२९॥</div>
+                <div class="sanskrit">प्रसङ्ख्यानेऽप्यकुसीदस्य सर्वथा विवेकख्यातेः धर्ममेघस्समाधिः</div>
+                <div class="transliteration">prasaṅkhyānē'pyakusīdasya sarvathā vivēkakhyātēḥ dharmamēghassamādhiḥ</div>
+                <div class="meaning">即使在对辨别有充分觉知的情况下，对于毫无欲望的瑜伽士，当他对万事万物都无执着时，便达到称为"法云三摩地"的境界。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.३०॥</div>
+                <div class="sanskrit">ततः क्लेशकर्मनिवृत्तिः</div>
+                <div class="transliteration">tataḥ klēśakarmanivṛttiḥ</div>
+                <div class="meaning">由此，烦恼和业停止。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.३१॥</div>
+                <div class="sanskrit">तदा सर्वावरणमलापेतस्य ज्ञानस्यानन्त्यात् ज्ञेयमल्पम्</div>
+                <div class="transliteration">tadā sarvāvaraṇamalāpētasya jñānasyānantyāt jñēyamalpam</div>
+                <div class="meaning">那时，由于所有遮盖不净都已消除，知识是无限的，而需被认知的则显得微不足道。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.३२॥</div>
+                <div class="sanskrit">ततः कृतार्थानां परिणामक्रमसमाप्तिर्गुणानाम्</div>
+                <div class="transliteration">tataḥ kṛtārthānāṃ pariṇāmakramasamāptirguṇānām</div>
+                <div class="meaning">随后，三德在完成了它们的目的后，其转化序列也到达了终点。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.३३॥</div>
+                <div class="sanskrit">क्षणप्रतियोगी परिणामापरान्त निर्ग्राह्यः क्रमः</div>
+                <div class="transliteration">kṣaṇapratiyōgī pariṇāmāparānta nirgrāhyaḥ kramaḥ</div>
+                <div class="meaning">序列（的终结）是指在转化最终时刻被感知的、与每个瞬间相对应的（三德）序列。</div>
+            </div>
+
+            <div class="sutra">
+                <div class="sutra-number">॥४.३४॥</div>
+                <div class="sanskrit">पुरुषार्थशून्यानां गुणानाम्प्रतिप्रसवः कैवल्यं स्वरूपप्रतिष्ठा वा चितिशक्तिरिति</div>
+                <div class="transliteration">puruṣārthaśūnyānāṃ guṇānāmpratiprasavaḥ kaivalyaṃ svarūpapratiṣṭhā vā citiśaktiriti</div>
+                <div class="meaning">当三德不再为纯意识（普鲁沙）的目的服务时，它们便消融回其根源。这就是独存（解脱），即意识力量安住于其自身真实本性之中。</div>
+            </div>
+        </section>
+        
+        <a href="../index.html" class="back-link">← 返回首页</a>
+    </article>
+    
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航激活状态
+            const navItems = document.querySelectorAll('.nav-item');
+            const chapters = document.querySelectorAll('.chapter');
+            
+            function updateActiveNav() {
+                let currentChapter = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                chapters.forEach(chapter => {
+                    const chapterTop = chapter.offsetTop;
+                    const chapterHeight = chapter.clientHeight;
+                    
+                    if (scrollPosition >= chapterTop && scrollPosition < chapterTop + chapterHeight) {
+                        currentChapter = chapter.id;
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${currentChapter}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav();
+        });
+    </script>
+</body>
+</html>

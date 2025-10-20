@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瑜伽调息法 Prāṇāyāma</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Futura", "-apple-system", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fff;
+        }
+        
+        /* 左侧导航栏样式 */
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            left: 32px;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .nav-trigger {
+            width: 6px;
+            height: 6px;
+            background-color: #666;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1002;
+        }
+        
+        .nav-trigger:hover,
+        .nav-trigger.active {
+            background-color: #1a1a1a;
+            transform: scale(1.2);
+        }
+        
+        .nav-menu {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-8px);
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 0.75rem;
+            min-width: 160px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .chapter-nav:hover .nav-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 0.5rem 0.375rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 9px;
+            line-height: 1.2;
+            transition: all 0.2s ease;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            color: #1a1a1a;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item.active {
+            color: #1a1a1a;
+            font-weight: 500;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* 主内容区域样式 */
+        .blog-article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .article-header {
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .chapter {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+        
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .chapter-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-paragraph {
+            margin-bottom: 1.5rem;
+        }
+        
+        .sanskrit {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 0.25rem;
+        }
+        
+        .transliteration {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-left: 0.5rem;
+            font-weight: 400;
+        }
+        
+        .meaning {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+            margin-top: 0.25rem;
+        }
+        
+        .quote {
+            border-left: 3px solid #e5e5e5;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .technique-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #8bc34a;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        /* 返回链接样式 */
+        .back-link {
+            display: inline-block;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 8px 16px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-link:hover {
+            color: #000;
+            background-color: #f0f0f0;
+            transform: translateX(-5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-link:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-nav">
+        <div class="nav-trigger"></div>
+        <div class="nav-menu">
+            <a href="#intro" class="nav-item">调息法概述</a>
+            <a href="#prana" class="nav-item">气 Prāṇa</a>
+            <a href="#vayu" class="nav-item">気 Vāyu</a>
+            <a href="#safety" class="nav-item">安全准则</a>
+            <a href="#techniques" class="nav-item">核心技术</a>
+            <a href="#bandha" class="nav-item">锁印 Bandha</a>
+            <a href="#practice" class="nav-item">实践分类</a>
+            <a href="#purification" class="nav-item">净化类调息</a>
+        </div>
+    </div>
+
+    <article class="blog-article">
+        <header class="article-header">
+            <h1 class="article-title">瑜伽调息法 Prāṇāyāma</h1>
+            <p class="article-subtitle">प्राणायाम prāṇāyāma</p>
+        </header>
+        
+        <section id="intro" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">调息法概述</h2>
+                <p class="chapter-subtitle">प्राणायाम परिचय prāṇāyāma paricaya</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p><span class="sanskrit">प्राण prāṇa</span> <span class="transliteration">指气</span>；<span class="sanskrit">आयाम ayāma</span> <span class="transliteration">指扩展、延伸、暂停</span>。通过有意识地中断<span class="sanskrit">(विच्छेदः vicchedaḥ)</span>、延长<span class="sanskrit">(दीर्घ dīrgha)</span>与精微化<span class="sanskrit">(सूक्ष्म sūkṣma)</span>呼吸来调控<span class="sanskrit">(निरोध nirodha)</span>生命能量的技术，称为制气或调息<span class="sanskrit">(प्राणायाम prāṇāyāma)</span>。</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">तस्मिन् सति श्वासप्रश्वासयोर्गतिविच्छेदः प्राणायामः</p>
+                <p class="transliteration">tasmin sati śvāsa-praśvāsyor gati-vicchedaḥ prāṇāyāmaḥ</p>
+                <p class="meaning">稳固体式后，吸息、呼息的自然流有意识中断，即为调息</p>
+                <p class="meaning">——《瑜伽经》yoga sūtra 2.49，作者：帕坦伽利 पतञ्जलि patañjali</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">बाह्याभ्यन्तरस्तम्भवृत्तिः देशकालसंख्याभिः परिदृष्टो दीर्घसूक्ष्मः</p>
+                <p class="transliteration">bāhyābhyantarastambhavṛttiḥ deśakālasaṃkhyābhiḥ paridṛṣṭo dīrghasūkṣmaḥ</p>
+                <p class="meaning">调息的练习分为外在（呼气）、内在（吸气）与静止（屏息），通过时间、空间和次数的调节，逐渐延长（दीर्घ dīrgha）并精微化（सूक्ष्म sūkṣma）</p>
+                <p class="meaning">——《瑜伽经》yoga sūtra 2.50</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">छेदनं पूरकं कुम्भकं रेचकं प्राणायामः</p>
+                <p class="transliteration">chhedanaṃ pūrakaṃ kumbhakaṃ recakaṃ prāṇāyāmaḥ</p>
+                <p class="meaning">调息（prāṇāyāma）由（吸气前的）净化（छेदनं chhedanam）、吸气（पूरक pūraka）、屏息（कुम्भक kumbhaka）和呼气（रेचक recaka）组成</p>
+                <p class="meaning">——《哈他之光》 हठप्रदीक haṭha pradīpikā 2.1，作者：瑜伽士·斯瓦特玛拉摩（yogi·svātmārāma, 15th CE）</p>
+            </div>
+        </section>
+
+        <section id="prana" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">气 Prāṇa</h2>
+                <p class="chapter-subtitle">प्राण prāṇa</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>气是贯穿宇宙与个体的能量，宏观层面称宇宙气：炁 <span class="sanskrit">मह-प्राण maha-prāṇa</span> 微观层面称生命气：氣 <span class="sanskrit">प्राण-वायु prāṇa-vāyu</span> 其流动形式为运动气：気 <span class="sanskrit">वायु vāyu</span>。</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">प्राणो हि भूतानामायुः</p>
+                <p class="transliteration">prāṇo hi bhūtānām āyuḥ</p>
+                <p class="meaning">炁乃万物的生命本源</p>
+                <p class="meaning">——《泰帝利奥义书》taittirīya upaniṣad 2.1</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">वायुः सर्वस्याधारः</p>
+                <p class="transliteration">vāyuḥ sarvasya ādhāraḥ</p>
+                <p class="meaning">风息是万物的运动基制</p>
+                <p class="meaning">——《阿闼婆吠陀》atharvaveda 10.8.4</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>当连接肉体<span class="sanskrit">(स्थूल शरीर sthūla śarīra)</span>与精微体<span class="sanskrit">(सूक्ष्म शरीर sūkṣma śarīra)</span>的氣断开时，灵体携带prāṇa离体，世俗视为死亡，实则转为另一种存在形态。</p>
+                <p>未修瑜伽者：气从足心或肛门散失</p>
+                <p>瑜伽成就者：气经顶轮<span class="sanskrit">(सहस्रार sahasrāra)</span>离体</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">चले वायौ चलं चित्तं निश्चले निश्चलं भवेत्।योगी स्थाणुत्वमाप्नोति ततो वायुं निरोधयेत् ॥</p>
+                <p class="transliteration">cale vāte calaṃ cittaṃ niścale niścalaṃ bhavet । yogī sthāṇutvam āpnoti tato vāyuṃ nirodhayet ॥</p>
+                <p class="meaning">氣动则心动，氣静则心寂。瑜伽士由此证得不动之境，故应调控呼吸</p>
+                <p class="meaning">——《哈他之光》HP 2.2</p>
+            </div>
+        </section>
+
+        <section id="vayu" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">気 Vāyu</h2>
+                <p class="chapter-subtitle">वायु vāyu</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>气（prāṇa）不仅通过呼吸进入身体，体内还存在精微能量<span class="sanskrit">(सूक्ष्म प्राण sūkṣma prāṇa)</span>的运动形式，称为気(vāyu)。它们是智慧的生命力<span class="sanskrit">(jñāna śakti)</span>，体现在精微身<span class="sanskrit">(सूक्ष्म शरीर sūkṣma śarīra)</span>中，通过大脑和脊髓的五个神经中枢(行气的控制节点)运作。</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>五主气 पञ्च वायु pañca vāyu</h3>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">命氣 प्राण-वायु prāṇa-vāyu</p>
+                    <p class="meaning">宗气，喉至心。呼吸、血液循环。练习：能量上行，喉锁(जालन्धर बन्ध jālandhara bandha)</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">下氣 अपान-वायु apāna-vāyu</p>
+                    <p class="meaning">浊气，脐至足。排泄、生殖。练习：能量逆转至中脉，根锁(मूल बन्ध mūla bandha)</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">均氣 समान-वायु samāna-vāyu</p>
+                    <p class="meaning">谷气，心至脐。消化、代谢。练习：平衡火元素(अग्नि agni)，腹锁(उड्डीयन बन्ध uḍḍīyana bandha)</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">上氣 उदान-वायु udāna-vāyu</p>
+                    <p class="meaning">清气，喉至顶。意识提升、语言。练习：突破轮回（死后离体），静坐(ध्यान dhyāna)</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">遍氣 व्यान-वायु vyāna-vāyu</p>
+                    <p class="meaning">营气，全身。神经协调、体液循环。练习：显化人体辉光(और aura)，体式(आसन āsana)</p>
+                </div>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">प्राणोऽपानसमानश्च उदानव्यान एव च।नागः कूर्मश्च कृकरो देवदत्तो धनञ्जयः॥</p>
+                <p class="transliteration">prāṇo'pāna-samānaśca udāna-vyāna eva ca।nāgaḥ kūrmaśca kṛkaro devadatto dhanañjayaḥ॥</p>
+                <p class="meaning">命气、下气、均气、上气与遍气，以及龙气、龟气、咳气、天授气与胜军气——此十气乃生命运作之本</p>
+                <p class="meaning">——《哈他之光》HP 2.4-5</p>
+            </div>
+        </section>
+
+        <section id="safety" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">安全练习准则</h2>
+                <p class="chapter-subtitle">सुरक्षा अभ्यास दिशानिर्देश surakṣā abhyāsa diśānirdeśa</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>调息的练习包括主动地呼、吸和自发性的屏来控制气，并不是轻松的坐着观察呼吸就是调息。在体式练习中融入生命能量的控制<span class="sanskrit">(प्राणसंयम prāṇa-saṃyama)</span> 带进练习里，并结合清洁法<span class="sanskrit">(śodhana)</span> 如：经络清洁调息法<span class="sanskrit">(nāḍī-śodhana prāṇāyāma)</span> 或圣光调息<span class="sanskrit">(kapālabhātī prāṇāyāma)</span> 方能奠定调息的基础。</p>
+            </div>
+            
+            <div class="warning-box">
+                <h3>重要原则：</h3>
+                <p><strong>1. 比例优先于时长</strong></p>
+                <p>初学先达成吸、呼比例（1:1），再逐步引入屏息（1:1:1）→ 进阶1:2:1（吸:屏:呼）</p>
+                
+                <p><strong>2. 清洁法前置</strong></p>
+                <p>未净经脉者，气与心皆不控，经络清洁法需在调息前完成，尤其先平衡阴阳能量。</p>
+                
+                <p><strong>3. 体式锁印协同</strong></p>
+                <p>至善坐(siddhāsana)确保骨盆中立，脊柱延展，配合三锁(traya-bandha)。</p>
+                
+                <p><strong>4. 饮食与时辰</strong></p>
+                <p>调息最佳时间为日出前1.5小时(brahma-muhūrta），此时大气中prāṇa最纯净；胃部空置。</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">आसनं प्राणसंरोधः</p>
+                <p class="transliteration">āsanaṃ prāṇa-saṃrodhaḥ</p>
+                <p class="meaning">体式的目的是为生命能量的控制(saṃrodha)做准备</p>
+                <p class="meaning">——《哈他之光》HP 1.56</p>
+            </div>
+        </section>
+
+        <section id="techniques" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">核心技术</h2>
+                <p class="chapter-subtitle">मुख्य तकनीक mukhya takanīka</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>呼吸三要素</h3>
+                <p>调息法的变化通过呼吸的时间<span class="sanskrit">kāla</span>、位置<span class="sanskrit">deśa</span>、次数<span class="sanskrit">saṃkhyā</span>来调节，逐渐延长并精微化。</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>基础动作（时长调控）</h3>
+                <div class="technique-box">
+                    <p class="sanskrit">吸气 (pūraka)</p>
+                    <p class="meaning">缓慢深长的主动吸气，扩张体腔以激活命气(prāṇa-vāyu)</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">呼气 (recaka)</p>
+                    <p class="meaning">完全控制的主动呼气，收缩体腔以净化下气(apāna-vāyu)</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">屏息 (kumbhaka)</p>
+                    <p class="meaning">呼吸的主动暂停，平衡均气/中脉能量(samāna-vāyu/suṣumnā)</p>
+                </div>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>屏息分类（位置调控）</h3>
+                <p><strong>内屏息</strong> <span class="sanskrit">(ābhyantara kumbhaka)</span> - 吸气后屏息（肺部充盈后的主动屏息），配合喉锁</p>
+                <p><strong>外屏息</strong> <span class="sanskrit">(bāhya kumbhaka)</span> - 呼气后屏息（肺部排空后的刻意屏息），配合根锁+腹锁</p>
+                <p><strong>自发屏息</strong> <span class="sanskrit">(kevela kumbhaka)</span> - 无吸无呼的自然停顿（无意识参与的呼吸暂停），此为高阶状态</p>
+            </div>
+        </section>
+
+        <section id="bandha" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">锁印 Bandha</h2>
+                <p class="chapter-subtitle">बन्ध bandha</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>锁<span class="sanskrit">(bandha)</span>作为调控呼吸的关键技术，其核心在于通过收缩特定身体部位维持体内气压的动态平衡，封存生命能量（prāṇa），防止其耗散，并引导其按照意定的方向或沿中脉<span class="sanskrit">(suṣumnā)</span>流动的技术。</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>三锁 (traya-bandha)</h3>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">喉锁 (jālandhara bandha)</p>
+                    <p class="meaning">下颌内收锁定咽喉通道。防止能量散失，稳定颈部能量流动</p>
+                    <p class="sanskrit">कण्ठं आकुञ्च्य हृदि चिबुकं निधाय</p>
+                    <p class="transliteration">kaṇṭhaṃ ākuñcya hṛdi cibukaṃ nidhāya</p>
+                    <p class="meaning">收缩喉咙，下颌抵住胸口</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">腹锁 (uḍḍīyana bandha)</p>
+                    <p class="meaning">呼气后屏息时，腹部向后背脊柱方向收缩上提。迫使命气(prāṇa-vāyu)上行，刺激消化火(agni)，推动能量入中脉</p>
+                    <p class="sanskrit">उड्डियानं नाम मध्यं आकृष्य उरः प्रति</p>
+                    <p class="transliteration">uḍḍīyanaṃ nāma madhyaṃ ākṛṣya uraḥ prati</p>
+                    <p class="meaning">腹锁即（呼气后）将腹部中部向后背脊柱上提</p>
+                </div>
+                
+                <div class="technique-box">
+                    <p class="sanskrit">根锁 (mūla bandha)</p>
+                    <p class="meaning">收缩会阴肌群，封闭盆底区域。封存下气，逆转其下行趋势，与命气结合</p>
+                    <p class="sanskrit">मूलबन्धः अपानं ऊर्ध्वं नयति</p>
+                    <p class="transliteration">mūla-bandhaḥ apānaṃ ūrdhvaṃ nayati</p>
+                    <p class="meaning">根锁使下行气(apāna)向上逆转</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="practice" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">实践分类</h2>
+                <p class="chapter-subtitle">अभ्यास वर्गीकरण abhyāsa vargīkaraṇa</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <p>呼吸本无定法，唯失衡为大患。当随体式迁变，顺能量盈虚，妙转呼吸枢机。</p>
+                <p>调息<span class="sanskrit">(prāṇāyāma)</span>必以经脉净化<span class="sanskrit">(nāḍī śodhana)</span>为先，持修三月，涤净脉髓，否则万法唐捐。诸法虽殊——或通滞、或强形、或祛病、或安神，终不离脉净为源。脉净则气畅，气畅则心定，心定则慧生，如泉活、风调、镜明，朗照圆成。</p>
+            </div>
+            
+            <div class="quote">
+                <p class="sanskrit">न शुद्धे नाडीचक्रे प्राणः क्षेत्रं प्रविशति न च सिद्धिर्न च सुषुम्णासंधानम् । नाडीशुद्धिं विना सर्वा हठसिद्धिर्न जायते ।</p>
+                <p class="transliteration">na śuddhe nāḍīcakre prāṇaḥ kṣetraṃ praviśati na ca siddhirna ca suṣumṇāsaṃdhānam । nāḍīśuddhiṃ vinā sarvā haṭhasiddhirna jāyate ।</p>
+                <p class="meaning">若经脉未净，生命气（prāṇa）不得入中脉（suṣumṇā），无有成就（siddhi），亦难心定。气脉未净者，哈他瑜伽一切功德终不成办。</p>
+                <p class="meaning">——《哈他之光》HP 2.4 - 2.5</p>
+            </div>
+        </section>
+
+        <section id="purification" class="chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title">净化类调息</h2>
+                <p class="chapter-subtitle">शोधन प्राणायाम śodhana prāṇāyāma</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>气脉净化 (nāḍī śodhana)</h3>
+                <p>修行枢要，首在通脉。气脉<span class="sanskrit">(nāḍī)</span>，生命能量通道；净化<span class="sanskrit">(śodhana)</span>，涤除浊阴以见本明。此法以左右鼻息交替为用，使左脉<span class="sanskrit">(idā)</span>之太阴清凉与右脉<span class="sanskrit">(piṅgalā)</span>之太阳炽热，交融互济，如日月合璧。</p>
+            </div>
+            
+            <div class="technique-box">
+                <h4>方法1——基础涤脉法</h4>
+                <p><strong>身姿：</strong>至善坐（siddhāsana）须弥不动</p>
+                <p><strong>步骤：</strong></p>
+                <p>1. 先调根本息：双鼻吸-呼各3次（如天地开阖）</p>
+                <p>2. 左脉净化：拇指封右鼻（日脉），独启左鼻（月脉）；徐吸缓呼十度</p>
+                <p>3. 右脉净化：无名指封左鼻，独启右鼻，同法行十息</p>
+                <p>4. 收功：双鼻三息（引气归元）</p>
+                <p><strong>呼吸比例：</strong>循"天道之数"渐进：1:1（七日）→ 1:2（二七）→ 1:2:2（三七）→ 1:4:2:3（四九圆满）</p>
+            </div>
+            
+            <div class="content-paragraph">
+                <h3>净脑法 (kapālabhāti)</h3>
+                <p><span class="sanskrit">kapāla</span> 意为头颅，<span class="sanskrit">bhāti</span>意为闪亮、光，因这种清洁法以呼吸的方式进行，也称圣光调息。短促呼气激活额窦，为主动调息法<span class="sanskrit">(sahita prāṇāyāma)</span>。</p>
+            </div>
+            
+            <div class="warning-box">
+                <p><strong>禁忌：</strong>高血压、心脏病患者不宜练习</p>
+            </div>
+            
+            <div class="technique-box">
+                <h4>基本方法：</h4>
+                <p>莲花坐或成就坐，闭上眼睛。双手结智慧手印<span class="sanskrit">(jñāna mudrā)</span></p>
+                <p>双鼻孔缓慢呼气和吸气后短促有力的呼气，收缩腹部，反射性自然吸气。</p>
+                <p>初阶可从15次至20次开始，做3轮，逐渐增加至120次。</p>
+                <p><strong>注意：</strong>此为主动调息<span class="sanskrit">(sahita prāṇāyāma)</span>，需避免过度用力导致头晕。</p>
+            </div>
+        </section>
+        
+        <a href="../index.html" class="back-link">← 返回首页</a>
+    </article>
+    
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 链接点击反馈
+            const links = document.querySelectorAll('.item, .contact-icon');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // 页面过渡效果 - 淡出过渡
+                    e.preventDefault();
+                    const targetUrl = this.href;
+                    
+                    document.body.style.transition = 'opacity 0.4s ease';
+                    document.body.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 400);
+                });
+                
+                link.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                link.addEventListener('mouseup', function() {
+                    this.style.transform = '';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // 加载动画
+            const items = document.querySelectorAll('.item');
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-10px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.4s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, index * 80);
+            });
+            
+            // 导航激活状态
+            const navItems = document.querySelectorAll('.nav-item');
+            const chapters = document.querySelectorAll('.chapter');
+            
+            function updateActiveNav() {
+                let currentChapter = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                chapters.forEach(chapter => {
+                    const chapterTop = chapter.offsetTop;
+                    const chapterHeight = chapter.clientHeight;
+                    
+                    if (scrollPosition >= chapterTop && scrollPosition < chapterTop + chapterHeight) {
+                        currentChapter = chapter.id;
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${currentChapter}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav();
+        });
+    </script>
+</body>
+</html>

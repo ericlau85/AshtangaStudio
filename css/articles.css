@@ -1,0 +1,240 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background-color: #fff;
+    font-size: 16px;
+}
+
+/* 左侧导航栏 */
+.chapter-nav {
+    position: fixed;
+    top: 50%;
+    left: 32px;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.nav-trigger {
+    width: 8px;
+    height: 8px;
+    background-color: #666;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1002;
+}
+
+.nav-trigger:hover,
+.nav-trigger.active {
+    background-color: #1a1a1a;
+    transform: scale(1.2);
+}
+
+.nav-menu {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 120px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.chapter-nav:hover .nav-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+}
+
+.nav-item {
+    display: block;
+    padding: 0.75rem 0.5rem;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    color: #1a1a1a;
+    background-color: #f8f9fa;
+}
+
+.nav-item.active {
+    color: #1a1a1a;
+    font-weight: 500;
+    background-color: #f8f9fa;
+}
+
+.nav-item:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* 主内容区域 */
+.blog-article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.article-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.article-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    color: #000;
+    letter-spacing: -0.02em;
+}
+
+.article-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 300;
+    font-family: "Futura", "Futura-Medium", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+}
+
+.chapter {
+    margin-bottom: 4rem;
+    scroll-margin-top: 2rem;
+}
+
+.chapter-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.chapter-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    color: #000;
+    letter-spacing: -0.01em;
+}
+
+.chapter-subtitle {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 300;
+    font-family: "Futura", "Futura-Medium", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+}
+
+.content-paragraph {
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.sanskrit {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 0.25rem;
+    line-height: 1.5;
+}
+
+.transliteration {
+    font-size: 0.95rem;
+    color: #666;
+    font-style: normal;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    font-family: "Futura", "Futura-Medium", "Futura Medium", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+}
+
+.meaning {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 300;
+    margin-top: 0.25rem;
+    line-height: 1.5;
+}
+
+/* 返回链接 */
+.back-link {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    margin-top: 40px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    font-weight: 300;
+}
+
+.back-link:hover {
+    color: #000;
+    background-color: #f8f9fa;
+    transform: translateX(-5px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border-color: #ccc;
+}
+
+.back-link::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+    transition: left 0.5s ease;
+}
+
+.back-link:hover::before {
+    left: 100%;
+}
+
+/* 段落文本样式 */
+p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+/* 标题样式 */
+h1, h2, h3 {
+    font-weight: 300;
+    color: #000;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0 1rem 0;
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 1.1rem;
+    margin: 1.25rem 0 0.75rem 0;
+    font-weight: 400;
+    color: #333;
+}
