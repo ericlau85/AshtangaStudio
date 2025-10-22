@@ -5,6 +5,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
+    line-height: 1.0;/* 行高 */
 }
 
 .home-layout {
@@ -20,8 +21,8 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    align-items: flex-end;
-    text-align: right;
+    align-items: center; /* 居中 */
+    text-align: center; /* 文字居中 */
     position: relative;
 }
 
@@ -67,28 +68,30 @@
 .home-logo {
     font-size: 60px;
     font-weight: 600;
-    margin-bottom: 13px;
+    margin-bottom: 8px;/* 间距 */
     letter-spacing: 1px;
+    line-height: 1.0; /* 行高控制 */
 }
 
 .home-name {
     font-size: 24px;
     font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 8px;
+    line-height: 1.1;/* 行高 */
+    margin-bottom: 5px;/* 间距 */
 }
 
 .home-location {
     font-size: 14px;
     color: #666;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 15px;/* 间距 */
+    line-height: 1.0; /* 行高 */
 }
 
 .home-contact-icons {
     display: flex;
-    gap: 15px;
-    justify-content: flex-end;
+    gap: 8px;/* 间距 */
+    justify-content: center;
 }
 
 .home-contact-icon {
@@ -113,32 +116,33 @@
 }
 
 .home-section {
-    margin-bottom: 20px;
+    margin-bottom: 15px;/* 间距 */
 }
 
 .home-section-title {
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 8px;/* 间距 */
+    line-height: 1.0; /* 行高 */
 }
 
 .home-items-list {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;/* 间距 */
 }
 
 .home-item {
     display: block;
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: 11px;
+    line-height: 1.0;/* 行高 */
     font-weight: 400;
     text-decoration: none;
     color: inherit;
-    padding: 4px 0;
+    padding: 6px 0;/* 内边距 */
     border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
     position: relative;
@@ -217,12 +221,11 @@
 
 /* 语言切换器样式 */
 .language-switcher {
-    position: absolute;
-    top: 360px;
-    right: 0px;
     display: flex;
     gap: 2px;
-    z-index: 100;
+    justify-content: center;
+    margin: 10px 0; /* 调整上下间距 */
+    width: 100%;
 }
 
 .lang-btn {

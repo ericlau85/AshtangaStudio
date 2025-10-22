@@ -1,5 +1,4 @@
 /* 课程专用样式 */
-
 .courses-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -57,7 +56,7 @@
 /* ===== Mysore 页面专用样式 ===== */
 
 .classes-section {
-    padding: 0 0 80px;
+    padding: 120px 0 80px; /* 直接使用固定值 */
 }
 
 .classes-header {
@@ -189,6 +188,11 @@
     padding: 20px 0;
     border-bottom: 1px solid #f0f0f0;
     gap: 20px;
+    transition: background-color 0.3s ease; /* 悬停效果 */
+}
+
+.class-item:hover {
+    background-color: #f9f9f9; /* 悬停背景色 */
 }
 
 .class-info {
@@ -270,6 +274,7 @@
     .method-grid,
     .benefits-grid {
         grid-template-columns: 1fr;
+        gap: 20px; /* 移动端间隙 */
     }
     
     .class-item {
@@ -281,15 +286,33 @@
     .class-time {
         text-align: left;
         margin: 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
     }
     
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .class-action {
+        width: 100%;
+        text-align: left;
+    }
+    
+    .book-btn {
+        width: 100%;
     }
 }
 
+/* 小屏幕优化 */
 @media (max-width: 480px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
+    .classes-header h1 {
+        font-size: 24px;
+    }
+    
+    .classes-header p {
+        font-size: 13px;
+    }
+    
+    .method-card,
+    .course-card {
+        padding: 20px 15px;
     }
 }

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>主题工作坊 | ASHTANGA STUDIO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/courses.css">
     <style>
         /* 基础样式 */
         * {
@@ -36,478 +39,7 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #ffffff;
-            border-bottom: 1px solid #e5e5e5;
-            z-index: 1000;
-            padding: 15px 0;
-            transition: all 0.4s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .logo:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 40px;
-        }
-        
-        .nav-menu li {
-            position: relative;
-        }
-        
-        .nav-menu a {
-            font-size: 13px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            padding: 5px 0;
-        }
-        
-        .nav-menu a:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-menu a.active {
-            font-weight: 500;
-        }
-        
-        /* 导航栏下划线动画 */
-        .nav-menu a {
-            position: relative;
-        }
 
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #000;
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
-            width: 100%;
-        }
-        
-        .nav-auth {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .login-btn, .signup-btn {
-            padding: 8px 20px;
-            font-size: 13px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #000;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .signup-btn {
-            background: #000;
-            color: #fff;
-        }
-        
-        .login-btn:hover, .signup-btn:hover {
-            opacity: 0.8;
-        }
-        
-        .login-btn:active, .signup-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        
-        
-        /* 课程页面内容 */
-        .classes-section {
-            padding: 100px 0 80px;
-        }
-        
-        .classes-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .classes-header h1 {
-            font-size: 32px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-        
-        .classes-header p {
-            color: #666;
-            font-size: 14px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* 课程网格 */
-        .classes-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto 80px;
-        }
-        
-        .class-card {
-            border: 1px solid #e5e5e5;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-        
-        .class-card:hover {
-            border-color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .class-icon {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        
-        .class-card h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        
-        .class-card p {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        
-        .class-features {
-            margin: 20px 0;
-        }
-        
-        .class-features li {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
-        
-        .class-btn {
-            display: inline-block;
-            padding: 10px 25px;
-            background: #000;
-            color: #fff;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #000;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .class-btn:hover {
-            background: transparent;
-            color: #000;
-        }
-        
-        .class-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* 课表内容 */
-        .schedule-section {
-            padding: 60px 0;
-            background-color: #f8f8f8;
-        }
-        
-        .schedule-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .schedule-header h2 {
-            font-size: 28px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-        
-        .schedule-header p {
-            color: #666;
-            font-size: 14px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* 课表 */
-        .schedule-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .schedule-day {
-            margin-bottom: 40px;
-        }
-        
-        .day-title {
-            font-size: 18px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-        
-        .class-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #f0f0f0;
-            gap: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .class-item:hover {
-            background-color: #f0f0f0;
-        }
-
-        .class-info {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .class-name {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .class-type {
-            color: #666;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        .class-time {
-            text-align: center;
-            min-width: 120px;
-            margin: 0 20px;
-        }
-
-        .time-slot {
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .class-duration {
-            color: #666;
-            font-size: 12px;
-        }
-
-        .class-action {
-            min-width: 80px;
-            text-align: right;
-        }
-
-        .book-btn {
-            padding: 8px 20px;
-            background: #000;
-            color: #fff;
-            border: 1px solid #000;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-btn:hover {
-            background: transparent;
-            color: #000;
-        }
-        
-        .book-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .rest-day {
-            text-align: center;
-            padding: 40px 0;
-            color: #666;
-            font-style: italic;
-        }
-        
-        /* 页脚 */
-        .footer {
-            background: #000;
-            color: #fff;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 14px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 8px;
-        }
-        
-        .footer-column a {
-            color: #ccc;
-            transition: all 0.3s ease;
-            font-size: 13px;
-        }
-        
-        .footer-column a:hover {
-            color: #fff;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        /* 页面加载动画 */
-        .fade-in {
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .nav-menu, .nav-auth {
-                display: none;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .classes-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .class-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .class-time {
-                text-align: left;
-                margin: 0;
-                display: flex;
-                gap: 20px;
-                align-items: center;
-            }
-            
-            .class-action {
-                text-align: left;
-                width: 100%;
-            }
-            
-            .book-btn {
-                width: 100%;
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .class-time {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-        }
         /* 工作坊特色样式 */
         .workshop-categories {
             padding: 60px 0;
@@ -518,18 +50,34 @@
             justify-content: center;
             margin-bottom: 40px;
             border-bottom: 1px solid #e5e5e5;
+            flex-wrap: wrap;
         }
         
         .category-tab {
-            padding: 15px 30px;
+            padding: 15px 25px;
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .category-tab.active {
             border-bottom-color: #000;
             font-weight: 500;
+        }
+        
+        .category-tab:hover {
+            border-bottom-color: #000;
+        }
+        
+        .category-panel {
+            display: none;
+        }
+        
+        .category-panel.active {
+            display: block;
         }
         
         .upcoming-workshops {
@@ -542,6 +90,9 @@
             border: 1px solid #e5e5e5;
             margin-bottom: 30px;
             transition: all 0.3s ease;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .workshop-card:hover {
@@ -557,31 +108,51 @@
         .workshop-content {
             padding: 30px;
         }
+
+        .price-amount {
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .category-tab {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .workshop-header,
+            .workshop-content {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">ASHTANGA STUDIO</a>
-            <ul class="nav-menu">
-                <li><a href="mysore.html">Mysore</a></li>
-                <li><a href="private.html">私教</a></li>
-                <li><a href="workshops.html" class="active">工作坊</a></li>
-            </ul>
-            <div class="nav-auth">
-                <div class="language-switcher">
-                    <a href="index.html" class="language-btn active" title="中文">🇨🇳</a>
-                    <a href="../en/index.html" class="language-btn" title="English">🇬🇧</a>
-                </div>
-                <a href="sign/login.html" class="login-btn">登录</a>
-                <a href="sign/register.html" class="signup-btn">注册</a>
-            </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="mysore.html">Mysore</a></li>
+                <li><a href="private.html">私教</a></li>
+                <li><a href="workshops.html" class="active">工作坊</a></li>
+                <li><a href="rates.html" class="active">费用</a></li>
+            </ul>
         </div>
     </nav>
+    <div class="menu-overlay"></div>
 
     <!-- 页面内容 -->
     <section class="classes-section">
@@ -600,12 +171,9 @@
             <!-- 工作坊分类 -->
             <div class="workshop-categories">
                 <div class="container">
-                    <div class="section-title">
-                    </div>
                     <div class="category-tabs">
                         <div class="category-tab active" data-category="foundation">基础精讲</div>
                         <div class="category-tab" data-category="philosophy">哲学探讨</div>
-                        <div class="category-tab" data-category="advanced">进阶技巧</div>
                         <div class="category-tab" data-category="special">特别专题</div>
                     </div>
                     
@@ -614,176 +182,259 @@
                         <div class="category-panel active" id="foundation">
                             <div class="classes-grid">
                                 <div class="class-card">
-                                    <div class="class-icon">
+                                    <div class="method-icon">
                                         <i class="fas fa-language"></i>
                                     </div>
                                     <h3>梵语入门</h3>
-                                    <p>学习梵语字母、发音和常用瑜伽术语</p>
-                                    <ul class="class-features">
+                                    <p style="color: #666;">学习梵语字母、发音和常用瑜伽术语</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
                                         <li>梵文字母表学习</li>
                                         <li>正确发音指导</li>
                                         <li>体式名称解析</li>
                                         <li>唱诵基础</li>
                                     </ul>
-                                    <button class="class-btn">了解详情</button>
+                                    <button class="book-btn">了解详情</button>
                                 </div>
                                 <div class="class-card">
-                                    <div class="class-icon">
+                                    <div class="method-icon">
+                                        <i class="fas fa-hands"></i>
+                                    </div>
+                                    <h3>初级序列精讲</h3>
+                                    <p style="color: #666;">完整学习阿斯汤加初级序列</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>序列完整解析</li>
+                                        <li>体式正确进入方式</li>
+                                        <li>常见错误纠正</li>
+                                        <li>计数与呼吸配合</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                                <div class="class-card">
+                                    <div class="method-icon">
                                         <i class="fas fa-wind"></i>
                                     </div>
                                     <h3>呼吸控制法</h3>
-                                    <p>深入掌握乌佳依呼吸和其他调息技巧</p>
-                                    <ul class="class-features">
+                                    <p style="color: #666;">深入掌握乌佳依呼吸和其他调息技巧</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
                                         <li>乌佳依呼吸精讲</li>
                                         <li>班达运用技巧</li>
                                         <li>呼吸与体式配合</li>
                                         <li>调息法入门</li>
                                     </ul>
-                                    <button class="class-btn">了解详情</button>
-                                    /div>
+                                    <button class="book-btn">了解详情</button>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- 闭合classes-section的container -->
                         
+                        <!-- 哲学探讨内容 -->
+                        <div class="category-panel" id="philosophy">
+                            <div class="classes-grid">
+                                <div class="class-card">
+                                    <div class="method-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <h3>瑜伽经研读</h3>
+                                    <p style="color: #666;">深入理解帕坦伽利的瑜伽经</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>八支瑜伽解析</li>
+                                        <li>经典经文解读</li>
+                                        <li>现代生活应用</li>
+                                        <li>哲学思想探讨</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                                <div class="class-card">
+                                    <div class="method-icon">
+                                        <i class="fas fa-yin-yang"></i>
+                                    </div>
+                                    <h3>瑜伽哲学基础</h3>
+                                    <p style="color: #666;">了解瑜伽的哲学根源和思想体系</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>六大哲学流派</li>
+                                        <li>梵我合一理念</li>
+                                        <li>业力与轮回</li>
+                                        <li>现代意义探讨</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                                <div class="class-card">
+                                    <div class="method-icon">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <h3>能量系统哲学</h3>
+                                    <p style="color: #666;">脉轮与生命能量的哲学基础</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>七大脉轮解析</li>
+                                        <li>气脉与生命能量</li>
+                                        <li>能量净化哲学</li>
+                                        <li>身心能量平衡</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                        <!-- 特别专题内容 -->
+                        <div class="category-panel" id="special">
+                            <div class="classes-grid">
+                                <div class="class-card">
+                                    <div class="method-icon">
+                                        <i class="fas fa-user-injured"></i>
+                                    </div>
+                                    <h3>伤痛预防与康复</h3>
+                                    <p style="color: #666;">科学应对常见瑜伽伤痛，安全练习</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>常见瑜伽伤害解析</li>
+                                        <li>肩颈、腰椎保护技巧</li>
+                                        <li>膝盖与手腕防护</li>
+                                        <li>康复性练习序列</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                                
+                                <div class="class-card">
+                                    <div class="method-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <h3>瑜伽饮食与生活方式</h3>
+                                    <p style="color: #666;">瑜伽哲学在生活中的应用</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>悦性饮食原则</li>
+                                        <li>阿育吠陀基础</li>
+                                        <li>排毒与清洁法</li>
+                                        <li>日常作息优化</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                                
+                                <div class="class-card">
+                                    <div class="method-icon">
+                                        <i class="fas fa-hands-helping"></i>
+                                    </div>
+                                    <h3>辅助与调整技巧</h3>
+                                    <p style="color: #666;">学习正确的体式辅助方法</p>
+                                    <ul style="color: #666; line-height: 1.6; margin: 20px 0;">
+                                        <li>手法调整原则</li>
+                                        <li>口令提示优化</li>
+                                        <li>不同体型适配</li>
+                                        <li>安全调整边界</li>
+                                    </ul>
+                                    <button class="book-btn">了解详情</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- 近期工作坊 -->
             <div class="upcoming-workshops">
                 <div class="container">
-                    <div class="section-title">
+                    <div class="schedule-header">
+                        <h2>近期工作坊</h2>
+                        <p>即将开始的专题工作坊，名额有限，尽快报名</p>
                     </div>
                     
                     <div class="workshop-card">
                         <div class="workshop-header">
                             <h3>阿斯汤加初级序列精讲</h3>
-                            <p style="color: #666; margin-top: 10px;">2025年11月15日 · 线上工作坊 · 3小时</p>
+                            <p style="color: #666; margin-top: 10px;">日期：待定 · 线上工作坊 · 3小时</p>
                         </div>
                         <div class="workshop-content">
-                            <p>深度解析初级序列中的每一个体式，学习正确的进入、保持和退出方式，掌握序列的完整练习方法。</p>
+                            <p style="color: #666; line-height: 1.6;">深度解析初级序列中的每一个体式，学习正确的进入、保持和退出方式，掌握序列的完整练习方法。适合有一定基础的练习者。</p>
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
                                 <span class="price-amount">¥280</span>
                                 <button class="book-btn">立即报名</button>
                             </div>
-                        </div> <!-- 闭合schedule-container -->
-                    </div> <!-- 闭合schedule-section的container -->
-                </section> <!-- 闭合schedule-section -->
-    
-        <!-- 在近期工作坊部分后添加 -->
-        <section class="pricing-cta" style="padding: 60px 0; text-align: center; background: #f8f8f8;">
-            <div class="container">
-                <h3 style="font-size: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">工作坊费用</h3>
-                <p style="color: #666; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    每个工作坊都有独立的收费标准，具体价格请参考各工作坊详情。
-                </p>
-                <div style="margin-top: 30px;">
-                    <a href="rates.html" class="class-btn" style="display: inline-block;">查看所有课程价格</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 页脚 -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-column">
-                        <h3>ASHTANGA STUDIO</h3>
-                        <p style="color: #ccc; font-size: 13px; margin-top: 10px; line-height: 1.6;">自主练习 · 个性化指导 · 线上便捷学习</p>
+                        </div>
                     </div>
-                    <div class="footer-column">
-                        <h3>快速链接</h3>
-                        <ul>
-                            <li><a href="index.html">首页</a></li>
-                            <li><a href="about.html">关于</a></li>
-                            <li><a href="classes.html">课程</a></li>
-                            <li><a href="rates.html">价格</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>联系信息</h3>
-                        <ul>
-                            <li><a href="mailto:info@ashtangastudio.com">info@ashtangastudio.com</a></li>
-                            <li><a href="tel:+8613121212007">+86 131 2121 2007</a></li>
-                            <li>视频会议授课</li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>关注我们</h3>
-                        <ul>
-                            <li><a href="#">微信: xbyogi</a></li>
-                            <li><a href="#">小红书: 608394030</a></li>
-                            <li><a href="#">Instagram: xbyoga</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2025 ASHTANGA STUDIO. 保留所有权利.</p>
-                </div>
-            </div>
-        </footer>
 
-        <script>
-            // 页面加载动画
-            document.addEventListener('DOMContentLoaded', function() {
-                const mainContent = document.querySelector('.classes-section');
-                if (mainContent) {
-                    mainContent.classList.add('fade-in');
-                }
-                
-                // 导航栏滚动效果
-                window.addEventListener('scroll', function() {
-                    const navbar = document.querySelector('.navbar');
-                    if (window.scrollY > 50) {
-                        navbar.classList.add('scrolled');
-                    } else {
-                        navbar.classList.remove('scrolled');
-                    }
-                });
-            });
+                    <div class="workshop-card">
+                        <div class="workshop-header">
+                            <h3>梵语唱诵工作坊</h3>
+                            <p style="color: #666; margin-top: 10px;">日期：待定 · 线上工作坊 · 2小时</p>
+                        </div>
+                        <div class="workshop-content">
+                            <p style="color: #666; line-height: 1.6;">学习传统梵语唱诵，包括开篇唱诵、结束唱诵和常用曼陀罗。了解唱诵的意义和正确发音方法。</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                                <span class="price-amount">¥200</span>
+                                <button class="book-btn">立即报名</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <script>
+        // 汉堡菜单功能
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            const overlay = document.querySelector('.menu-overlay');
             
-            // 汉堡菜单功能
-            document.querySelector('.hamburger').addEventListener('click', function() {
-                const navMenu = document.querySelector('.nav-menu');
-                const navAuth = document.querySelector('.nav-auth');
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // 点击遮罩层关闭菜单
+        document.querySelector('.menu-overlay').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            const icon = hamburger.querySelector('i');
+            
+            navMenu.classList.remove('active');
+            this.classList.remove('active');
+            icon.className = 'fas fa-bars';
+        });
+
+        // 分类标签切换
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
                 
-                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-                navAuth.style.display = navAuth.style.display === 'flex' ? 'none' : 'flex';
+                // 更新标签状态
+                document.querySelectorAll('.category-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
                 
-                if (navMenu.style.display === 'flex') {
-                    navMenu.style.flexDirection = 'column';
-                    navMenu.style.position = 'absolute';
-                    navMenu.style.top = '60px';
-                    navMenu.style.left = '0';
-                    navMenu.style.width = '100%';
-                    navMenu.style.background = '#fff';
-                    navMenu.style.padding = '20px';
-                    navMenu.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
-                    
-                    navAuth.style.flexDirection = 'column';
-                    navAuth.style.position = 'absolute';
-                    navAuth.style.top = '260px';
-                    navAuth.style.left = '0';
-                    navAuth.style.width = '100%';
-                    navAuth.style.background = '#fff';
-                    navAuth.style.padding = '20px';
-                    navAuth.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                // 切换内容显示
+                document.querySelectorAll('.category-panel').forEach(panel => {
+                    panel.classList.remove('active');
+                });
+                document.getElementById(category).classList.add('active');
+            });
+        });
+
+        // 按钮功能
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                let message = '工作坊咨询';
+                
+                // 如果是工作坊卡片内的按钮，获取工作坊名称
+                const workshopCard = this.closest('.workshop-card');
+                if (workshopCard) {
+                    const workshopName = workshopCard.querySelector('h3').textContent;
+                    message = `报名 ${workshopName}`;
                 }
+                
+                // 如果是分类卡片内的按钮，获取分类名称
+                const classCard = this.closest('.class-card');
+                if (classCard) {
+                    const className = classCard.querySelector('h3').textContent;
+                    message = `咨询 ${className} 工作坊`;
+                }
+                
             });
-
-            // 课程按钮功能
-            document.querySelectorAll('.class-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const className = this.closest('.class-card').querySelector('h3').textContent;
-                    alert(`了解更多关于 ${className} 的信息`);
-                });
-            });
-
-            // 预约按钮功能
-            document.querySelectorAll('.book-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const className = this.closest('.class-item').querySelector('.class-name').textContent;
-                    const timeSlot = this.closest('.class-item').querySelector('.time-slot').textContent;
-                    alert(`预约 ${className}\n时间: ${timeSlot}\n即将跳转到预约页面...`);
-                });
-            });
-        </script>
-    </body>
-    </html>
+        });
+    </script>
+</body>
+</html>

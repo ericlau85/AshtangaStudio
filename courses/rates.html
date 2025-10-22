@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>课程费用 | ASHTANGA STUDIO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/courses.css">
     <style>
         /* 基础样式 */
         * {
@@ -37,119 +40,9 @@
             padding: 0 20px;
         }
         
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #ffffff;
-            border-bottom: 1px solid #e5e5e5;
-            z-index: 1000;
-            padding: 15px 0;
-            transition: all 0.4s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .logo:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 40px;
-        }
-        
-        .nav-menu li {
-            position: relative;
-        }
-        
-        .nav-menu a {
-            font-size: 13px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            padding: 5px 0;
-        }
-        
-        .nav-menu a:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-menu a.active {
-            font-weight: 500;
-        }
-        
-        /* 导航栏下划线动画 */
-        .nav-menu a {
-            position: relative;
-        }
-        
-        .nav-auth {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .login-btn, .signup-btn {
-            padding: 8px 20px;
-            font-size: 13px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #000;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .signup-btn {
-            background: #000;
-            color: #fff;
-        }
-        
-        .login-btn:hover, .signup-btn:hover {
-            opacity: 0.8;
-        }
-        
-        .login-btn:active, .signup-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        
-        
         /* 价格页面主内容 */
         .rates-section {
-            padding: 80px 0 80px;
+            padding: 120px 0 80px;
         }
         
         .rates-header {
@@ -170,43 +63,6 @@
             font-size: 14px;
             max-width: 600px;
             margin: 0 auto;
-        }
-        
-        /* 购买流程 */
-        .purchase-steps {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 50px;
-            gap: 60px;
-        }
-        
-        .step {
-            text-align: center;
-            position: relative;
-        }
-        
-        .step-number {
-            width: 40px;
-            height: 40px;
-            border: 2px solid #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .step.active .step-number {
-            background: #000;
-            color: #fff;
-        }
-        
-        .step-text {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
         /* 价格网格 */
@@ -240,6 +96,7 @@
             border-bottom: 1px solid #f0f0f0;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .rate-item:hover {
@@ -251,6 +108,27 @@
             background-color: #f0f0f0;
             border-left: 3px solid #000;
             padding-left: 10px;
+        }
+        
+        .rate-item.featured {
+            border-left: 3px solid #000;
+            padding-left: 10px;
+            background-color: #f8f8f8;
+        }
+        
+        .rate-item.featured::before {
+            content: '推荐';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #000;
+            color: #fff;
+            padding: 3px 8px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            z-index: 2;
         }
         
         .rate-info {
@@ -290,230 +168,58 @@
         }
         
         .price-note {
-            color: #666;
+            color: #ff6b6b;
             font-size: 12px;
         }
         
-        /* 支付表单 */
-        .payment-section {
+        /* 联系信息 */
+        .contact-info {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border: 1px solid #e5e5e5;
             max-width: 600px;
             margin: 0 auto;
-            padding: 40px;
-            border: 1px solid #e5e5e5;
-            background: #f8f8f8;
-            display: none;
-            transition: all 0.4s ease;
         }
         
-        .payment-section.active {
-            display: block;
-            animation: fadeIn 0.8s ease;
-        }
-        
-        .payment-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .payment-header h3 {
-            font-size: 18px;
+        .contact-info h3 {
+            font-size: 16px;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-        
-        .form-group {
             margin-bottom: 20px;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #e5e5e5;
+        .contact-info p {
+            color: #666;
+            margin-bottom: 20px;
             font-size: 14px;
-            transition: all 0.3s ease;
         }
         
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #000;
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .purchase-submit {
-            width: 100%;
-            padding: 14px;
+        .consult-btn {
+            display: inline-block;
+            padding: 10px 25px;
             background: #000;
             color: #fff;
-            border: 1px solid #000;
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 1px solid #000;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 25px;
-            position: relative;
-            overflow: hidden;
+            text-decoration: none;
         }
         
-        .purchase-submit:hover {
+        .consult-btn:hover {
             background: transparent;
             color: #000;
         }
         
-        .purchase-submit:active {
-            transform: scale(0.95);
-        }
-        
-        /* 订单摘要 */
-        .order-summary {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid #e5e5e5;
-            background: #fff;
-            transition: all 0.3s ease;
-        }
-        
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-        
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 500;
-            font-size: 16px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #000;
-        }
-        
-        /* 页脚 */
-        .footer {
-            background: #000;
-            color: #fff;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 14px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 8px;
-        }
-        
-        .footer-column a {
-            color: #ccc;
-            transition: all 0.3s ease;
-            font-size: 13px;
-        }
-        
-        .footer-column a:hover {
-            color: #fff;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        /* 页面加载动画 */
-        .fade-in {
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .nav-menu, .nav-auth {
-                display: none;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
             .rates-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
-            
-            .purchase-steps {
-                gap: 30px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .rate-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .rate-price {
-                text-align: left;
-                margin-top: 10px;
-            }
-            
-            .payment-section {
-                padding: 30px 20px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -522,25 +228,19 @@
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">ASHTANGA STUDIO</a>
-            <ul class="nav-menu">
-                <li><a href="mysore.html">Mysore</a></li>
-                <li><a href="private.html" class="active">私教</a></li>
-                <li><a href="workshops.html">工作坊</a></li>
-            </ul>
-            <div class="nav-auth">
-                <div class="language-switcher">
-                    <a href="index.html" class="language-btn active" title="中文">🇨🇳</a>
-                    <a href="../en/index.html" class="language-btn" title="English">🇬🇧</a>
-                </div>
-                <a href="sign/login.html" class="login-btn">登录</a>
-                <a href="sign/register.html" class="signup-btn">注册</a>
-            </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="mysore.html">Mysore</a></li>
+                <li><a href="private.html">私教</a></li>
+                <li><a href="workshops.html">工作坊</a></li>
+                <li><a href="rates.html" class="active">费用</a></li>
+            </ul>
         </div>
     </nav>
+    <div class="menu-overlay"></div>
 
     <!-- 价格页面内容 -->
     <section class="rates-section">
@@ -548,22 +248,6 @@
             <div class="rates-header">
                 <h1>课程费用</h1>
                 <p>选择适合您的瑜伽课程套餐，开始您的阿斯汤加瑜伽之旅</p>
-            </div>
-
-            <!-- 购买步骤 -->
-            <div class="purchase-steps">
-                <div class="step active">
-                    <div class="step-number">1</div>
-                    <div class="step-text">选择套餐</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-text">填写信息</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-text">完成支付</div>
-                </div>
             </div>
 
             <div class="rates-grid">
@@ -574,7 +258,7 @@
                     <div class="rate-item" data-package="单次体验" data-price="128" data-duration="7天">
                         <div class="rate-info">
                             <div class="rate-name">单次体验</div>
-                            <div class="rate-description">体验和适应性练习</div>
+                            <div class="rate-description">单次体验或无规律练习</div>
                             <div class="rate-details">有效期7天</div>
                         </div>
                         <div class="rate-price">
@@ -593,7 +277,18 @@
                         </div>
                     </div>
                     
-                    <div class="rate-item" data-package="月卡" data-price="980" data-duration="30天">
+                    <div class="rate-item" data-package="12节课套餐" data-price="660" data-duration="30天">
+                        <div class="rate-info">
+                            <div class="rate-name">月卡12节</div>
+                            <div class="rate-description">30天内参加12次课程</div>
+                            <div class="rate-details">约¥55/节</div>
+                        </div>
+                        <div class="rate-price">
+                            <div class="price-amount">¥660</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rate-item featured" data-package="月卡" data-price="980" data-duration="30天">
                         <div class="rate-info">
                             <div class="rate-name">月卡</div>
                             <div class="rate-description">30天内无限次参加课程</div>
@@ -657,190 +352,56 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 支付表单 -->
-            <div class="payment-section" id="paymentSection">
-                <div class="payment-header">
-                    <h3>填写支付信息</h3>
-                </div>
-                <form id="purchaseForm">
-                    <div class="form-group">
-                        <label for="fullName">姓名</label>
-                        <input type="text" id="fullName" name="fullName" required placeholder="请输入您的姓名">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">手机号码</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="请输入您的手机号码">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="paymentMethod">支付方式</label>
-                        <select id="paymentMethod" name="paymentMethod" required>
-                            <option value="">请选择支付方式</option>
-                            <option value="wechat">微信支付</option>
-                            <option value="alipay">支付宝</option>
-                            <option value="bank">银行转账</option>
-                        </select>
-                    </div>
-                    
-                    <!-- 订单摘要 -->
-                    <div class="order-summary">
-                        <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">订单摘要</h3>
-                        <div class="summary-item">
-                            <span>套餐:</span>
-                            <span id="selectedPackage">请选择套餐</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>价格:</span>
-                            <span id="packagePrice">¥0</span>
-                        </div>
-                        <div class="summary-total">
-                            <span>总计:</span>
-                            <span id="totalPrice">¥0</span>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="purchase-submit">确认支付</button>
-                </form>
-            </div>
-        </div>
     </section>
-    
+
     <script>
-        // 页面加载动画
-        document.addEventListener('DOMContentLoaded', function() {
-            const mainContent = document.querySelector('.rates-section');
-            if (mainContent) {
-                mainContent.classList.add('fade-in');
-            }
-            
-            // 导航栏滚动效果
-            window.addEventListener('scroll', function() {
-                const navbar = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-        });
-        
         // 汉堡菜单功能
         document.querySelector('.hamburger').addEventListener('click', function() {
             const navMenu = document.querySelector('.nav-menu');
-            const navAuth = document.querySelector('.nav-auth');
+            const overlay = document.querySelector('.menu-overlay');
             
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navAuth.style.display = navAuth.style.display === 'flex' ? 'none' : 'flex';
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
             
-            if (navMenu.style.display === 'flex') {
-                navMenu.style.flexDirection = 'column';
-                navMenu.style.position = 'absolute';
-                navMenu.style.top = '60px';
-                navMenu.style.left = '0';
-                navMenu.style.width = '100%';
-                navMenu.style.background = '#fff';
-                navMenu.style.padding = '20px';
-                navMenu.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
-                
-                navAuth.style.flexDirection = 'column';
-                navAuth.style.position = 'absolute';
-                navAuth.style.top = '260px';
-                navAuth.style.left = '0';
-                navAuth.style.width = '100%';
-                navAuth.style.background = '#fff';
-                navAuth.style.padding = '20px';
-                navAuth.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
             }
+        });
+
+        // 点击遮罩层关闭菜单
+        document.querySelector('.menu-overlay').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            const icon = hamburger.querySelector('i');
+            
+            navMenu.classList.remove('active');
+            this.classList.remove('active');
+            icon.className = 'fas fa-bars';
+        });
+
+        // 简单的按钮点击效果
+        document.querySelectorAll('.consult-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
         });
 
         // 套餐选择功能
-        let selectedPackage = null;
-        
         document.querySelectorAll('.rate-item').forEach(item => {
             item.addEventListener('click', function() {
-                // 移除其他项目的选中状态
-                document.querySelectorAll('.rate-item').forEach(i => {
-                    i.classList.remove('selected');
-                });
+                const packageName = this.getAttribute('data-package');
+                const price = this.getAttribute('data-price');
+                const duration = this.getAttribute('data-duration');
                 
-                // 添加当前项目的选中状态
-                this.classList.add('selected');
-                
-                // 更新选中的套餐信息
-                selectedPackage = {
-                    name: this.getAttribute('data-package'),
-                    price: this.getAttribute('data-price'),
-                    duration: this.getAttribute('data-duration')
-                };
-                
-                // 更新订单摘要
-                document.getElementById('selectedPackage').textContent = selectedPackage.name;
-                document.getElementById('packagePrice').textContent = '¥' + selectedPackage.price;
-                document.getElementById('totalPrice').textContent = '¥' + selectedPackage.price;
-                
-                // 显示支付表单
-                document.getElementById('paymentSection').classList.add('active');
-                
-                // 更新步骤指示器
-                document.querySelectorAll('.step').forEach((step, index) => {
-                    if (index === 0) {
-                        step.classList.add('active');
-                    } else {
-                        step.classList.remove('active');
-                    }
-                });
-                
-                // 滚动到支付表单
-                document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth' });
+                alert(`选择套餐: ${packageName}\n价格: ¥${price}\n有效期: ${duration}\n请联系微信: xbyogi 报名`);
             });
         });
-
-        // 购买表单提交
-        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!selectedPackage) {
-                alert('请先选择课程套餐');
-                return;
-            }
-            
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            
-            // 模拟支付成功
-            alert(`购买成功！\n\n姓名: ${fullName}\n套餐: ${selectedPackage.name}\n金额: ¥${selectedPackage.price}\n支付方式: ${getPaymentMethodText(paymentMethod)}\n\n我们已发送确认邮件至 ${email}，请查收。`);
-            
-            // 重置表单
-            this.reset();
-            document.querySelectorAll('.rate-item').forEach(i => {
-                i.classList.remove('selected');
-            });
-            document.getElementById('paymentSection').classList.remove('active');
-            selectedPackage = null;
-            
-            // 重置订单摘要
-            document.getElementById('selectedPackage').textContent = '请选择套餐';
-            document.getElementById('packagePrice').textContent = '¥0';
-            document.getElementById('totalPrice').textContent = '¥0';
-        });
-
-        function getPaymentMethodText(method) {
-            const methods = {
-                'wechat': '微信支付',
-                'alipay': '支付宝',
-                'bank': '银行转账'
-            };
-            return methods[method] || '未选择';
-        }
     </script>
 </body>
 </html>

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mysore课程 | ASHTANGA STUDIO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/courses.css">
     <style>
         /* 基础样式 */
         * {
@@ -36,566 +39,25 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #ffffff;
-            border-bottom: 1px solid #e5e5e5;
-            z-index: 1000;
-            padding: 15px 0;
-            transition: all 0.4s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .logo:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 40px;
-        }
-        
-        .nav-menu li {
-            position: relative;
-        }
-        
-        .nav-menu a {
-            font-size: 13px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            padding: 5px 0;
-        }
-        
-        .nav-menu a:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-menu a.active {
-            font-weight: 500;
-        }
-        
-        /* 导航栏下划线动画 */
-        .nav-menu a {
-            position: relative;
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #000;
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
-            width: 100%;
-        }
-        
-        .nav-auth {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .login-btn, .signup-btn {
-            padding: 8px 20px;
-            font-size: 13px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #000;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .signup-btn {
-            background: #000;
-            color: #fff;
-        }
-        
-        .login-btn:hover, .signup-btn:hover {
-            opacity: 0.8;
-        }
-        
-        .login-btn:active, .signup-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        
-        
-        /* 课程页面内容 */
-        .classes-section {
-            padding: 100px 0 80px;
-        }
-        
-        .classes-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .classes-header h1 {
-            font-size: 32px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-        
-        .classes-header p {
-            color: #666;
-            font-size: 14px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* 课程网格 */
-        .classes-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto 80px;
-        }
-        
-        .class-card {
-            border: 1px solid #e5e5e5;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-        
-        .class-card:hover {
-            border-color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .class-icon {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        
-        .class-card h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        
-        .class-card p {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        
-        .class-features {
-            margin: 20px 0;
-        }
-        
-        .class-features li {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
-        
-        .class-btn {
-            display: inline-block;
-            padding: 10px 25px;
-            background: #000;
-            color: #fff;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #000;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .class-btn:hover {
-            background: transparent;
-            color: #000;
-        }
-        
-        .class-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* 课表内容 */
-        .schedule-section {
-            padding: 60px 0;
-            background-color: #f8f8f8;
-        }
-        
-        .schedule-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .schedule-header h2 {
-            font-size: 28px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-        
-        .schedule-header p {
-            color: #666;
-            font-size: 14px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* 课表 */
-        .schedule-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .schedule-day {
-            margin-bottom: 40px;
-        }
-        
-        .day-title {
-            font-size: 18px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-        
-        .class-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #f0f0f0;
-            gap: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .class-item:hover {
-            background-color: #f0f0f0;
-        }
-
-        .class-info {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .class-name {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .class-type {
-            color: #666;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        .class-time {
-            text-align: center;
-            min-width: 120px;
-            margin: 0 20px;
-        }
-
-        .time-slot {
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .class-duration {
-            color: #666;
-            font-size: 12px;
-        }
-
-        .class-action {
-            min-width: 80px;
-            text-align: right;
-        }
-
-        .book-btn {
-            padding: 8px 20px;
-            background: #000;
-            color: #fff;
-            border: 1px solid #000;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-btn:hover {
-            background: transparent;
-            color: #000;
-        }
-        
-        .book-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .rest-day {
-            text-align: center;
-            padding: 40px 0;
-            color: #666;
-            font-style: italic;
-        }
-        
-        /* 页脚 */
-        .footer {
-            background: #000;
-            color: #fff;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 14px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 8px;
-        }
-        
-        .footer-column a {
-            color: #ccc;
-            transition: all 0.3s ease;
-            font-size: 13px;
-        }
-        
-        .footer-column a:hover {
-            color: #fff;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        /* 页面加载动画 */
-        .fade-in {
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* 特色样式 */
-        .practice-method {
-            padding: 60px 0;
-        }
-        
-        .method-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .method-card {
-            border: 1px solid #e5e5e5;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .method-card:hover {
-            border-color: #000;
-            transform: translateY(-5px);
-        }
-        
-        .method-icon {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        
-        .benefits-section {
-            padding: 60px 0;
-            background-color: #f8f8f8;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .benefit-item {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .benefit-icon {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .nav-menu, .nav-auth {
-                display: none;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .classes-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .method-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .class-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .class-time {
-                text-align: left;
-                margin: 0;
-                display: flex;
-                gap: 20px;
-                align-items: center;
-            }
-            
-            .class-action {
-                text-align: left;
-                width: 100%;
-            }
-            
-            .book-btn {
-                width: 100%;
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .class-time {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
-            <div class="nav-container">
-                <a href="../index.html" class="logo">ASHTANGA STUDIO</a>
-                <ul class="nav-menu">
-                    <li><a href="mysore.html" class="active">Mysore</a></li>
-                    <li><a href="private.html">私教</a></li>
-                    <li><a href="workshops.html">工作坊</a></li>
-                </ul>
-                <div class="nav-auth">
-                    <div class="language-switcher">
-                        <a href="index.html" class="language-btn active" title="中文">🇨🇳</a>
-                        <a href="../en/index.html" class="language-btn" title="English">🇬🇧</a>
-                    </div>
-                    <a href="sign/login.html" class="login-btn">登录</a>
-                    <a href="sign/register.html" class="signup-btn">注册</a>
-                </div>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
+        <div class="nav-container">
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
             </div>
-        </nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="mysore.html" class="active">Mysore</a></li>
+                <li><a href="private.html">私教</a></li>
+                <li><a href="workshops.html">工作坊</a></li>
+                <li><a href="rates.html" class="active">费用</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="menu-overlay"></div>
 
     <!-- 页面内容 -->
     <section class="classes-section">
@@ -607,8 +69,8 @@
 
             <!-- 课程介绍 -->
             <div class="about-text" style="max-width: 800px; margin: 0 auto 50px;">
-                <h2>传统练习方式</h2>
-                <p>Mysore是阿斯汤加瑜伽最传统的练习方式，以印度Mysore城市命名。在这种模式下，每位学员按照自己的节奏和记忆练习固定序列，教师则提供个性化的指导和调整。</p>
+                <h2>练习方式</h2>
+                <p>Mysore是阿斯汤加瑜伽最传统的练习方式。在这种模式下，每位学员按照自己的节奏和记忆练习固定序列，教师则提供个性化的指导和调整。</p>
             </div>
 
             <!-- 练习方式对比 -->
@@ -619,7 +81,7 @@
                             <div class="method-icon">
                                 <i class="fas fa-user-clock"></i>
                             </div>
-                            <h3>传统Mysore</h3>
+                            <h3>Mysore</h3>
                             <p><strong>自主练习 · 灵活入场 · 个性化指导</strong></p>
                             <ul style="color: #666; line-height: 1.6; margin-top: 15px;">
                                 <li>按照个人节奏练习固定序列</li>
@@ -685,7 +147,7 @@
                     <h2>课程表</h2>
                     <p>查看最新的课程安排，选择适合您的时间</p>
                 </div>
-
+                
                 <div class="schedule-container">
                     <!-- 常规课程 -->
                     <div class="schedule-day">
@@ -719,145 +181,103 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 休息日 -->
-                    <div class="rest-day">
-                        <p>休息日: 每周六 & 新月/满月日</p>
+                    
+                    <!-- 私教课程 -->
+                    <div class="schedule-day">
+                        <h2 class="day-title">私教课程</h2>
+                        
+                        <div class="class-item">
+                            <div class="class-info">
+                                <div class="class-name">一对一私教</div>
+                                <div class="class-type">周一至周日 · 个性化定制 · 深度指导</div>
+                                <div style="font-size: 12px; color: #999; margin-top: 5px;">
+                                    针对个人需求定制专属练习序列
+                                </div>
+                            </div>
+                            <div class="class-time">
+                                <div class="time-slot">9:00 - 19:30</div>
+                                <div class="class-duration">75分钟/节</div>
+                            </div>
+                            <div class="class-action">
+                                <button class="book-btn">预约</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- 费用提示部分 -->
-        <section class="pricing-cta" style="padding: 60px 0; text-align: center;">
-            <div class="container">
-                <h3 style="font-size: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">课程费用</h3>
-                <p style="color: #666; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    我们提供灵活的套餐选择，包括单次体验、周卡、月卡和季卡，满足不同学员的需求。
+            
+            <!-- 休息日 -->
+            <div class="rest-day">
+                <p>休息日: 每周六 &
+                    <a href="javascript:void(0)" onclick="showMoonCalendar()" class="moon-phase-link">
+                        <i class="fas fa-moon"></i>新月/满月日
+                    </a>
                 </p>
-                <div style="display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-                    <div style="text-align: center; padding: 0 25px;">
-                        <div style="font-size: 18px; font-weight: 500; margin-bottom: 5px;">单次体验</div>
-                        <div style="color: #666; font-size: 13px;">¥128</div>
-                    </div>
-                    <div style="text-align: center; padding: 0 25px;">
-                        <div style="font-size: 18px; font-weight: 500; margin-bottom: 5px;">月卡</div>
-                        <div style="color: #666; font-size: 13px;">¥980</div>
-                    </div>
-                    <div style="text-align: center; padding: 0 25px;">
-                        <div style="font-size: 18px; font-weight: 500; margin-bottom: 5px;">季卡</div>
-                        <div style="color: #666; font-size: 13px;">¥2,680</div>
-                    </div>
-                </div>
-                <div style="margin-top: 30px;">
-                    <a href="rates.html" class="class-btn" style="display: inline-block;">查看完整价格表</a>
-                </div>
             </div>
-        </section>
-    </section>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>ASHTANGA STUDIO</h3>
-                    <p style="color: #ccc; font-size: 13px; margin-top: 10px; line-height: 1.6;">自主练习 · 个性化指导 · 线上便捷学习</p>
+            <!-- 月相日历弹窗 -->
+            <div id="moonCalendar" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border: 1px solid #e5e5e5; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; max-width: 500px; width: 90%;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0;">当月月相日历</h3>
+                    <button onclick="hideMoonCalendar()" style="background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
                 </div>
-                <div class="footer-column">
-                    <h3>快速链接</h3>
-                    <ul>
-                        <li><a href="../index.html">首页</a></li>
-                        <li><a href="../about.html">关于</a></li>
-                        <li><a href="mysore.html">课程</a></li>
-                        <li><a href="rates.html">价格</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>联系信息</h3>
-                    <ul>
-                        <li><a href="mailto:info@ashtangastudio.com">info@ashtangastudio.com</a></li>
-                        <li><a href="tel:+8613121212007">+86 131 2121 2007</a></li>
-                        <li>视频会议授课</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>关注我们</h3>
-                    <ul>
-                        <li><a href="#">微信: xbyogi</a></li>
-                        <li><a href="#">小红书: 608394030</a></li>
-                        <li><a href="#">Instagram: xbyoga</a></li>
-                    </ul>
+                <div id="moonCalendarContent">
+                    <p style="color: #666; margin-bottom: 15px;">查看完整的月相日历：</p>
+                    <a href="https://www.timeanddate.com/moon/phases/" target="_blank" class="book-btn" style="display: inline-block; margin-right: 10px;">
+                        查看月相表
+                    </a>
+                    <button onclick="hideMoonCalendar()" class="book-btn" style="background: transparent; color: #000; border: 1px solid #000;">
+                        关闭
+                    </button>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 ASHTANGA STUDIO. 保留所有权利.</p>
-            </div>
+            <div id="moonCalendarOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
+
+            <script>
+            function showMoonCalendar() {
+                document.getElementById('moonCalendar').style.display = 'block';
+                document.getElementById('moonCalendarOverlay').style.display = 'block';
+            }
+
+            function hideMoonCalendar() {
+                document.getElementById('moonCalendar').style.display = 'none';
+                document.getElementById('moonCalendarOverlay').style.display = 'none';
+            }
+
+            // 点击遮罩层关闭
+            document.getElementById('moonCalendarOverlay').addEventListener('click', hideMoonCalendar);
+            </script>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        // 页面加载动画
-        document.addEventListener('DOMContentLoaded', function() {
-            const mainContent = document.querySelector('.classes-section');
-            if (mainContent) {
-                mainContent.classList.add('fade-in');
-            }
-            
-            // 导航栏滚动效果
-            window.addEventListener('scroll', function() {
-                const navbar = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-        });
-        
-        // 汉堡菜单功能
-        document.querySelector('.hamburger').addEventListener('click', function() {
-            const navMenu = document.querySelector('.nav-menu');
-            const navAuth = document.querySelector('.nav-auth');
-            
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navAuth.style.display = navAuth.style.display === 'flex' ? 'none' : 'flex';
-            
-            if (navMenu.style.display === 'flex') {
-                navMenu.style.flexDirection = 'column';
-                navMenu.style.position = 'absolute';
-                navMenu.style.top = '60px';
-                navMenu.style.left = '0';
-                navMenu.style.width = '100%';
-                navMenu.style.background = '#fff';
-                navMenu.style.padding = '20px';
-                navMenu.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
-                
-                navAuth.style.flexDirection = 'column';
-                navAuth.style.position = 'absolute';
-                navAuth.style.top = '260px';
-                navAuth.style.left = '0';
-                navAuth.style.width = '100%';
-                navAuth.style.background = '#fff';
-                navAuth.style.padding = '20px';
-                navAuth.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
-            }
-        });
+<script>
+// 汉堡菜单功能
+document.querySelector('.hamburger').addEventListener('click', function() {
+    const navMenu = document.querySelector('.nav-menu');
+    const overlay = document.querySelector('.menu-overlay');
+    
+    navMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    const icon = this.querySelector('i');
+    if (navMenu.classList.contains('active')) {
+        icon.className = 'fas fa-times';
+    } else {
+        icon.className = 'fas fa-bars';
+    }
+});
 
-        // 课程按钮功能
-        document.querySelectorAll('.class-btn').forEach(button => {
-            button.addEventListener('click', function() {
-            });
-        });
-
-        // 预约按钮功能
-        document.querySelectorAll('.book-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const className = this.closest('.class-item').querySelector('.class-name').textContent;
-                const timeSlot = this.closest('.class-item').querySelector('.time-slot').textContent;
-                alert(`预约 ${className}\n时间: ${timeSlot}\n即将跳转到预约页面...`);
-            });
-        });
-    </script>
+// 点击遮罩层关闭菜单
+document.querySelector('.menu-overlay').addEventListener('click', function() {
+    const navMenu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger');
+    const icon = hamburger.querySelector('i');
+    
+    navMenu.classList.remove('active');
+    this.classList.remove('active');
+    icon.className = 'fas fa-bars';
+});
+</script>
 </body>
 </html>
