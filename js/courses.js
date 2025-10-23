@@ -24,3 +24,17 @@ document.querySelector('.menu-overlay').addEventListener('click', function() {
     this.classList.remove('active');
     icon.className = 'fas fa-bars';
 });
+
+// 确保菜单在窗口调整大小时正确重置
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        const navMenu = document.querySelector('.nav-menu');
+        const overlay = document.querySelector('.menu-overlay');
+        const hamburger = document.querySelector('.hamburger');
+        const icon = hamburger.querySelector('i');
+        
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        icon.className = 'fas fa-bars';
+    }
+});

@@ -278,3 +278,59 @@ body {
     background: #fff;
     color: #000;
 }
+
+/* 基础响应式设置 */
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 通用媒体查询 */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 992px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 576px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+}
+
+/* 确保图片自适应 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.qr-image {
+    max-width: 200px;
+    height: auto;
+}
+
+@media (max-width: 480px) {
+    .qr-image {
+        max-width: 150px;
+    }
+}

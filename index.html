@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashtanga Studio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body class="home-page-body">
@@ -21,7 +20,8 @@
                         🇬🇧
                     </button>
                 </div>
-                <div class="home-logo">AS</div>
+                
+                <div class="home-logo">A</div>
                 
                 <!-- 中文内容 -->
                 <div class="home-name zh-content">Ashtanga Studio</div>
@@ -95,42 +95,25 @@
     <div id="wechatQRModal" class="qr-modal">
         <div class="qr-modal-content">
             <span class="qr-close">&times;</span>
+            
+            <!-- 中文版本 -->
+            <div class="zh-content">
             <h3>添加微信</h3>
             <img src="images/wechat-qr.jpg" alt="微信二维码" class="qr-image">
             <p>扫描二维码联系我</p>
             <p class="qr-username">微信号: xbyogi</p>
         </div>
+            
+            <!-- 英文版本 -->
+            <div class="en-content" style="display: none;">
+                <h3>Add WeChat</h3>
+                <img src="images/wechat-qr.jpg" alt="WeChat QR Code" class="qr-image">
+                <p>Scan QR code to contact me</p>
+                <p class="qr-username">WeChat ID: xbyogi</p>
+            </div>
+        </div>
     </div>
 
     <script src="js/main.js"></script>
-    <script>
-        // 语言切换功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const langButtons = document.querySelectorAll('.lang-btn');
-            const zhContents = document.querySelectorAll('.zh-content');
-            const enContents = document.querySelectorAll('.en-content');
-            
-            langButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    
-                    // 更新按钮状态
-                    langButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // 切换内容显示
-                    if (lang === 'zh') {
-                        zhContents.forEach(content => content.style.display = 'block');
-                        enContents.forEach(content => content.style.display = 'none');
-                        document.documentElement.lang = 'zh-CN';
-                    } else {
-                        zhContents.forEach(content => content.style.display = 'none');
-                        enContents.forEach(content => content.style.display = 'block');
-                        document.documentElement.lang = 'en';
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
