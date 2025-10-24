@@ -31,7 +31,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     links.forEach(link => {
         link.addEventListener('click', function(e) {
-            console.log('导航到:', this.href);
+            const href = this.getAttribute('href');
+            
+            // 如果是普通链接，正常跳转
+            if (href && !href.startsWith('javascript') && href !== '#') {
+                console.log('导航到:', href);
+                window.location.href = href;
+                return; // 防止其他处理
+            } else {
+                console.log('特殊链接:', href);
+                // 特殊链接保持原有行为
+            }
         });
         
         link.addEventListener('mousedown', function() {
@@ -44,34 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         link.addEventListener('mouseleave', function() {
             this.style.transform = '';
-        });
-    });
-    
-    // 语言切换功能
-    document.addEventListener('DOMContentLoaded', function() {
-        const langButtons = document.querySelectorAll('.lang-btn');
-        const zhContents = document.querySelectorAll('.zh-content');
-        const enContents = document.querySelectorAll('.en-content');
-        
-        langButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                
-                // 更新按钮状态
-                langButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // 切换内容显示
-                if (lang === 'zh') {
-                    zhContents.forEach(content => content.style.display = 'block');
-                    enContents.forEach(content => content.style.display = 'none');
-                    document.documentElement.lang = 'zh-CN';
-                } else {
-                    zhContents.forEach(content => content.style.display = 'none');
-                    enContents.forEach(content => content.style.display = 'block');
-                    document.documentElement.lang = 'en';
-                }
-            });
         });
     });
     
