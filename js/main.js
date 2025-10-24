@@ -28,18 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 链接点击反馈
     const links = document.querySelectorAll('.home-item, .home-contact-icon');
-
+    
     links.forEach(link => {
         link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // 如果是普通链接，正常跳转
-            if (href && !href.startsWith('javascript') && href !== '#') {
-                console.log('导航到:', href);
-                window.location.href = href;
-            } else {
-                console.log('特殊链接:', href);
-            }
+            console.log('导航到:', this.href);
         });
         
         link.addEventListener('mousedown', function() {
@@ -53,10 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('mouseleave', function() {
             this.style.transform = '';
         });
-        
-        // 移动端触摸优化
-        link.style.minHeight = '44px';
-        link.style.cursor = 'pointer';
     });
     
     // 语言切换功能
