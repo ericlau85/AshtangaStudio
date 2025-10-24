@@ -334,3 +334,23 @@ img {
         max-width: 150px;
     }
 }
+
+/* 基础响应式设置 */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+    
+    .container, .home-container, .home-layout {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    
+    /* 强制所有元素不超出屏幕 */
+    * {
+        box-sizing: border-box;
+    }
+}

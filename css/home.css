@@ -326,3 +326,52 @@ body {
         font-size: 14px;
     }
 }
+
+/* 手机响应式样式 */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .home-layout {
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    /* 确保所有容器不超出屏幕 */
+    .home-container * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* 调整文字大小 */
+    body {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    h1 {
+        font-size: 24px !important;
+    }
+    
+    h2 {
+        font-size: 20px !important;
+    }
+    
+    h3 {
+        font-size: 18px !important;
+    }
+    
+    /* 图片自适应 */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* 防止横向滚动 */
+    body {
+        overflow-x: hidden;
+    }
+}
