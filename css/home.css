@@ -237,10 +237,11 @@ body {
 /* 语言切换器样式 */
 .language-switcher {
     position: absolute;
-    top: 45%;
+    top: 20px;
     right: 20px;
     display: flex;
     gap: 2px;
+    z-index: 100;
 }
 
 .home-left-column {
@@ -347,18 +348,27 @@ body {
         height: auto;
         padding: 30px 0;
         order: 1;
+        text-align: center;
     }
     
     .home-right-column {
         height: auto;
         order: 2;
+        text-align: center;
     }
     
     .language-switcher {
-        position: static;
-        margin-bottom: 20px;
-        justify-content: center;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        margin-bottom: 0;
+        justify-content: flex-end;
     }
+    
+    .home-logo, .home-name, .home-location, .home-contact-icons {
+            text-align: center;
+            width: 100%;
+        }
     
     .home-logo {
         font-size: 48px;
@@ -391,6 +401,7 @@ body {
     
     .home-contact-icons {
         margin-top: 20px;
+        justify-content: center;
     }
     
     .home-contact-icon {
@@ -451,5 +462,32 @@ body {
     
     .home-left-column {
         padding: 15px 0;
+    }
+}
+
+/* 手机上的国旗位置 */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        margin-bottom: 0;
+    }
+    
+    .home-left-column {
+        position: relative; /* 确保相对定位 */
+        padding-top: 50px; /* 给国旗留出空间 */
+    }
+}
+
+/* 小手机上的调整 */
+@media (max-width: 480px) {
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .home-left-column {
+        padding-top: 40px;
     }
 }
